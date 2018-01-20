@@ -1,0 +1,3 @@
+targets:
+  TasteWithMe: local/cjc0b79eg00040125wnuzt3cp
+  default: TasteWithMe
