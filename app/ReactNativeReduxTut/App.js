@@ -5,34 +5,41 @@
  */
 
 import React from 'react';
-import { Provider } from 'react-redux';
-import { createStore, applyMiddleware, combineReducers, compose} from 'redux';
-import thunkMiddleware from 'redux-thunk';
-import { createLogger } from 'redux-logger';
-import reducer from './app/reducers';
+
 import AppContainer from './app/containers/AppContainer';
+import { ApolloProvider } from 'react-apollo';
+import client from './app/apollo/client';
+import store from './app/redux/store';
+
+const App = () => (
+  <ApolloProvider client={client} store={store}>
+    <AppContainer />
+  </ApolloProvider>
+)
+
+export default App;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // import {
 //   Platform,
 //   StyleSheet,
 //   Text,
 //   View
 // } from 'react-native';
-
-//to run logger only in development mode
-const loggerMiddleware = createLogger({ predicate: (getState, action) => __DEV__});
-
-
-function configureStore(initialState) {
-  const enhancer = compose(
-    applyMiddleware(
-      thunkMiddleware,
-      loggerMiddleware,
-    ),
-  );
-  return createStore(reducer, initialState, enhancer);
-}
-
-const store = configureStore({});
 
 // const instructions = Platform.select({
 //   ios: 'Press Cmd+R to reload,\n' +
@@ -54,13 +61,6 @@ const store = configureStore({});
 //   }
 // }
 
-const App = () => (
-  <Provider store={store}>
-    <AppContainer />
-  </Provider>
-)
-
-export default App;
 // const styles = StyleSheet.create({
 //   container: {
 //     flex: 1,

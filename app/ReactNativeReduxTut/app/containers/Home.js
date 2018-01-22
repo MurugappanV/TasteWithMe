@@ -11,7 +11,6 @@ class Home extends Component {
         return <View>
             <View>
                 <Text>Dummy line </Text>
-
                 <Text>Dummy line </Text>
                 <TouchableHighlight onPress={ () => this.searchRecipes() }>
                     <Text>Fetch Recipes</Text>
