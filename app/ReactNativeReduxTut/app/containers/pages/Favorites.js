@@ -1,8 +1,15 @@
 import React, {Component} from "react";
 import {ScrollView, Button, View, TextInput, Image, TouchableHighlight, StyleSheet, Text} from "react-native";
 import {connect} from 'react-redux';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 class Favorites extends Component {
+    static navigationOptions = {
+        tabBarLabel: "mensu",
+        tabBarIcon: ({ tintColor }) => (
+            <Icon name="favorite" style={{fontWeight: "regular"}} size={20} color={tintColor} />
+        ),
+    };
 
     render() {
         return <View>
