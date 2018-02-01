@@ -1,11 +1,55 @@
 import * as types from './types';
 import Api from '../lib/api';
 import client from '../apollo/client';
-import { allUsers } from '../graphql/quries';
+import { allUsers , hotel} from '../graphql/quries';
 
 export function addRecipe() {
     return {
         type: types.ADD_RECIPE,
+    }
+}
+
+// export function setViewDimensions(event) {
+//     let fullViewDimens = {
+//         width: event.nativeEvent.layout.width,
+//         height: event.nativeEvent.layout.height
+//     }
+//     console.log(fullViewDimens.width + " + " + fullViewDimens.height);
+//     return {
+//         type: types.SET_FULL_VIEW_DIMENSIONS,
+//         state: fullViewDimens
+//     }
+// }
+
+export function fetchInitialData() {
+    return (dispatch, getState) => {
+        console.log(getState());
+        dispatch({
+            type: types.FETCH_HOTEL_LOADING,
+        });
+        client.query({
+            query: hotel
+        }).then((resp) => {
+            console.log("gql 1 ---> " + resp);
+            if (resp.data) {
+                console.log("gql data - ");
+                console.log(resp.data);
+                dispatch({
+                    type: types.SET_HOTEL_DETAILS,
+                });
+            }
+            if(resp.errors) {
+                console.log("gql errors - " + resp.errors);
+            }
+        }).catch( (ex) => {
+            console.log("gql exception " + ex);
+        });
+    }
+}
+
+function navigateForward(state) {
+    return {
+        type: types.FETCH_HOTEL_LOADING
     }
 }
 

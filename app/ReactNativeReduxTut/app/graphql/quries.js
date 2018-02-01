@@ -9,3 +9,15 @@ export const allUsers = gql`
         }
     }
 `;
+
+export const hotel = gql`
+    query Hotel {
+        Hotel(id: "cjcx7z5va002y0125ue5cuier") {
+            id
+            isDeleted
+            createdAt
+            updatedAt
+            name
+        }
+    }
+`;

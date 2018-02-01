@@ -25,7 +25,7 @@ import ApolloClient, { createNetworkInterface } from 'react-apollo';
 //import config from '../config.json';
 
 const networkInterface = createNetworkInterface({
-  uri: 'http://localhost:60000/simple/v1/cjc0b79eg00040125wnuzt3cp',
+  uri: 'https://api.graph.cool/simple/v1/cjd1tk3gh0hq60190xt4eg2cy',
 });
 
 networkInterface.use([{

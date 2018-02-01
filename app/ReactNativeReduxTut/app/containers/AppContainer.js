@@ -4,10 +4,19 @@ import { connect } from "react-redux";
 import { ActionCreators } from "../actions";
 import { bindActionCreators } from "redux";
 import Home from "./Home";
+//import SplashScreen from 'react-native-splash-screen';
+import SplashScreen from "./SplashScreen";
 
 class AppContainer extends Component {
+
+    componentDidMount() {
+    	// do stuff while splash screen is shown
+        // After having done stuff (such as async tasks) hide the splash screen
+        //SplashScreen.hide();
+    }
+
     render() {
-        return <Home  {...this.props}/>        
+        return <SplashScreen  {...this.props}/>        
     }    
 }
 

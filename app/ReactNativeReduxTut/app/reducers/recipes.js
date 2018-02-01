@@ -10,3 +10,19 @@ export const recipeCount = createReducer(0, {
          return state + 10;
     }
 });
+
+export const fetchHotelStatus = createReducer(0, {
+    [types.FETCH_HOTEL_LOADING](state, action) {
+         return 1;
+    },
+    [types.SET_HOTEL_DETAILS](state, action) {
+        return 2;
+   }
+});
+
+// export const setViewDimensions = createReducer({width: 300, height: 300}, {
+//     [types.SET_FULL_VIEW_DIMENSIONS](state, action) {
+//         console.log(state.width + " - " + state.height );
+//         return state;
+//     }
+// });
