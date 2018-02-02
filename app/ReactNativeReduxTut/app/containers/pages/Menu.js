@@ -8,7 +8,7 @@ class Menu extends Component {
     static navigationOptions = {
         tabBarLabel: "mensu",
         tabBarIcon: ({ tintColor }) => (
-            <Icon name="cake" style={{fontWeight: "regular"}} size={20} color={tintColor} />
+            <Icon name="cake" style={{fontWeight: "regular"}} size={25} color={tintColor} />
         ),
     };
 

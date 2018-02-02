@@ -7,7 +7,7 @@ class Profile extends Component {
     static navigationOptions = {
         tabBarLabel: "mensu",
         tabBarIcon: ({ tintColor }) => (
-            <Icon name="person" style={{fontWeight: "regular"}} size={20} color={tintColor} />
+            <Icon name="person" style={{fontWeight: "regular"}} size={30} color={tintColor} />
         ),
     };
 

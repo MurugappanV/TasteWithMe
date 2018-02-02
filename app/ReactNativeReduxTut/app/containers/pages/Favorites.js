@@ -7,7 +7,7 @@ class Favorites extends Component {
     static navigationOptions = {
         tabBarLabel: "mensu",
         tabBarIcon: ({ tintColor }) => (
-            <Icon name="favorite" style={{fontWeight: "regular"}} size={20} color={tintColor} />
+            <Icon name="favorite" style={{fontWeight: "regular"}} size={25} color={tintColor} />
         ),
     };
 
