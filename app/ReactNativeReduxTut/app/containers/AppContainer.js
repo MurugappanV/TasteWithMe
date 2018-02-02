@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-//import { View, Text,TouchableHighlight} from "react-native";
+import { StatusBar } from "react-native";
 import { connect } from "react-redux";
 import { ActionCreators } from "../actions";
 import { bindActionCreators } from "redux";
@@ -13,6 +13,7 @@ class AppContainer extends Component {
     	// do stuff while splash screen is shown
         // After having done stuff (such as async tasks) hide the splash screen
         //SplashScreen.hide();
+        StatusBar.setHidden(true);
     }
 
     render() {
