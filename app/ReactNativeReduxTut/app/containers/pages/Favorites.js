@@ -1,13 +1,16 @@
-import React, {Component} from "react";
+import React, {PureComponent} from "react";
 import {ScrollView, Button, View, TextInput, Image, TouchableHighlight, StyleSheet, Text} from "react-native";
 import {connect} from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import * as Sizes from '../../Constants/Sizes';
+import * as IconName from '../../Constants/IconName';
+import * as Labels from '../../Constants/Labels';
 
-class Favorites extends Component {
+class Favorites extends PureComponent {
     static navigationOptions = {
-        tabBarLabel: "mensu",
+        tabBarLabel: Labels.FAVORITE_TAB_LABEL,
         tabBarIcon: ({ tintColor }) => (
-            <Icon name="favorite" style={{fontWeight: "regular"}} size={25} color={tintColor} />
+            <Icon name={IconName.FAVORITE_TAB_ICON_NAME} size={Sizes.DEFAULT_HEADER_ICON_SIZE} color={tintColor} />
         ),
     };
 

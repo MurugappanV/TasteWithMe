@@ -1,30 +1,27 @@
-import React, {Component} from "react";
+import React, { PureComponent } from "react";
 import { TabNavigator } from "react-navigation";
 import Menu from './pages/Menu';
 import Favorites from './pages/Favorites';
 import Profile from './pages/Profile';
+import * as Colors from '../Constants/Colors';
+import * as Sizes from '../Constants/Sizes';
+import { basicStyles } from '../StyleSheets/styles';
 
 const Home = TabNavigator({
-    Menu: { screen: Menu, navigationOptions: { header: null } },
-    Favorites: { screen: Favorites, navigationOptions: { header: null } },
-    Profile: { screen: Profile, navigationOptions: { header: null }},
-  },{
-    animationEnabled: true,
-    tabBarOptions: {
-      activeTintColor: '#f90b0b',
-      inactiveTintColor: '#949292',
-      showIcon: true,
-      showLabel: false,
-      style: {
-        backgroundColor: '#f7f7f7',
-        height: 60,
-        paddingTop: 5,
-      },
-      indicatorStyle: {
-        backgroundColor: '#f90b0b',
-      }
-    },
-  }
+        Menu: { screen: Menu, navigationOptions: { header: null } },
+        Favorites: { screen: Favorites, navigationOptions: { header: null } },
+        Profile: { screen: Profile, navigationOptions: { header: null } },
+    }, {
+        animationEnabled: true,
+        tabBarOptions: {
+            activeTintColor: Colors.ACTIVE_ICON_COLOR,
+            inactiveTintColor: Colors.IN_ACTIVE_ICON_COLOR,
+            showIcon: true,
+            showLabel: false,
+            style: basicStyles.pageHeader,
+            indicatorStyle: basicStyles.activeBackGround
+        },
+    }
 );
 
 

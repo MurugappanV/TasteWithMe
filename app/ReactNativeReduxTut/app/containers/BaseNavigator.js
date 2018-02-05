@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React, {PureComponent} from "react";
 import { StackNavigator } from "react-navigation";
 import DishDetails from './pages/DishDetails';
 import Home from './Home';

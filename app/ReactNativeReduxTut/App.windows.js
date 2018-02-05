@@ -4,7 +4,7 @@
  * @flow
  */
 
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import {
   Platform,
   StyleSheet,
@@ -16,7 +16,7 @@ const instructions =
   'Press Ctrl+R to reload,\n' +
   'Shift+F10 or shake for dev menu';
 
-export default class App extends Component<{}> {
+export default class App extends PureComponent {
   render() {
     return (
       <View style={styles.container}>

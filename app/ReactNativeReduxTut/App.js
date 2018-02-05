@@ -5,7 +5,6 @@
  */
 
 import React from 'react';
-
 import AppContainer from './app/containers/AppContainer';
 import { ApolloProvider } from 'react-apollo';
 import client from './app/apollo/client';
@@ -48,7 +47,7 @@ export default App;
 //     'Shake or press menu button for dev menu',
 // });
 
-// class MainApp extends Component {
+// class MainApp extends PureComponent {
 //   render() {
 //     return (
 //       <View>

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import {
   AppRegistry,
   StyleSheet,
@@ -14,7 +14,7 @@ for (var i = 0; i < 1000; i++) {
   arr.push(i)
 }
 
-export default class DecayView extends Component {
+export default class DecayView extends PureComponent {
 
   constructor () {
     super()

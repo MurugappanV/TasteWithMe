@@ -1,23 +1,17 @@
-import React, {Component} from "react";
-import {Animated , Platform, Easing, ScrollView, View, TextInput, Image, TouchableHighlight, StyleSheet, Text} from "react-native";
+import React, {PureComponent} from "react";
 import {connect} from 'react-redux';
 import SplashScreenUI from '../components/SplashScreenUI';
-import { fetchInitialData } from "../actions/recipes";
 import BaseNavigator from './BaseNavigator';
+import { fetchInitialData } from "../actions/recipes";
+import { ActionCreators } from "../actions";
+import { bindActionCreators } from "redux";
 import timer from 'react-native-timer';
+import * as GeneralConstants from '../Constants/GeneralConstants';
 
-class SplashScreen extends Component {
+class SplashScreen extends PureComponent {
     constructor () {
         super()
-        this.state = {
-            isDelayed: false, 
-        }
-    }
-
-    delay() {
-        timer.setTimeout(this, 'delay',() => {
-            this.setState({isDelayed: true})
-        }, 2000);
+        this.state = { isDelayed: false, }
     }
 
     componentDidMount () {
@@ -29,17 +23,20 @@ class SplashScreen extends Component {
         timer.clearTimeout(this);
     }
 
+    delay() {
+        timer.setTimeout(this, 'delay',() => {
+            this.setState({isDelayed: true})
+        }, GeneralConstants.SPLASH_SCREEN_MIN_TIME);
+    }
+
     render() {
-        // return <View><Home/></View>
         return (() => { 
-            
-            if(this.state.isDelayed && this.props.fetchHotelStatus == 2 ) {
+            if(this.state.isDelayed && this.props.fetchHotelStatus == GeneralConstants.LOADED) {
                 return <BaseNavigator />
             } else {
-                return <SplashScreenUI fetchHotelStatus={this.props.fetchHotelStatus}/>
+                return <SplashScreenUI displayText={GeneralConstants.SPLASH_SCREEN_TEXT}/>
             }
         })()
-        
     }
 }
 
@@ -49,8 +46,11 @@ function mapStateToProps(state) {
     }
 }
 
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators(ActionCreators, dispatch);
+}
 
-export default connect(mapStateToProps)(SplashScreen);
+export default connect(mapStateToProps,mapDispatchToProps)(SplashScreen);
 
 
 

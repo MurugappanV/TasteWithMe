@@ -1,8 +1,8 @@
-import React, {Component} from "react";
+import React, {PureComponent} from "react";
 import {Image} from "react-native";
 import * as Animatable from 'react-native-animatable';
 
-export default class AnimatedImage extends Component {
+export default class AnimatedImage extends PureComponent {
     render() {
         return <Animatable.Image 
         animation={this.props.animationType} 

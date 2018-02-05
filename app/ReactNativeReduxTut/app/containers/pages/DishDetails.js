@@ -1,8 +1,8 @@
-import React, {Component} from "react";
-import {ScrollView, View, TextInput, Image, TouchableHighlight, StyleSheet, Text} from "react-native";
+import React, {PureComponent} from "react";
+import {View, Text} from "react-native";
 import {connect} from 'react-redux';
 
-class DishDetails extends Component {
+class DishDetails extends PureComponent {
 
     render() {
         return <View>

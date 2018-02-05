@@ -1,31 +1,24 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import { StatusBar } from "react-native";
 import { connect } from "react-redux";
 import { ActionCreators } from "../actions";
 import { bindActionCreators } from "redux";
 import Home from "./Home";
-//import SplashScreen from 'react-native-splash-screen';
 import SplashScreen from "./SplashScreen";
+import * as GeneralConstants from '../Constants/GeneralConstants';
 
-class AppContainer extends Component {
+class AppContainer extends PureComponent {
 
     componentDidMount() {
-    	// do stuff while splash screen is shown
-        // After having done stuff (such as async tasks) hide the splash screen
-        //SplashScreen.hide();
-        StatusBar.setHidden(true);
+        StatusBar.setHidden(GeneralConstants.IS_STATUS_BAR_HIDDEN);
     }
 
     render() {
-        return <SplashScreen  {...this.props}/>        
+        return <SplashScreen />        
     }    
 }
 
-function mapDispatchToProps(dispatch) {
-    return bindActionCreators(ActionCreators, dispatch);
-}
-
-export default connect((state) => { return { } }, mapDispatchToProps)(AppContainer);
+export default AppContainer;
 
 
 
@@ -39,7 +32,13 @@ export default connect((state) => { return { } }, mapDispatchToProps)(AppContain
     //     this.props.addRecipe();
     // }
 
+        	// do stuff while splash screen is shown
+        // After having done stuff (such as async tasks) hide the splash screen
+        //SplashScreen.hide();
 
+// function mapDispatchToProps(dispatch) {
+//     return bindActionCreators(ActionCreators, dispatch);
+// }
 
     // <View>
         //     <Text style={{marginTop: 20}}>
@@ -51,3 +50,5 @@ export default connect((state) => { return { } }, mapDispatchToProps)(AppContain
         //     </TouchableHighlight>
         // </View>
 //export default AppContainer;
+
+//import SplashScreen from 'react-native-splash-screen';
