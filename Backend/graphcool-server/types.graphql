@@ -3,12 +3,13 @@
 
 type User @model {
   id: ID! @isUnique
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  isDeleted: Boolean @defaultValue(value: "false")
+
   name: String
   dateOfBirth: DateTime
 
-  # Uncomment below - you can declare relations between models like this
-
-  # posts: [Post!]! @relation(name: "UserPosts")
 }
 
 
@@ -21,7 +22,7 @@ type Hotel @model {
   name: String!
   logoImageUrl: String
   logoImageName: String
-
+  appSettingRelation: HotelAppSettingRelation @relation(name: "HotelAppSettingRelation")
 }
 
 type HotelDetails @model {
@@ -35,6 +36,311 @@ type HotelDetails @model {
   displayNameImageUrl: String
 }
 
+type HotelAppSettingRelation @model {
+  id: ID! @isUnique
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  isDeleted: Boolean @defaultValue(value: "false")
+
+  hotel: Hotel! @relation(name: "HotelAppSettingRelation")
+  settings: [AppSettings!]! @relation(name: "AppSettingHotelRelation")
+}
+
+type AppSettings @model {
+  id: ID! @isUnique
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  isDeleted: Boolean @defaultValue(value: "false")
+
+  settingName: String!
+  value: String
+  hotelRelation: HotelAppSettingRelation @relation(name: "AppSettingHotelRelation")
+}
+
+type Dish @model {
+  id: ID! @isUnique
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  isDeleted: Boolean @defaultValue(value: "false")
+
+  name: String!
+  photoUrls: String
+  description: String
+  rateDetalil: DishRateDetail! @relation(name: "DishDishRateDetailsRelation")
+  availabilityDetail: DishAvailability! @relation(name: "DishDishAvailabilityRelation")
+  detail: DishDetail! @relation(name: "DishDishDetailRelation")
+}
+
+type DishDetail @model {
+  id: ID! @isUnique
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  isDeleted: Boolean @defaultValue(value: "false")
+
+  mealType: [MealType!]! @defaultValue(value: ["ALL"])
+  courseType: [CourseType!]!
+  cookingType: CookingType
+  cuisineType: CuisineType @defaultValue(value: "SOUTH_INDIAN")
+  tasteType: TasteType @defaultValue(value: "MIXED")
+  color: Color
+  dishQuantityRelation: DishQuantityDetailsRelation @relation(name: "DishDetailQuantityRelation")
+  ingredientRelation: DishDetailIngredientRelation @relation(name: "DishDetailIngredientRelation")
+  nutritionRelation: DishDetailNutritionRelation @relation(name: "DishDetailNutritionRelation")
+  dish: Dish! @relation(name: "DishDishDetailRelation")
+}
+
+type DishQuantityDetailsRelation @model {
+  id: ID! @isUnique
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  isDeleted: Boolean @defaultValue(value: "false")
+
+  dishDetail: DishDetail! @relation(name: "DishDetailQuantityRelation")
+  dishQuantities: [DishQuantity!]! @relation(name: "DishQuantityDetailRelation")
+}
+
+type DishQuantity @model {
+  id: ID! @isUnique
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  isDeleted: Boolean @defaultValue(value: "false")
+
+  quantity: String
+  quantityAmount: Float
+  quantityType: QuantityType
+  dishDetailRelations: [DishQuantityDetailsRelation!]! @relation(name: "DishQuantityDetailRelation")
+}
+
+type DishRateDetail @model {
+  id: ID! @isUnique
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  isDeleted: Boolean @defaultValue(value: "false")
+
+  price: Float @defaultValue(value: -1)
+  discountPercentage: Float @defaultValue(value: 0)
+  discountFlat: Float @defaultValue(value: 0)
+  currencyType: CurrencyType @defaultValue(value: "RUPEES")
+  dish: Dish! @relation(name: "DishDishRateDetailsRelation")
+}
+
+type DishAvailability @model {
+  id: ID! @isUnique
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  isDeleted: Boolean @defaultValue(value: "false")
+
+  availabilityStatus: DishAvailabilityType @defaultValue(value: "NOT_AVAILABLE")
+  dish: Dish! @relation(name: "DishDishAvailabilityRelation")
+  dishTimingRelation: DishAvailablilityTimingsRelation @relation(name: "DishAvailablilityTimingsRelation")
+}
+
+type DishAvailablilityTimingsRelation @model {
+  id: ID! @isUnique
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  isDeleted: Boolean @defaultValue(value: "false")
+
+  dishAvailabilty: DishAvailability! @relation(name: "DishAvailablilityTimingsRelation")
+  dishTiming: [DishTimimgs!]! @relation(name: "DishTimingsAvailablilityRelation")
+}
+
+type DishTimimgs @model {
+  id: ID! @isUnique
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  isDeleted: Boolean @defaultValue(value: "false")
+
+  startTime: DateTime!
+  endTime: DateTime!
+  count: Float @defaultValue(value: 0)
+  dishAvailabiltyRelation: DishAvailablilityTimingsRelation @relation(name: "DishTimingsAvailablilityRelation")
+}
+
+# type Taste @model {
+#   id: ID! @isUnique
+#   createdAt: DateTime!
+#   updatedAt: DateTime!
+#   isDeleted: Boolean @defaultValue(value: "false")
+
+#   name: String!
+#   icon: String
+# }
+
+# type Course @model {
+#   id: ID! @isUnique
+#   createdAt: DateTime!
+#   updatedAt: DateTime!
+#   isDeleted: Boolean @defaultValue(value: "false")
+
+#   name: String!
+#   icon: String
+# }
+
+# type Cuisine @model {
+#   id: ID! @isUnique
+#   createdAt: DateTime!
+#   updatedAt: DateTime!
+#   isDeleted: Boolean @defaultValue(value: "false")
+
+#   name: String!
+#   icon: String
+# }
+
+type DishDetailIngredientRelation @model {
+  id: ID! @isUnique
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  isDeleted: Boolean @defaultValue(value: "false")
+
+  dishDetail: DishDetail! @relation(name: "DishDetailIngredientRelation")
+  ingredients: [Ingredient!]! @relation(name: "IngredientDishDetailRelation")
+}
+
+
+type Ingredient @model {
+  id: ID! @isUnique
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  isDeleted: Boolean @defaultValue(value: "false")
+
+  name: String!
+  icon: String
+  photoUrls: String
+  description: String
+  tasteType: TasteType
+  dishDetailRelations: [DishDetailIngredientRelation!]! @relation(name: "IngredientDishDetailRelation")
+}
+
+type DishDetailNutritionRelation @model {
+  id: ID! @isUnique
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  isDeleted: Boolean @defaultValue(value: "false")
+
+  dishDetail: DishDetail! @relation(name: "DishDetailNutritionRelation")
+  nutrition: [Nutrition!]! @relation(name: "NutritionDishDetailRelation")
+}
+
+type Nutrition @model {
+  id: ID! @isUnique
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  isDeleted: Boolean @defaultValue(value: "false")
+
+  name: String!
+  icon: String
+  description: String
+  nutritionQuantityRelation: NutritionQuantityRelation @relation(name: "NutritionQuantityRelation")
+  dishDetailRelations: [DishDetailNutritionRelation!]! @relation(name: "NutritionDishDetailRelation")
+}
+
+type NutritionQuantityRelation @model {
+  id: ID! @isUnique
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  isDeleted: Boolean @defaultValue(value: "false")
+
+  nutrition: Nutrition! @relation(name: "NutritionQuantityRelation")
+  nutritionQuantities: [NutritionQuantity!]! @relation(name: "QuantityNutritionRelation")
+}
+
+type NutritionQuantity @model {
+  id: ID! @isUnique
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  isDeleted: Boolean @defaultValue(value: "false")
+
+  quantity: String
+  quantityAmount: Float
+  quantityType: QuantityType
+  nutritionRelations: [NutritionQuantityRelation!]! @relation(name: "QuantityNutritionRelation")
+}
+
+enum DishType {
+  VEG,
+  NON_VEG,
+  EGG
+}
+
+enum TasteType {
+  SWEET,
+  SPICY,
+  HOT,
+  BITTER,
+  MIXED
+}
+
+enum MealType {
+  BREAKFAST,
+  BRUNCH, 
+  LUNCH,
+  SUPPER,
+  DINNER,
+  ALL
+}
+
+enum CourseType {
+  SOUPS,
+  SALADS,
+  SNACKS,
+  STARTERS,
+  MAIN_DISH,
+  SIDE_DISH,
+  DESSERTS
+}
+
+enum CuisineType {
+  SOUTH_INDIAN,
+  NORTH_INDIAN,
+  INDIAN,
+  CHINESE,
+  ITALIAN,
+  AMERICAN
+}
+
+enum CookingType {
+  ROASTED,
+  BOILED,
+  FRIED
+}
+
+enum DishAvailabilityType {
+  AVAILABLE,
+  NOT_AVAILABLE,
+  EVALUVATE_TIME,
+  EVALUVATE_QUANTITY,
+  EVALUVATE_QUANTITY_AND_TIME
+}
+
+enum QuantityType {
+  MILILITER,
+  LITER,
+  KILOGRAM,
+  GRAM,
+  Nos,
+  PIECES,
+  PLATE
+}
+
+enum CurrencyType {
+  RUPEES,
+  DOLLAR
+}
+
+enum Color {
+  GREEN,
+  RED,
+  WHITE,
+  BROWN,
+  ORANGE,
+  MIXED
+}
+
+#Hotel offers
+#combo dishes
+
+
 # Uncomment the model below as well
 
 # type Post @model {
@@ -44,3 +350,7 @@ type HotelDetails @model {
 #   # Every relation also required a back-relation (to determine 1:1, 1:n or n:m)
 #   author: User! @relation(name: "UserPosts")
 # }
+
+  # Uncomment below - you can declare relations between models like this
+
+  # posts: [Post!]! @relation(name: "UserPosts")
