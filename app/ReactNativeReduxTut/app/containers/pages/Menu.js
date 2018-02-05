@@ -22,28 +22,65 @@ class Menu extends PureComponent {
 
     constructor () {
         super()
-        this.state = { isCardView: true, }
+        this.state = { isCardView: false, }
     }
 
     MockData = [ {
             headerText: 'Soup',
             member: [ {
-                    title: 'memberTitle1',
-                    content: 'content',
+                    title: 'Fries',
+                    content: 'tasty',
+                    price: '$7',
+                    imageUrl: 'https://firebasestorage.googleapis.com/v0/b/tastewithme-1.appspot.com/o/fries.png?alt=media&token=f4f150b5-ad32-4aab-873a-8a9ce05d967a',
+                    dishType: ''
+                },{
+                    title: 'Pop corn',
+                    content: 'time pass',
+                    price: '$5',
+                    imageUrl: 'https://firebasestorage.googleapis.com/v0/b/tastewithme-1.appspot.com/o/popcorn.png?alt=media&token=44d559d8-f270-41cb-af10-2c2221faaeaa',
+                },{
+                    title: 'chicken pallipalayamgdfgdfhhfghfhghg',
+                    content: 'hungry',
+                    price: '$12',
+                    imageUrl: 'https://firebasestorage.googleapis.com/v0/b/tastewithme-1.appspot.com/o/chicken65.png?alt=media&token=62fb9ae1-38fc-461c-96e4-1f3383165c07',
                 },
             ]
         }, {
             headerText: 'Starter',
             member: [ {
-                    title: 'memberTitle2',
-                    content: 'content',
+                    title: 'Fries',
+                    content: 'tasty',
+                    price: '$7',
+                    imageUrl: 'https://firebasestorage.googleapis.com/v0/b/tastewithme-1.appspot.com/o/fries.png?alt=media&token=f4f150b5-ad32-4aab-873a-8a9ce05d967a',
+                },{
+                    title: 'Pop corn',
+                    content: 'time pass',
+                    price: '$5',
+                    imageUrl: 'https://firebasestorage.googleapis.com/v0/b/tastewithme-1.appspot.com/o/popcorn.png?alt=media&token=44d559d8-f270-41cb-af10-2c2221faaeaa',
+                },{
+                    title: 'chicken 65',
+                    content: 'hungry',
+                    price: '$12',
+                    imageUrl: 'https://firebasestorage.googleapis.com/v0/b/tastewithme-1.appspot.com/o/chicken65.png?alt=media&token=62fb9ae1-38fc-461c-96e4-1f3383165c07',
                 },
             ]
         }, {
             headerText: 'Dessert',
             member: [ {
-                    title: 'memberTitle3',
-                    content: 'content',
+                    title: 'Fries',
+                    content: 'tasty',
+                    price: '$7',
+                    imageUrl: 'https://firebasestorage.googleapis.com/v0/b/tastewithme-1.appspot.com/o/fries.png?alt=media&token=f4f150b5-ad32-4aab-873a-8a9ce05d967a',
+                },{
+                    title: 'Pop corn',
+                    content: 'time pass',
+                    price: '$5',
+                    imageUrl: 'https://firebasestorage.googleapis.com/v0/b/tastewithme-1.appspot.com/o/popcorn.png?alt=media&token=44d559d8-f270-41cb-af10-2c2221faaeaa',
+                },{
+                    title: 'chicken 65',
+                    content: 'hungry',
+                    price: '$12',
+                    imageUrl: 'https://firebasestorage.googleapis.com/v0/b/tastewithme-1.appspot.com/o/chicken65.png?alt=media&token=62fb9ae1-38fc-461c-96e4-1f3383165c07',
                 },
             ]
         },
@@ -61,7 +98,7 @@ class Menu extends PureComponent {
         return <View style={basicStyles.fullContent}>
             <Accordion data={this.MockData} extraData={this.state.isCardView} itemHeader={this.renderHeader.bind(this)} itemContent={this.renderContent.bind(this)}/>
             <TouchableHighlight style={basicStyles.absoluteBottomCircle} onPress={this.onViewChangePress}>
-                <MaterialIcon name={this.state.isCardView ? IconName.CARD_VIEW_ICON_NAME : IconName.LIST_VIEW_ICON_NAME} size={Sizes.DEFAULT_HEADER_ICON_SIZE} color={Colors.ICON_WHITE} />
+                <MaterialIcon name={this.state.isCardView ? IconName.CARD_VIEW_ICON_NAME : IconName.LIST_VIEW_ICON_NAME} size={Sizes.DEFAULT_HEADER_ICON_SIZE} color={Colors.ACTIVE_ICON_COLOR} />
             </TouchableHighlight>
         </View>
     }

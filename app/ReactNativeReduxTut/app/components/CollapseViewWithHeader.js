@@ -3,6 +3,7 @@ import { FlatList, ScrollView, View, TextInput, Image, StyleSheet, Text, Touchab
 import {connect} from 'react-redux';
 import Icon from 'react-native-vector-icons/Entypo';
 import Collapsible from 'react-native-collapsible';
+import * as Colors from '../Constants/Colors';
 import * as Sizes from '../Constants/Sizes';
 import * as IconName from '../Constants/IconName';
 import * as Labels from '../Constants/Labels';
@@ -19,7 +20,7 @@ class CollapseViewWithHeader extends PureComponent {
 
     render() {
         return <View >
-             <TouchableHighlight onPress={this.onHeaderPress}>
+             <TouchableHighlight onPress={this.onHeaderPress} underlayColor={Colors.DARK_HIGHLIGHT_COLOR}>
                 {this.props.header(this.props.data, this.state.isCollapsed)}
             </TouchableHighlight>
             <Collapsible collapsed={this.state.isCollapsed}>
