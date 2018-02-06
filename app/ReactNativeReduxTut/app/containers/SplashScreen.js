@@ -2,8 +2,8 @@ import React, {PureComponent} from "react";
 import {connect} from 'react-redux';
 import SplashScreenUI from '../components/SplashScreenUI';
 import BaseNavigator from './BaseNavigator';
-import { fetchInitialData } from "../actions/recipes";
-import { ActionCreators } from "../actions";
+import { fetchInitialData } from "../actions/initialDataActions";
+import { InitialDataActions } from "../actions";
 import { bindActionCreators } from "redux";
 import timer from 'react-native-timer';
 import * as GeneralConstants from '../Constants/GeneralConstants';
@@ -47,7 +47,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators(ActionCreators, dispatch);
+    return bindActionCreators(InitialDataActions, dispatch);
 }
 
 export default connect(mapStateToProps,mapDispatchToProps)(SplashScreen);

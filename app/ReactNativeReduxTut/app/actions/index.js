@@ -1,5 +1,7 @@
-import * as RecipeActions from './recipes';
+import * as initialDataActions from './initialDataActions';
+import * as dishDisDataActions from './dishDisDataActions';
 
-export const ActionCreators = Object.assign({},
-    RecipeActions,
+export const InitialDataActions = Object.assign({},
+    initialDataActions,
+    dishDisDataActions,
 );
