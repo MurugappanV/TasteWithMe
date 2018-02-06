@@ -5,9 +5,9 @@ import * as IconName from '../../Constants/IconName';
 import HomeHeader from '../../components/HomeHeader';
 import UnderConstruction from '../../components/UnderConstruction';
 
-class DishDetails extends PureComponent {
+class AboutUs extends PureComponent {
     static navigationOptions = {
-        header: ({navigation}) =>  <HomeHeader headerTitle='Dish Details' leftLogo={IconName.HOTEL_LOGO} backLogo={IconName.BACK_ICON_NAME} navigation={navigation}/>
+        header: ({navigation}) =>  <HomeHeader headerTitle='About Us' backLogo={IconName.BACK_ICON_NAME} navigation={navigation}/>
     };
 
     render() {
@@ -23,8 +23,4 @@ function mapStateToProps(state) {
 }
 
 
-export default connect(mapStateToProps)(DishDetails);
-
-
-//console.log(`+++++++++++++++++++++++++++++++++++++++-${props}`)
-//console.log(props)
+export default connect(mapStateToProps)(AboutUs);

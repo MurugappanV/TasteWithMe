@@ -8,6 +8,7 @@ import * as IconName from '../../Constants/IconName';
 import * as Colors from '../../Constants/Colors';
 import * as Labels from '../../Constants/Labels';
 import { basicStyles } from '../../StyleSheets/styles';
+import UnderConstruction from '../../components/UnderConstruction';
 
 class Favorites extends PureComponent {
     static navigationOptions = {
@@ -18,23 +19,15 @@ class Favorites extends PureComponent {
     };
 
     render() {
-        return <View style={basicStyles.fullContent}>
-            <IonIcon name={IconName.UNDER_CONSTRUCTION_ICON_NAME} size={100} color={Colors.HEADER_BACKGROUND_COLOR} />
-            <Text style={basicStyles.darkHeaderText}>Under Construction</Text>
-            <TouchableHighlight onPress={() => this.props.navigation.navigate('DishDetails')}>
-                <Text style={basicStyles.darkHeaderText}>Go to details page >></Text>
-            </TouchableHighlight>
-        </View>        
+        return <UnderConstruction label='Under Construction' iconName={IconName.UNDER_CONSTRUCTION_ICON_NAME}/>
     }
 }
-
 
 function mapStateToProps(state) {
     return {
         
     }
 }
-
 
 export default connect(mapStateToProps)(Favorites);
 
@@ -49,3 +42,9 @@ export default connect(mapStateToProps)(Favorites);
             title="Chat with Lucy"
         />
         </View> */}
+
+        // <View style={basicStyles.fullContent}>
+        //     <IonIcon name={IconName.UNDER_CONSTRUCTION_ICON_NAME} size={100} color={Colors.HEADER_BACKGROUND_COLOR} />
+        //     <Text style={basicStyles.darkHeaderText}>Under Construction</Text>
+            
+        // </View>        

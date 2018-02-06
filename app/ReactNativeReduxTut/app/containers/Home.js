@@ -7,11 +7,14 @@ import HomeHeader from '../components/HomeHeader';
 import * as Colors from '../Constants/Colors';
 import * as Sizes from '../Constants/Sizes';
 import { basicStyles } from '../StyleSheets/styles';
+import * as IconName from '../Constants/IconName';
+
+const header = (navigation) => <HomeHeader headerTitle='TasteE' leftLogo={IconName.HOTEL_LOGO} navigation={navigation}/>
 
 const Home = TabNavigator({
-        Menu: { screen: Menu, navigationOptions: { header: <HomeHeader/> } },
-        Favorites: { screen: Favorites, navigationOptions: { header: null } },
-        Profile: { screen: Profile, navigationOptions: { header: null } },
+        Menu: { screen: Menu, navigationOptions: { header: ({navigation}) => header(navigation) } },
+        Favorites: { screen: Favorites, navigationOptions: { header: ({navigation}) => header(navigation) } },
+        Profile: { screen: Profile, navigationOptions: { header: ({navigation}) => header(navigation) } },
     }, {
         animationEnabled: true,
         tabBarOptions: {

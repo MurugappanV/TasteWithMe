@@ -56,6 +56,10 @@ export const sizes = StyleSheet.create({
         width: cardImageWidth,
         height: cardImageHeight,
     },
+    listImage: {
+        width: 40, 
+        height: 40
+    },
 });
 
 export const fonts = StyleSheet.create({
@@ -72,6 +76,116 @@ export const fonts = StyleSheet.create({
 });
 
 export const basicCompStyles = StyleSheet.create({
+    flexColumnCC: { 
+        flexDirection: 'column', 
+        justifyContent: 'center', 
+        alignItems: 'center'
+    },
+    flexColumnNFs: {
+        flexDirection: 'column', 
+        alignItems: 'flex-start'
+    },
+    flexRowSbC: {
+        flexDirection: "row", 
+        justifyContent:"space-between", 
+        alignItems:"center"
+    },
+    flexRowNC: {
+        flexDirection: "row", 
+        alignItems:"center"
+    },
+
+
+    absoluteAndBlack: {
+        backgroundColor: 'black', 
+        position: 'absolute'
+    },
+    absoluteBottomRight20: {
+        position: 'absolute',
+        bottom: 20,
+        right: 20
+    },
+    absoluteBottomLeft0: {
+        position: 'absolute',
+        bottom: 0,
+        left: 0
+    },
+    absoluteTop5Right0: {
+        position: 'absolute', 
+        top: 5, 
+        right: 0
+    },
+
+
+    
+    defaultBorder: {
+        borderWidth: Sizes.DEFAULT_BORDER_WIDTH,
+        borderColor: Colors.LIGHT_BACKGROUND_COLOR,
+    },
+    defaultPadding: {
+        padding: DEFAULT_PADDING,
+    },
+    paddingLR10: {
+        paddingLeft: 10, 
+        paddingRight: 10
+    },
+    fullSize: {
+        flex: 1
+    },
+
+    activeBackGround: {
+        backgroundColor: Colors.ACTIVE_ICON_COLOR
+    },
+    blackBackGround: {
+        backgroundColor: 'black'
+    },
+    greenBackGround: { 
+        backgroundColor: 'green'
+    },
+    contentBackGround: {
+        backgroundColor: Colors.CONTENT_BACKGROUND_COLOR,
+    },
+    darkBackGround: {
+        backgroundColor: Colors.MEDIUM_TEXT_COLOR
+    },
+    transparentBackGround: {
+        backgroundColor: Colors.TRANSPARENT
+    },
+
+
+    darkTextColor: {
+        color: Colors.MEDIUM_TEXT_COLOR
+    },
+    darkerTextColor: {
+        color: Colors.DARK_TEXT_COLOR
+    },
+    lightTextColor: {
+        color: Colors.LIGHT_TEXT_COLOR
+    },
+
+
+    pageHeader: {
+        borderBottomWidth: Sizes.DEFAULT_BORDER_WIDTH,
+        borderColor: Colors.IN_ACTIVE_ICON_COLOR, 
+        backgroundColor: Colors.HEADER_BACKGROUND_COLOR,
+        padding: Sizes.DEFAULT_PADDING,
+    },
+    subHeader: {  
+        backgroundColor: Colors.LIGHT_BACKGROUND_COLOR, 
+        padding: Sizes.DEFAULT_PADDING,
+    },
+    dishListView: {
+        backgroundColor: Colors.ACTIVE_ICON_COLOR, 
+        padding: Sizes.DEFAULT_PADDING
+    },
+    dishCardView: {
+        backgroundColor: Colors.ACTIVE_ICON_COLOR, 
+        padding: Sizes.DEFAULT_PADDING, 
+    },
+    subContent: { 
+        backgroundColor: Colors.ACTIVE_ICON_COLOR,
+    },
+
     bigHeaderText: {
         fontSize: 40, 
         fontWeight: 'bold', 
@@ -89,90 +203,6 @@ export const basicCompStyles = StyleSheet.create({
         fontSize: 25, 
         color: 'white'
     },
-    flexColumnCC: { 
-        flexDirection: 'column', 
-        justifyContent: 'center', 
-        alignItems: 'center'
-    },
-    absoluteAndBlack: {
-        backgroundColor: 'black', 
-        position: 'absolute'
-    },
-    pageHeader: {
-        backgroundColor: Colors.HEADER_BACKGROUND_COLOR,
-        paddingTop: Sizes.DEFAULT_PADDING,
-    },
-    activeBackGround: {
-        backgroundColor: Colors.ACTIVE_ICON_COLOR
-    },
-    blackBackGround: {
-        backgroundColor: 'black'
-    },
-    flexRowSbC: {
-        flexDirection: "row", 
-        justifyContent:"space-between", 
-        alignItems:"center"
-    },
-    flexRowNC: {
-        flexDirection: "row", 
-        alignItems:"center"
-    },
-    subHeader: {  
-        backgroundColor: Colors.LIGHT_BACKGROUND_COLOR, 
-        padding: Sizes.DEFAULT_PADDING,
-    },
-    absoluteBottomRight20: {
-        position: 'absolute',
-        bottom: 20,
-        right: 20
-    },
-    absoluteBottomLeft0: {
-        position: 'absolute',
-        bottom: 0,
-        left: 0
-    },
-    greenBackGround: { 
-        backgroundColor: 'green'
-    },
-    contentBackGround: {
-        backgroundColor: Colors.CONTENT_BACKGROUND_COLOR,
-    },
-    dishListView: {
-        backgroundColor: Colors.ACTIVE_ICON_COLOR, 
-        padding: Sizes.DEFAULT_PADDING
-    },
-    dishCardView: {
-        backgroundColor: Colors.ACTIVE_ICON_COLOR, 
-        padding: Sizes.DEFAULT_PADDING, 
-    },
-    subContent: { 
-        backgroundColor: Colors.ACTIVE_ICON_COLOR,
-    },
-    defaultBorder: {
-        borderWidth: Sizes.DEFAULT_BORDER_WIDTH,
-        borderColor: Colors.LIGHT_BACKGROUND_COLOR,
-    },
-    defaultPadding: {
-        padding: DEFAULT_PADDING,
-    },
-    fullSize: {
-        flex: 1
-    },
-    darkTextColor: {
-        color: Colors.MEDIUM_TEXT_COLOR
-    },
-    darkerTextColor: {
-        color: Colors.DARK_TEXT_COLOR
-    },
-    lightTextColor: {
-        color: Colors.LIGHT_TEXT_COLOR
-    },
-    darkBackGround: {
-        backgroundColor: Colors.MEDIUM_TEXT_COLOR
-    },
-    transparentBackGround: {
-        backgroundColor: Colors.TRANSPARENT
-    }
 });
 
 export const basicStyles = {
@@ -184,6 +214,29 @@ export const basicStyles = {
         fonts.default , 
         basicCompStyles.mediumText
     ],
+    headerText: [
+        fonts.default , 
+        basicCompStyles.headerText,
+        basicCompStyles.lightTextColor
+    ],
+    paddedHeaderText: [
+        fonts.default , 
+        basicCompStyles.headerText,
+        basicCompStyles.lightTextColor,
+        basicCompStyles.paddingLR10
+    ],
+    darkHeaderText: [
+        fonts.default , 
+        basicCompStyles.headerText,
+        basicCompStyles.darkTextColor
+    ],
+    darkTitleText: [
+        fonts.default , 
+        basicCompStyles.titleText,
+        basicCompStyles.darkerTextColor
+    ],
+
+
     fullSizeColumnCC: [
         sizes.fullViewSize,
         basicCompStyles.flexColumnCC,
@@ -193,29 +246,21 @@ export const basicStyles = {
         sizes.fullViewSize, 
         basicCompStyles.absoluteAndBlack
     ],
+
+
     pageHeader: [
         sizes.pageHeader,
         basicCompStyles.pageHeader
-    ],
-    activeBackGround: [
-        basicCompStyles.activeBackGround
     ],
     subHeader: [
         sizes.subHeader,
         basicCompStyles.flexRowSbC,
         basicCompStyles.subHeader
     ],
-    headerText: [
-        basicCompStyles.headerText,
-        basicCompStyles.lightTextColor
-    ],
-    darkHeaderText: [
-        basicCompStyles.headerText,
-        basicCompStyles.darkTextColor
-    ],
-    darkTitleText: [
-        basicCompStyles.titleText,
-        basicCompStyles.darkerTextColor
+
+
+    activeBackGround: [
+        basicCompStyles.activeBackGround
     ],
     fullContent: [
         sizes.contentFullHeight,
@@ -229,11 +274,43 @@ export const basicStyles = {
         basicCompStyles.darkBackGround,
         basicCompStyles.absoluteBottomRight20
     ],
+    vegImageView: [
+        basicCompStyles.absoluteBottomLeft0,
+        
+    ],
+    subContent: [
+        sizes.subContent,
+        basicCompStyles.subContent,
+        basicCompStyles.defaultBorder
+    ],
+
+
+
     dishListView: [
         basicCompStyles.flexRowNC,
         basicCompStyles.dishListView,
         basicCompStyles.defaultBorder
     ],
+    dishListImageView: [
+        basicCompStyles.flexColumnCC,
+        basicCompStyles.transparentBackGround,
+        basicCompStyles.defaultPadding,
+    ],
+    dishListTextView: [
+        basicCompStyles.flexRowSbC,
+        basicCompStyles.transparentBackGround,
+        basicCompStyles.defaultPadding,
+        basicCompStyles.fullSize
+    ],
+    dishListTextIconView: [
+        basicCompStyles.flexColumnNFs,
+        basicCompStyles.defaultPadding,
+        basicCompStyles.fullSize
+    ],
+
+
+
+
     dishCardView: [
         sizes.cardView,
         basicCompStyles.flexColumnCC,
@@ -254,26 +331,6 @@ export const basicStyles = {
         basicCompStyles.flexColumnCC,
         basicCompStyles.transparentBackGround,
         basicCompStyles.defaultPadding,
-    ],
-    dishListImageView: [
-        basicCompStyles.flexColumnCC,
-        basicCompStyles.transparentBackGround,
-        basicCompStyles.defaultPadding,
-    ],
-    dishListTextView: [
-        basicCompStyles.flexRowSbC,
-        basicCompStyles.transparentBackGround,
-        basicCompStyles.defaultPadding,
-        basicCompStyles.fullSize
-    ],
-    vegImageView: [
-        basicCompStyles.absoluteBottomLeft0,
-        
-    ],
-    subContent: [
-        sizes.subContent,
-        basicCompStyles.subContent,
-        basicCompStyles.defaultBorder
     ],
 }
 

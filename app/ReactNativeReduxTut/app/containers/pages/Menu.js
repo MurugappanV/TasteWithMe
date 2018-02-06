@@ -92,7 +92,7 @@ class Menu extends PureComponent {
 
     renderHeader = (data, isCollapsed)  => <View><CollapseHeader data={data} isCollapsed={isCollapsed}/></View>
 
-    renderContent = (data, isCollapsed) => <CollapseContent data={data} isCollapsed={isCollapsed} isCardView={this.state.isCardView}/>
+    renderContent = (data, isCollapsed) => <CollapseContent navigation={this.props.navigation} data={data} isCollapsed={isCollapsed} isCardView={this.state.isCardView}/>
 
     render() {
         return <View style={basicStyles.fullContent}>
