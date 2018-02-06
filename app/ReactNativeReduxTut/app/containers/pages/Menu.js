@@ -6,6 +6,9 @@ import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import Accordion from '../../components/Accordion';
 import CollapseHeader from '../../components/CollapseHeader';
 import CollapseContent from '../../components/CollapseContent';
+import { dishList } from "../../actions/dishDisDataActions";
+import { DishDataActions } from "../../actions";
+import { bindActionCreators } from "redux";
 import * as Sizes from '../../Constants/Sizes';
 import * as Colors from '../../Constants/Colors';
 import * as IconName from '../../Constants/IconName';
@@ -22,81 +25,24 @@ class Menu extends PureComponent {
 
     constructor () {
         super()
-        this.state = { isCardView: false, }
+        this.state = { isCardView: false }
     }
 
-    MockData = [ {
-            headerText: 'Soup',
-            member: [ {
-                    title: 'Fries',
-                    content: 'tasty',
-                    price: '$7',
-                    imageUrl: 'https://firebasestorage.googleapis.com/v0/b/tastewithme-1.appspot.com/o/fries.png?alt=media&token=f4f150b5-ad32-4aab-873a-8a9ce05d967a',
-                    dishType: ''
-                },{
-                    title: 'Pop corn',
-                    content: 'time pass',
-                    price: '$5',
-                    imageUrl: 'https://firebasestorage.googleapis.com/v0/b/tastewithme-1.appspot.com/o/popcorn.png?alt=media&token=44d559d8-f270-41cb-af10-2c2221faaeaa',
-                },{
-                    title: 'chicken pallipalayamgdfgdfhhfghfhghg',
-                    content: 'hungry',
-                    price: '$12',
-                    imageUrl: 'https://firebasestorage.googleapis.com/v0/b/tastewithme-1.appspot.com/o/chicken65.png?alt=media&token=62fb9ae1-38fc-461c-96e4-1f3383165c07',
-                },
-            ]
-        }, {
-            headerText: 'Starter',
-            member: [ {
-                    title: 'Fries',
-                    content: 'tasty',
-                    price: '$7',
-                    imageUrl: 'https://firebasestorage.googleapis.com/v0/b/tastewithme-1.appspot.com/o/fries.png?alt=media&token=f4f150b5-ad32-4aab-873a-8a9ce05d967a',
-                },{
-                    title: 'Pop corn',
-                    content: 'time pass',
-                    price: '$5',
-                    imageUrl: 'https://firebasestorage.googleapis.com/v0/b/tastewithme-1.appspot.com/o/popcorn.png?alt=media&token=44d559d8-f270-41cb-af10-2c2221faaeaa',
-                },{
-                    title: 'chicken 65',
-                    content: 'hungry',
-                    price: '$12',
-                    imageUrl: 'https://firebasestorage.googleapis.com/v0/b/tastewithme-1.appspot.com/o/chicken65.png?alt=media&token=62fb9ae1-38fc-461c-96e4-1f3383165c07',
-                },
-            ]
-        }, {
-            headerText: 'Dessert',
-            member: [ {
-                    title: 'Fries',
-                    content: 'tasty',
-                    price: '$7',
-                    imageUrl: 'https://firebasestorage.googleapis.com/v0/b/tastewithme-1.appspot.com/o/fries.png?alt=media&token=f4f150b5-ad32-4aab-873a-8a9ce05d967a',
-                },{
-                    title: 'Pop corn',
-                    content: 'time pass',
-                    price: '$5',
-                    imageUrl: 'https://firebasestorage.googleapis.com/v0/b/tastewithme-1.appspot.com/o/popcorn.png?alt=media&token=44d559d8-f270-41cb-af10-2c2221faaeaa',
-                },{
-                    title: 'chicken 65',
-                    content: 'hungry',
-                    price: '$12',
-                    imageUrl: 'https://firebasestorage.googleapis.com/v0/b/tastewithme-1.appspot.com/o/chicken65.png?alt=media&token=62fb9ae1-38fc-461c-96e4-1f3383165c07',
-                },
-            ]
-        },
-    ]
+    componentDidMount() {
+        this.props.dishList();
+    }
 
     onViewChangePress = () => {
         this.setState({ isCardView: !this.state.isCardView })
     }
 
-    renderHeader = (data, isCollapsed)  => <View><CollapseHeader data={data} isCollapsed={isCollapsed}/></View>
+    renderHeader = (data, isCollapsed)  => <View><CollapseHeader headerText={data.name} isCollapsed={isCollapsed}/></View>
 
     renderContent = (data, isCollapsed) => <CollapseContent navigation={this.props.navigation} data={data} isCollapsed={isCollapsed} isCardView={this.state.isCardView}/>
 
     render() {
         return <View style={basicStyles.fullContent}>
-            <Accordion data={this.MockData} extraData={this.state.isCardView} itemHeader={this.renderHeader.bind(this)} itemContent={this.renderContent.bind(this)}/>
+            <Accordion data={this.props.dishListData} extraData={this.state.isCardView} itemHeader={this.renderHeader.bind(this)} itemContent={this.renderContent.bind(this)}/>
             <TouchableHighlight style={basicStyles.absoluteBottomCircle} onPress={this.onViewChangePress}>
                 <MaterialIcon name={this.state.isCardView ? IconName.CARD_VIEW_ICON_NAME : IconName.LIST_VIEW_ICON_NAME} size={Sizes.DEFAULT_HEADER_ICON_SIZE} color={Colors.ACTIVE_ICON_COLOR} />
             </TouchableHighlight>
@@ -107,12 +53,16 @@ class Menu extends PureComponent {
 
 function mapStateToProps(state) {
     return {
-        
+        dishListData : state.generalDishList,
+        dishListFetchingStatus : state.isDIshListLoading,
     }
 }
 
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators(DishDataActions, dispatch);
+}
 
-export default connect(mapStateToProps)(Menu);
+export default connect(mapStateToProps,mapDispatchToProps)(Menu);
 
 
         // <ExpanableList style={{paddingLeft: 5, paddingTop: 5, paddingRight: 5, paddingBottom: 5, backgroundColor: 'white'}}
@@ -203,3 +153,65 @@ export default connect(mapStateToProps)(Menu);
 
 
     // <Text>{`value${this.state.isCardView}`}</Text>
+
+
+//     MockData = [ {
+//         headerText: 'Soup',
+//         member: [ {
+//                 title: 'Fries',
+//                 content: 'tasty',
+//                 price: '$7',
+//                 imageUrl: 'https://firebasestorage.googleapis.com/v0/b/tastewithme-1.appspot.com/o/fries.png?alt=media&token=f4f150b5-ad32-4aab-873a-8a9ce05d967a',
+//                 dishType: ''
+//             },{
+//                 title: 'Pop corn',
+//                 content: 'time pass',
+//                 price: '$5',
+//                 imageUrl: 'https://firebasestorage.googleapis.com/v0/b/tastewithme-1.appspot.com/o/popcorn.png?alt=media&token=44d559d8-f270-41cb-af10-2c2221faaeaa',
+//             },{
+//                 title: 'chicken pallipalayamgdfgdfhhfghfhghg',
+//                 content: 'hungry',
+//                 price: '$12',
+//                 imageUrl: 'https://firebasestorage.googleapis.com/v0/b/tastewithme-1.appspot.com/o/chicken65.png?alt=media&token=62fb9ae1-38fc-461c-96e4-1f3383165c07',
+//             },
+//         ]
+//     }, {
+//         headerText: 'Starter',
+//         member: [ {
+//                 title: 'Fries',
+//                 content: 'tasty',
+//                 price: '$7',
+//                 imageUrl: 'https://firebasestorage.googleapis.com/v0/b/tastewithme-1.appspot.com/o/fries.png?alt=media&token=f4f150b5-ad32-4aab-873a-8a9ce05d967a',
+//             },{
+//                 title: 'Pop corn',
+//                 content: 'time pass',
+//                 price: '$5',
+//                 imageUrl: 'https://firebasestorage.googleapis.com/v0/b/tastewithme-1.appspot.com/o/popcorn.png?alt=media&token=44d559d8-f270-41cb-af10-2c2221faaeaa',
+//             },{
+//                 title: 'chicken 65',
+//                 content: 'hungry',
+//                 price: '$12',
+//                 imageUrl: 'https://firebasestorage.googleapis.com/v0/b/tastewithme-1.appspot.com/o/chicken65.png?alt=media&token=62fb9ae1-38fc-461c-96e4-1f3383165c07',
+//             },
+//         ]
+//     }, {
+//         headerText: 'Dessert',
+//         member: [ {
+//                 title: 'Fries',
+//                 content: 'tasty',
+//                 price: '$7',
+//                 imageUrl: 'https://firebasestorage.googleapis.com/v0/b/tastewithme-1.appspot.com/o/fries.png?alt=media&token=f4f150b5-ad32-4aab-873a-8a9ce05d967a',
+//             },{
+//                 title: 'Pop corn',
+//                 content: 'time pass',
+//                 price: '$5',
+//                 imageUrl: 'https://firebasestorage.googleapis.com/v0/b/tastewithme-1.appspot.com/o/popcorn.png?alt=media&token=44d559d8-f270-41cb-af10-2c2221faaeaa',
+//             },{
+//                 title: 'chicken 65',
+//                 content: 'hungry',
+//                 price: '$12',
+//                 imageUrl: 'https://firebasestorage.googleapis.com/v0/b/tastewithme-1.appspot.com/o/chicken65.png?alt=media&token=62fb9ae1-38fc-461c-96e4-1f3383165c07',
+//             },
+//         ]
+//     },
+// ]

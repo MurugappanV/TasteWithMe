@@ -1,6 +1,6 @@
 import createReducer from '../lib/createReducer';
 import *  as types from '../actions/types';
-import GeneralConstants from '../Constants/GeneralConstants';
+import *  as GeneralConstants from '../Constants/GeneralConstants';
 
 export const fetchHotelStatus = createReducer(0, {
     [types.FETCH_HOTEL_LOADING](state, action) {

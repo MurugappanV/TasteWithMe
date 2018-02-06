@@ -16,7 +16,7 @@ class Accordion extends PureComponent {
         return <FlatList 
             data={this.props.data}
             extraData={this.props.extraData}
-            keyExtractor={(item, index) => item.headerText}
+            keyExtractor={(item, index) => item.name}
             renderItem={this.renderItemCollapsible}
         />
     }

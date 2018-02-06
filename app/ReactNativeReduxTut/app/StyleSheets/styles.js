@@ -2,7 +2,6 @@ import Dimensions from 'Dimensions';
 import { StyleSheet , Platform} from 'react-native';
 import * as Colors from '../Constants/Colors';
 import * as Sizes from '../Constants/Sizes';
-import { DEFAULT_PADDING } from '../Constants/Sizes';
 
 export let fullHeight = Dimensions.get('window').height;
 export let fullWidth = Dimensions.get('window').width;
@@ -123,7 +122,10 @@ export const basicCompStyles = StyleSheet.create({
         borderColor: Colors.LIGHT_BACKGROUND_COLOR,
     },
     defaultPadding: {
-        padding: DEFAULT_PADDING,
+        padding: Sizes.DEFAULT_PADDING,
+    },
+    halfPadding: {
+        padding: Sizes.HALF_DEF_PADDING,
     },
     paddingLR10: {
         paddingLeft: 10, 
@@ -282,6 +284,12 @@ export const basicStyles = {
         sizes.subContent,
         basicCompStyles.subContent,
         basicCompStyles.defaultBorder
+    ],
+    subContentCardView: [
+        sizes.subContent,
+        basicCompStyles.subContent,
+        basicCompStyles.defaultBorder,
+        basicCompStyles.halfPadding
     ],
 
 

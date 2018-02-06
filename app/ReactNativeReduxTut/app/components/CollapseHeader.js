@@ -6,9 +6,9 @@ import * as Sizes from '../Constants/Sizes';
 import * as Animatable from 'react-native-animatable';
 import { basicStyles , basicCompStyles , animate } from '../StyleSheets/styles';
 
-const CollapseHeader  = ({data, isCollapsed}) => {
+const CollapseHeader  = ({headerText, isCollapsed}) => {
     return <View style={basicStyles.subHeader}>
-        <Text style={basicStyles.darkHeaderText}>{data.headerText}</Text>
+        <Text style={basicStyles.darkHeaderText}>{headerText}</Text>
         <Animatable.View transition="rotate" duration={500} style={animate(isCollapsed).rotation}>
             <Icon name={IconName.DROP_DOWN_ARROW_ICON_NAME} size={Sizes.DEFAULT_ICON_SIZE} style={[basicCompStyles.darkTextColor, {fontWeight: 'bold'}]}/>
         </Animatable.View>

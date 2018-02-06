@@ -1,4 +1,5 @@
 export const DEFAULT_PADDING = 5;
+export const HALF_DEF_PADDING = 2.5;
 export const PADDING_10 = 5;
 export const DEFAULT_BORDER_WIDTH = 1;
 export const HEADER_HEIGHT = 60;

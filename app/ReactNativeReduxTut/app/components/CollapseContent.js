@@ -2,7 +2,6 @@ import React, {PureComponent} from "react";
 import {FlatList, Image, View, Text} from "react-native";
 import { basicStyles , basicCompStyles, sizes } from '../StyleSheets/styles';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import GridView from 'react-native-super-grid';
 import * as IconName from '../Constants/IconName';
 import * as Colors from '../Constants/Colors';
 import * as Sizes from '../Constants/Sizes';
@@ -12,19 +11,22 @@ import DishList from "./DishList";
 class CollapseContent extends PureComponent  {
     renderItem = () => {
         if(this.props.isCardView) {
-            return <GridView
-                itemDimension={130}
-                items={this.props.data.member}
-                spacing={Sizes.DEFAULT_PADDING}
-                style={basicStyles.subContent}
-                renderItem={item => DishCard(item, this.props.navigation)}
-            />
+            return <View style={basicStyles.subContentCardView}><FlatList 
+                data={this.props.data.dish}
+                extraData={this.props.isCardView}
+                keyExtractor={(item, index) => item.name}
+                renderItem={({item}) => DishCard(item, this.props.navigation)}
+                numColumns={2}
+                horizontal={false}
+            /></View>
         } else {
             return <FlatList 
-                data={this.props.data.member}
+                data={this.props.data.dish}
                 extraData={this.props.isCardView}
-                keyExtractor={(item, index) => item.title}
+                keyExtractor={(item, index) => item.name}
                 renderItem={({item}) => DishList(item, this.props.navigation)}
+                // numColumns={2}
+                horizontal={false}
                 style={basicStyles.subContent}
             />
         }
@@ -77,3 +79,13 @@ export default CollapseContent;
             
     //     </View>
     // }
+
+
+
+    // <GridView
+    //             itemDimension={130}
+    //             items={this.props.data.dish}
+    //             spacing={Sizes.DEFAULT_PADDING}
+    //             style={basicStyles.subContent}
+    //             renderItem={item => DishCard(item, this.props.navigation)}
+    //         />

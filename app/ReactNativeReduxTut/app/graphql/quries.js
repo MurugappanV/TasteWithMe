@@ -21,3 +21,20 @@ export const hotel = gql`
         }
     }
 `;
+
+export const dishListByCourse = gql`
+    query getDishList {
+        allCourses {
+            name 
+            dishDetailRelations {
+                dishes {
+                    name
+                    photoUrls
+                    rateDetalil {
+                        price
+                    }
+                }
+            }
+        }
+    }
+`;
