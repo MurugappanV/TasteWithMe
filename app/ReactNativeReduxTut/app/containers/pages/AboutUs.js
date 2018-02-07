@@ -2,7 +2,7 @@ import React, {PureComponent} from "react";
 import {View, Text} from "react-native";
 import {connect} from 'react-redux';
 import * as IconName from '../../Constants/IconName';
-import HomeHeader from '../../components/HomeHeader';
+import HomeHeader from './HomeHeader';
 import UnderConstruction from '../../components/UnderConstruction';
 
 class AboutUs extends PureComponent {

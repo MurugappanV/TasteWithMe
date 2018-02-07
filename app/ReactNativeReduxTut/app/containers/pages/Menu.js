@@ -52,8 +52,10 @@ class Menu extends PureComponent {
 
 
 function mapStateToProps(state) {
+    console.log('in menu');
+    console.log(state.generalDishList.presentDishList.dishList)
     return {
-        dishListData : state.generalDishList,
+        dishListData : state.generalDishList.presentDishList.dishList,
         dishListFetchingStatus : state.isDIshListLoading,
     }
 }

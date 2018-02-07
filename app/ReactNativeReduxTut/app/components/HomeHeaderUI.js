@@ -18,7 +18,7 @@ const backButton = (backLogo, navigation, onSearchClose, isSearchActive, isNavig
         onPress = () => navigation.goBack()
     }
 
-    if(backLogo && (isSearchActive || isNavigateBack)) {//isSearchActive && 
+    if(backLogo && (isSearchActive || isNavigateBack)) {
         return <TouchableOpacity onPress={onPress}>
             <IonIcon style={basicCompStyles.paddingLR10} name={backLogo} size={Sizes.DEFAULT_HEADER_ICON_SIZE} color={color} />
         </TouchableOpacity>
@@ -82,35 +82,13 @@ const search = (searchLogo, closeLogo, onSearchPress, onSearchClear, isSearchAct
 }
 
 class HomeHeader extends PureComponent {
-    constructor(props, context) {
-        super(props, context);
-        this.state = { isSearchActive: false, searchValue: '' };
-    }
-
-    onSearchPressed = () => {
-        this.setState({ isSearchActive: true });
-    }
-
-    onSearchTextChanged = (searchValue) => {
-        this.setState({ searchValue });
-    }
-
-    onSearchClearPressed = () => {
-        this.onSearchTextChanged('');
-    }
-
-    onSearchClosed = () => {
-        this.setState({ isSearchActive: false, searchValue: '' });
-    }
-
     render() {
-        let {backLogo, leftLogo, searchLogo, closeLogo, searchPlaceHoler, headerTitle, navigation, isNavigateBack} = this.props
-        let {isSearchActive, searchValue} = this.state
+        let {isSearchActive, searchValue,backLogo, onSearchClosed, onSearchTextChanged, onSearchClearPressed, onSearchPressed, leftLogo, searchLogo, closeLogo, searchPlaceHoler, headerTitle, navigation, isNavigateBack} = this.props
         return <View style={[basicStyles.pageHeader, basicCompStyles.defaultPadding, basicCompStyles.flexRowNC, isSearchActive && {backgroundColor: Colors.LIGHT_BACKGROUND_COLOR }]}>
-            {backButton(backLogo, navigation, this.onSearchClosed, isSearchActive, isNavigateBack)}
+            {backButton(backLogo, navigation, onSearchClosed, isSearchActive, isNavigateBack)}
             {logo(leftLogo, navigation, isSearchActive)}
-            {title(headerTitle, searchPlaceHoler, this.onSearchClosed, this.onSearchTextChanged, searchValue, isSearchActive)}
-            {search(searchLogo,closeLogo,this.onSearchPressed, this.onSearchClearPressed, isSearchActive, searchValue)}
+            {title(headerTitle, searchPlaceHoler, onSearchClosed, onSearchTextChanged, searchValue, isSearchActive)}
+            {search(searchLogo,closeLogo,onSearchPressed, onSearchClearPressed, isSearchActive, searchValue)}
         </View>  
     } 
 }

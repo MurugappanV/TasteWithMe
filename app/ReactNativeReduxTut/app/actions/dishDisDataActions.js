@@ -23,10 +23,10 @@ export function dishList() {
 }
 
 
-function mapDishListRawData(data) {
-    let dishList = [];
-    if(data.allCourses) {
-        dishList = data.allCourses.map(courseObj => {
+function mapDishListRawData(inData) {
+    let data = {};
+    if(inData.allCourses) {
+        data.dishList = inData.allCourses.map(courseObj => {
             let course = {};
             course.name = courseObj.name;
             course.dish = courseObj.dishDetailRelations.dishes.map(dishObj => {
@@ -40,5 +40,5 @@ function mapDishListRawData(data) {
             return course;
         });
     }
-    return dishList;
+    return data;
 }
