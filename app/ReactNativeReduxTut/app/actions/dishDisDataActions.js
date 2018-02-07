@@ -32,6 +32,7 @@ function mapDishListRawData(data) {
             course.dish = courseObj.dishDetailRelations.dishes.map(dishObj => {
                 let dish = {};
                 dish.name = dishObj.name;
+                dish.type = dishObj.dishType;
                 dish.photoUrl = dishObj.photoUrls;
                 dish.rate = `₹${dishObj.rateDetalil.price}`;
                 return dish;

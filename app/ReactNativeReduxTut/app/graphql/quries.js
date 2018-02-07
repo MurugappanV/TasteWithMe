@@ -29,6 +29,7 @@ export const dishListByCourse = gql`
             dishDetailRelations {
                 dishes {
                     name
+                    dishType
                     photoUrls
                     rateDetalil {
                         price

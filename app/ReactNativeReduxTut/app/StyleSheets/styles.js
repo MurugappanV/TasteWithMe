@@ -5,7 +5,7 @@ import * as Sizes from '../Constants/Sizes';
 
 export let fullHeight = Dimensions.get('window').height;
 export let fullWidth = Dimensions.get('window').width;
-let contentFullHeight = fullHeight - Sizes.HEADER_HEIGHT;
+let contentFullHeight = fullHeight - (Sizes.HEADER_HEIGHT * 2);
 let contentFullWidth = fullWidth - (Sizes.DEFAULT_PADDING * 2);
 let cardViewWidth = (contentFullWidth - (Sizes.DEFAULT_PADDING * 3) - (Sizes.DEFAULT_BORDER_WIDTH *2)) / 2;
 let cardImageViewWidth = cardViewWidth - (Sizes.DEFAULT_PADDING * 2) - (Sizes.DEFAULT_BORDER_WIDTH *2);
@@ -21,7 +21,7 @@ export const sizes = StyleSheet.create({
       height: fullHeight,
     },
     halfViewSize: {
-      width: halfWidth,
+      width: fullWidth,
       height: halfHeight,
     },
     pageHeader: {
@@ -269,6 +269,11 @@ export const basicStyles = {
         basicCompStyles.contentBackGround,
         basicCompStyles.flexColumnCC,
         basicCompStyles.fullSize
+    ],
+    halfContent: [
+        sizes.halfViewSize,
+        basicCompStyles.contentBackGround,
+        basicCompStyles.flexColumnCC,
     ],
     absoluteBottomCircle: [
         sizes.mediumCircle,

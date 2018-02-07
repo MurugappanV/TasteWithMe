@@ -16,7 +16,7 @@ const DishCard = (item, navigation) => {
             <View style={basicStyles.dishCardTextView}>
                 <View>
                     <Text numberOfLines={1} ellipsizeMode="tail" style={basicStyles.darkTitleText}>{item.name}</Text>
-                    <Icon style={basicCompStyles.absoluteTop5Right0} name={IconName.VEG_INDICATE_ICON_NAME} size={Sizes.SMALL_ICON_SIZE} color={Colors.VEG_COLOR} />
+                    <Icon style={basicCompStyles.absoluteTop5Right0} name={IconName.VEG_INDICATE_ICON_NAME} size={Sizes.SMALL_ICON_SIZE} color={item.type == "VEG" ? Colors.VEG_COLOR : Colors.NON_VEG_COLOR} />
                 </View>
             </View>
             <Text style={basicStyles.darkTitleText}>{item.rate}</Text>
