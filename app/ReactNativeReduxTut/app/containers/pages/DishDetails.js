@@ -7,7 +7,7 @@ import UnderConstruction from '../../components/UnderConstruction';
 
 class DishDetails extends PureComponent {
     static navigationOptions = {
-        header: ({navigation}) =>  <HomeHeader headerTitle='Dish Details' leftLogo={IconName.HOTEL_LOGO} backLogo={IconName.BACK_ICON_NAME} navigation={navigation}/>
+        header: ({navigation}) =>  <HomeHeader headerTitle='Dish Details' leftLogo={IconName.HOTEL_LOGO} backLogo={IconName.BACK_ICON_NAME} navigation={navigation} isNavigateBack={true}/>
     };
 
     render() {

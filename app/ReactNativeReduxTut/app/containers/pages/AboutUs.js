@@ -7,7 +7,7 @@ import UnderConstruction from '../../components/UnderConstruction';
 
 class AboutUs extends PureComponent {
     static navigationOptions = {
-        header: ({navigation}) =>  <HomeHeader headerTitle='About Us' backLogo={IconName.BACK_ICON_NAME} navigation={navigation}/>
+        header: ({navigation}) =>  <HomeHeader headerTitle='About Us' backLogo={IconName.BACK_ICON_NAME} navigation={navigation} isNavigateBack={true}/>
     };
 
     render() {
