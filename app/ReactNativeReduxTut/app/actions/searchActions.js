@@ -47,11 +47,29 @@ export function setFavSearchValue(searchValue) {
 
 
 function filterDishListData(inData, searchValue) {
-    if(inData.dishList) {
-        inData.dishList = inData.dishList.map(courseObj => {
-            courseObj.dish = courseObj.dish.filter(dishObj => (dishObj.name.toLowerCase().indexOf(searchValue.toLowerCase() >= 0)));
+    let data = {
+        ...inData,
+        dishList: inData.dishList.map((courseObj) => {
+            return {
+                ...courseObj,
+                dish: courseObj.dish.map((dishObj) => {
+                    return {
+                        ...dishObj,
+                    }
+                })
+            }
+        })
+    };
+    if(data.dishList) {
+        data.dishList = data.dishList.map(courseObj => {
+            courseObj.dish = courseObj.dish.filter(dishObj => {
+                //console.log(`${dishObj.name} <-> ${searchValue}`)
+                let result = dishObj.name.toLowerCase().indexOf(searchValue.toLowerCase()) >= 0
+                //console.log(`result->${result}`);
+                return result;
+            });
             return courseObj;
         });
     }
-    return inData;
+    return data;
 }

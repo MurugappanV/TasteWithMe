@@ -9,15 +9,60 @@ let dishList = {
 
 export const generalDishList = createReducer(dishList, {
     [types.SET_DISH_LIST](state, action) {
-        console.log(`reduce${types.SET_DISH_LIST}`);
-        dishList.originalDishlist = action.data;
-        dishList.presentDishList = action.data;
-        return dishList;
+        console.log(`reduce ${types.SET_DISH_LIST} state `);
+        console.log(state);
+        //state.originalDishlist = Object.assign({},action.data);
+        //state.presentDishList = Object.assign({},action.data);
+        return {
+            ...state,
+            originalDishlist: {
+                ...action.data,
+                dishList: action.data.dishList.map((courseObj) => {
+                    return {
+                        ...courseObj,
+                        dish: courseObj.dish.map((dishObj) => {
+                            return {
+                                ...dishObj,
+                            }
+                        })
+                    }
+                })
+            },
+            presentDishList: {
+                ...action.data,
+                dishList: action.data.dishList.map((courseObj) => {
+                    return {
+                        ...courseObj,
+                        dish: courseObj.dish.map((dishObj) => {
+                            return {
+                                ...dishObj,
+                            }
+                        })
+                    }
+                })
+            }
+        };
     },
     [types.SET_MODIFIED_DISH_LIST](state, action) {
-        console.log(`reduce${types.SET_MODIFIED_DISH_LIST}`);
-        dishList.presentDishList = action.data;
-        return dishList;
+        console.log(`reduce stat ${types.SET_MODIFIED_DISH_LIST}`);
+        //state.presentDishList = Object.assign({},action.data);
+        return {
+            ...state,
+            presentDishList: {
+                ...action.data,
+                dishList: action.data.dishList.map((courseObj) => {
+                    return {
+                        ...courseObj,
+                        dish: courseObj.dish.map((dishObj) => {
+                            return {
+                                ...dishObj,
+                            }
+                        })
+                    }
+                })
+            }
+        };
+        //return state;
     },
     [types.DISH_LIST_LOADING](state, action) {
         return state;
