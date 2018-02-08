@@ -39,3 +39,20 @@ export const dishListByCourse = gql`
         }
     }
 `;
+
+export const hotelDetailByID = (hotelID) => gql`
+    query {
+        Hotel(id: ${hotelID}){
+            name,
+  	        logoImageUrl,
+            hotelImages {
+                hotelImageUrls
+            },
+            hotelDetail {
+                description,
+                openingTime,
+                closingTime
+            }
+          }
+      }
+`;

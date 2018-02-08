@@ -23,6 +23,18 @@ type Hotel @model {
   logoImageUrl: String
   logoImageName: String
   appSettingRelation: HotelAppSettingRelation @relation(name: "HotelAppSettingRelation")
+  hotelImages : HotelImages @relation(name : "HotelImageRelation")
+  hotelDetail : HotelDetails @relation(name : "HotelDetailRelation")
+}
+
+type HotelImages @model {
+  id: ID! @isUnique
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  isDeleted: Boolean @defaultValue(value: "false")
+
+  hotelImageUrls : [String!]!
+  hotel : Hotel! @relation(name : "HotelImageRelation")
 }
 
 type HotelDetails @model {
@@ -34,6 +46,10 @@ type HotelDetails @model {
   splashScreenImageUrl: String
   displayName: String
   displayNameImageUrl: String
+  description: String
+  openingTime: DateTime!
+  closingTime: DateTime!
+  hotel : Hotel! @relation(name : "HotelDetailRelation")
 }
 
 type HotelAppSettingRelation @model {
