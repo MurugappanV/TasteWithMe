@@ -1,19 +1,18 @@
-import React, {PureComponent} from "react";
-import { FlatList, TouchableHighlight, ScrollView, View, TextInput, Image, StyleSheet, Text} from "react-native";
-import {connect} from 'react-redux';
-import Icon from 'react-native-vector-icons/Entypo';
-import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
-import Accordion from '../../components/Accordion';
-import CollapseHeader from '../../components/CollapseHeader';
-import CollapseContent from '../../components/CollapseContent';
+import React, { PureComponent } from "react";
+import { FlatList, PanResponder, TouchableHighlight, Animated, ScrollView, View, TextInput, Image, StyleSheet, Text } from "react-native";
+import { connect } from 'react-redux';
 import { dishList } from "../../actions/dishDisDataActions";
 import { DishDataActions } from "../../actions";
 import { bindActionCreators } from "redux";
+import MenuUI from "../../components/MenuUI";
+import FilterUI from "../../components/FilterUI";
+import DraggableTopView from "../../components/DraggableTopView";
+import Icon from 'react-native-vector-icons/Entypo';
 import * as Sizes from '../../Constants/Sizes';
-import * as Colors from '../../Constants/Colors';
 import * as IconName from '../../Constants/IconName';
 import * as Labels from '../../Constants/Labels';
-import { basicStyles } from '../../StyleSheets/styles';
+import { basicStyles, fullWidth , contentFullHeight } from '../../StyleSheets/styles';
+
 
 class Menu extends PureComponent {
     static navigationOptions = {
@@ -23,40 +22,21 @@ class Menu extends PureComponent {
         ),
     };
 
-    constructor () {
-        super()
-        this.state = { isCardView: false }
-    }
-
-    componentDidMount() {
-        this.props.dishList();
-    }
-
-    onViewChangePress = () => {
-        this.setState({ isCardView: !this.state.isCardView })
-    }
-
-    renderHeader = (data, isCollapsed)  => <View><CollapseHeader headerText={data.name} isCollapsed={isCollapsed}/></View>
-
-    renderContent = (data, isCollapsed) => <CollapseContent navigation={this.props.navigation} data={data} isCollapsed={isCollapsed} isCardView={this.state.isCardView}/>
-
     render() {
-        return <View style={basicStyles.fullContent}>
-            <Accordion data={this.props.dishListData} extraData={this.state.isCardView} itemHeader={this.renderHeader.bind(this)} itemContent={this.renderContent.bind(this)}/>
-            <TouchableHighlight style={basicStyles.absoluteBottomCircle} onPress={this.onViewChangePress}>
-                <MaterialIcon name={this.state.isCardView ? IconName.CARD_VIEW_ICON_NAME : IconName.LIST_VIEW_ICON_NAME} size={Sizes.DEFAULT_HEADER_ICON_SIZE} color={Colors.ACTIVE_ICON_COLOR} />
-            </TouchableHighlight>
-        </View>
+        return <DraggableTopView 
+            mainView={<MenuUI navigation={this.props.navigation} dishListData={this.props.dishListData} dishList={this.props.dishList}/>} 
+            dragView={<FilterUI/>}
+            dragViewHeight={500}
+            dragViewInitialVisibleSize={25}
+        />        
     }
 }
 
 
 function mapStateToProps(state) {
-    console.log('in menu');
-    console.log(state.generalDishList.presentDishList.dishList)
     return {
-        dishListData : state.generalDishList.presentDishList.dishList,
-        dishListFetchingStatus : state.isDIshListLoading,
+        dishListData: state.generalDishList.presentDishList.dishList,
+        dishListFetchingStatus: state.isDIshListLoading,
     }
 }
 
@@ -64,7 +44,7 @@ function mapDispatchToProps(dispatch) {
     return bindActionCreators(DishDataActions, dispatch);
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(Menu);
+export default connect(mapStateToProps, mapDispatchToProps)(Menu);
 
 
         // <ExpanableList style={{paddingLeft: 5, paddingTop: 5, paddingRight: 5, paddingBottom: 5, backgroundColor: 'white'}}
@@ -82,7 +62,7 @@ export default connect(mapStateToProps,mapDispatchToProps)(Menu);
         //         renderContent={this._renderContent}
         //         initiallyActiveSection={1}
         //     />
-            
+
         // </View>
         // <FlatList style={{paddingLeft: 5, paddingTop: 5, paddingRight: 5, paddingBottom: 5, backgroundColor: 'white'}}
         //     data={this.MockData}

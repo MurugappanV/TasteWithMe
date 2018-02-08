@@ -31,7 +31,7 @@ class SplashScreen extends PureComponent {
 
     render() {
         return (() => { 
-            if(this.state.isDelayed && this.props.fetchHotelStatus == GeneralConstants.LOADED) {
+            if(this.state.isDelayed || this.props.fetchHotelStatus == GeneralConstants.LOADED) {
                 return <BaseNavigator />
             } else {
                 return <SplashScreenUI displayText={GeneralConstants.SPLASH_SCREEN_TEXT}/>
