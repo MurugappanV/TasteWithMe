@@ -40,9 +40,9 @@ export const dishListByCourse = gql`
     }
 `;
 
-export const hotelDetailByID = (hotelID) => gql`
+export const hotelDetailByID = gql`
     query {
-        Hotel(id: ${hotelID}){
+        Hotel(id: "cjde7ni3645px0134n7bkomcw"){
             name,
   	        logoImageUrl,
             hotelImages {
