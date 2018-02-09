@@ -9,10 +9,6 @@ let dishList = {
 
 export const generalDishList = createReducer(dishList, {
     [types.SET_DISH_LIST](state, action) {
-        console.log(`reduce ${types.SET_DISH_LIST} state `);
-        console.log(state);
-        //state.originalDishlist = Object.assign({},action.data);
-        //state.presentDishList = Object.assign({},action.data);
         return {
             ...state,
             originalDishlist: {
@@ -44,8 +40,6 @@ export const generalDishList = createReducer(dishList, {
         };
     },
     [types.SET_MODIFIED_DISH_LIST](state, action) {
-        console.log(`reduce stat ${types.SET_MODIFIED_DISH_LIST}`);
-        //state.presentDishList = Object.assign({},action.data);
         return {
             ...state,
             presentDishList: {
@@ -62,7 +56,6 @@ export const generalDishList = createReducer(dishList, {
                 })
             }
         };
-        //return state;
     },
     [types.DISH_LIST_LOADING](state, action) {
         return state;

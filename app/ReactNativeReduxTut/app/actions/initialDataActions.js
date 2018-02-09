@@ -1,5 +1,4 @@
 import * as types from './types';
-import Api from '../lib/api';
 import client from '../apollo/client';
 import {hotel} from '../graphql/quries';
 import { exception } from '../reducers/handleException';

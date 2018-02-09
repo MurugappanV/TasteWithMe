@@ -11,6 +11,7 @@ import * as Labels from '../Constants/Labels';
 class CollapseViewWithHeader extends PureComponent {
     constructor () {
         super()
+        this.onHeaderPress = this.onHeaderPress.bind(this)
         this.state = { isCollapsed: false, }
     }
 
@@ -30,8 +31,6 @@ class CollapseViewWithHeader extends PureComponent {
         
     }
 }
-
-
 
 export default CollapseViewWithHeader;
 

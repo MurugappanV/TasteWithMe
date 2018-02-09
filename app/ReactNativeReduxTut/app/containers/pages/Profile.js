@@ -1,13 +1,9 @@
 import React, {PureComponent} from "react";
-import {ScrollView, View, TextInput, Image, TouchableHighlight, StyleSheet, Text} from "react-native";
 import {connect} from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import IonIcon from 'react-native-vector-icons/Ionicons';
 import * as Sizes from '../../Constants/Sizes';
 import * as IconName from '../../Constants/IconName';
-import * as Colors from '../../Constants/Colors';
 import * as Labels from '../../Constants/Labels';
-import { basicStyles } from '../../StyleSheets/styles';
 import UnderConstruction from '../../components/UnderConstruction';
 
 class Profile extends PureComponent {

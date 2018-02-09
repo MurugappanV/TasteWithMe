@@ -2,7 +2,6 @@ import React, {PureComponent} from "react";
 import {View, Text} from "react-native";
 import IonIcon from 'react-native-vector-icons/Ionicons';
 import { basicStyles } from '../StyleSheets/styles';
-import * as Sizes from '../Constants/Sizes';
 import * as Colors from '../Constants/Colors';
 
 const UnderConstruction = (props) => {

@@ -12,6 +12,7 @@ class SplashScreen extends PureComponent {
     constructor () {
         super()
         this.state = { isDelayed: false, }
+        this.delay = this.delay.bind(this)
     }
 
     componentDidMount () {

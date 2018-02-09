@@ -1,14 +1,13 @@
 import React, {PureComponent} from "react";
-import { FlatList, TouchableOpacity, ScrollView, View, TextInput, Image, TouchableHighlight, StyleSheet, Text} from "react-native";
-import {connect} from 'react-redux';
-import Icon from 'react-native-vector-icons/Entypo';
+import { FlatList} from "react-native";
 import Collapsible from 'react-native-collapsible';
 import CollapseViewWithHeader from './CollapseViewWithHeader';
-import * as Sizes from '../Constants/Sizes';
-import * as IconName from '../Constants/IconName';
-import * as Labels from '../Constants/Labels';
 
 class Accordion extends PureComponent {
+    constructor(props) {
+        super(props);
+        this.renderItemCollapsible = this.renderItemCollapsible.bind(this);
+    }
 
     renderItemCollapsible = ({item})  => {return <CollapseViewWithHeader data={item} header={this.props.itemHeader} content={this.props.itemContent}/>};
 
@@ -21,8 +20,6 @@ class Accordion extends PureComponent {
         />
     }
 }
-
-
 
 export default Accordion;
 

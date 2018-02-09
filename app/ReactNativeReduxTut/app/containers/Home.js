@@ -5,7 +5,6 @@ import Favorites from './pages/Favorites';
 import Profile from './pages/Profile';
 import HomeHeader from './pages/HomeHeader';
 import * as Colors from '../Constants/Colors';
-import * as Sizes from '../Constants/Sizes';
 import { basicStyles } from '../StyleSheets/styles';
 import * as IconName from '../Constants/IconName';
 

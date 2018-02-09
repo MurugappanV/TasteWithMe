@@ -1,5 +1,4 @@
 import React, { PureComponent } from "react";
-import { FlatList, PanResponder, TouchableHighlight, Animated, ScrollView, View, TextInput, Image, StyleSheet, Text } from "react-native";
 import { connect } from 'react-redux';
 import { dishList } from "../../actions/dishDisDataActions";
 import { DishDataActions } from "../../actions";
@@ -11,7 +10,6 @@ import Icon from 'react-native-vector-icons/Entypo';
 import * as Sizes from '../../Constants/Sizes';
 import * as IconName from '../../Constants/IconName';
 import * as Labels from '../../Constants/Labels';
-import { basicStyles, fullWidth , contentFullHeight } from '../../StyleSheets/styles';
 
 
 class Menu extends PureComponent {

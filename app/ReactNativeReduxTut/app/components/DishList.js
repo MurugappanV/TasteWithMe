@@ -1,5 +1,5 @@
 import React, {PureComponent} from "react";
-import {FlatList, Image, View, Text, TouchableHighlight} from "react-native";
+import { Image, View, Text, TouchableHighlight} from "react-native";
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { basicStyles , basicCompStyles, sizes } from '../StyleSheets/styles';
 import * as IconName from '../Constants/IconName';

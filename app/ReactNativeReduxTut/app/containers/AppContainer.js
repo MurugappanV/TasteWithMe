@@ -1,9 +1,5 @@
 import React, { PureComponent } from "react";
 import { StatusBar } from "react-native";
-import { connect } from "react-redux";
-import { ActionCreators } from "../actions";
-import { bindActionCreators } from "redux";
-import Home from "./Home";
 import SplashScreen from "./SplashScreen";
 import * as GeneralConstants from '../Constants/GeneralConstants';
 

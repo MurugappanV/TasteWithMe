@@ -13,9 +13,12 @@ import { SearchActions } from "../../actions";
 import { bindActionCreators } from "redux";
 
 class HomeHeader extends PureComponent {
-    constructor(props, context) {
-        super(props, context);
-        //this.state = { isSearchActive: false, searchValue: '' };
+    constructor(props) {
+        super(props);
+        this.onSearchPressed = this.onSearchPressed.bind(this);
+        this.onSearchTextChanged = this.onSearchTextChanged.bind(this);
+        this.onSearchClearPressed = this.onSearchClearPressed.bind(this);
+        this.onSearchClosed = this.onSearchClosed.bind(this);
     }
 
     onSearchPressed = () => {
@@ -24,7 +27,6 @@ class HomeHeader extends PureComponent {
         } else {
             this.props.setFavSearchActive();
         }        
-        //this.setState({ isSearchActive: true });
     }
 
     onSearchTextChanged = (searchValue) => {
@@ -33,8 +35,6 @@ class HomeHeader extends PureComponent {
         } else {
             this.props.setFavSearchValue(searchValue);
         }
-        
-        //this.setState({ searchValue });
     }
 
     onSearchClearPressed = () => {
@@ -43,7 +43,6 @@ class HomeHeader extends PureComponent {
         } else {
             this.props.setFavSearchValue("");
         }
-        //this.onSearchTextChanged('');
     }
 
     onSearchClosed = () => {
@@ -54,8 +53,6 @@ class HomeHeader extends PureComponent {
             this.props.setFavSearchInActive();
             this.props.setFavSearchValue("");
         }
-        
-        //this.setState({ isSearchActive: false, searchValue: '' });
     }
 
     componentWillUnmount() {
@@ -64,7 +61,6 @@ class HomeHeader extends PureComponent {
 
     render() {
         let {isMenu, isMenuSearchActive, isFavSearchActive, menuSearchValue, favSearchValue, backLogo, leftLogo, searchLogo, closeLogo, searchPlaceHoler, headerTitle, navigation, isNavigateBack} = this.props
-        //let {isSearchActive, searchValue} = this.state
         return <HomeHeaderUI 
             {...this.props} 
             onSearchPressed={this.onSearchPressed}

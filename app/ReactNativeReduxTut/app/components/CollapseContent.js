@@ -1,14 +1,15 @@
 import React, {PureComponent} from "react";
-import {FlatList, Image, View, Text} from "react-native";
+import {FlatList, View } from "react-native";
 import { basicStyles , basicCompStyles, sizes } from '../StyleSheets/styles';
-import Icon from 'react-native-vector-icons/FontAwesome';
-import * as IconName from '../Constants/IconName';
-import * as Colors from '../Constants/Colors';
-import * as Sizes from '../Constants/Sizes';
 import DishCard from "./DishCard";
 import DishList from "./DishList";
 
 class CollapseContent extends PureComponent  {
+    constructor(props) {
+        super(props);
+        this.renderItem = this.renderItem.bind(this);
+    }
+
     renderItem = () => {
         if(this.props.isCardView) {
             return <View style={basicStyles.subContentCardView}><FlatList 

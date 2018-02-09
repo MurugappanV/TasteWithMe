@@ -1,9 +1,5 @@
 import React, { PureComponent } from "react";
-import { FlatList, PanResponder, TouchableHighlight, Animated, ScrollView, View, TextInput, Image, StyleSheet, Text } from "react-native";
-import * as Sizes from '../Constants/Sizes';
-import * as Colors from '../Constants/Colors';
-import * as IconName from '../Constants/IconName';
-import * as Labels from '../Constants/Labels';
+import { FlatList, PanResponder, Animated, View } from "react-native";
 import { basicStyles, fullWidth , contentFullHeight } from '../StyleSheets/styles';
 
 const GESTURE_DELAY = 10;
@@ -11,7 +7,6 @@ const GESTURE_DELAY_NEGATE = -10;
 const MIN_GESTURE_DISTANCE = 50;
 const MIN_GESTURE_DISTANCE_NEGATE = -50;
 class DraggableTopView extends PureComponent {
-
 
     constructor() {
         super()
@@ -79,8 +74,6 @@ class DraggableTopView extends PureComponent {
         </View>
     }
 }
-
-
 
 export default DraggableTopView;
 
