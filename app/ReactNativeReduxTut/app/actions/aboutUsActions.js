@@ -1,8 +1,6 @@
 import * as types from './types';
-import Api from '../lib/api';
 import client from '../apollo/client';
 import {hotelDetailByID} from '../graphql/quries';
-import { exception } from '../reducers/handleException';
 
 export function hotelDetailById(hotelID) {
     return (dispatch, getState) => {
@@ -22,8 +20,6 @@ export function hotelDetailById(hotelID) {
 }
 
 function mapHotelDetails(inData) {
-    console.log("indata ---")
-    console.log(inData)
     let data = {
         hotel: {
             ...inData.Hotel,

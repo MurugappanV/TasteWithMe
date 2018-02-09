@@ -1,7 +1,6 @@
 import * as types from './types';
 import client from '../apollo/client';
 import {hotel} from '../graphql/quries';
-import { exception } from '../reducers/handleException';
 
 export function fetchInitialData() {
     return (dispatch, getState) => {
