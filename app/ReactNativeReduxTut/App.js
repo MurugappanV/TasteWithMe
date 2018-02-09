@@ -7,7 +7,7 @@
 import React from 'react';
 import AppContainer from './app/containers/AppContainer';
 import { ApolloProvider } from 'react-apollo';
-import client from './app/apollo/client';
+import client from './app/redux/apollo/client';
 import store from './app/redux/store';
 
 const App = () => (

@@ -1,6 +1,7 @@
 import React, { PureComponent } from "react";
 import { StatusBar } from "react-native";
-import SplashScreen from "./SplashScreen";
+import SplashScreen from "../splashScreen";
+import BaseNavigator from "./BaseNavigator";
 import * as GeneralConstants from '../Constants/GeneralConstants';
 
 class AppContainer extends PureComponent {
@@ -10,7 +11,7 @@ class AppContainer extends PureComponent {
     }
 
     render() {
-        return <SplashScreen />        
+        return <SplashScreen NextPageReactElement={BaseNavigator}/>        
     }    
 }
 

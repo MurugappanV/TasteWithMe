@@ -1,8 +1,8 @@
 import React, {PureComponent} from "react";
 import { StackNavigator } from "react-navigation";
-import DishDetails from './pages/DishDetails';
 import Home from './Home';
-import AboutUs from "./pages/AboutUs";
+import AboutUs from '../aboutUs';
+import DishDetails from "../dishDetail";
 
 const BaseNavigator = StackNavigator({
     Home: { screen: Home },

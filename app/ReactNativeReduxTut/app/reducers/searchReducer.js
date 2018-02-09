@@ -1,5 +1,5 @@
 import createReducer from '../lib/createReducer';
-import *  as types from '../actions/types';
+import *  as types from '../redux/types';
 import *  as GeneralConstants from '../Constants/GeneralConstants';
 
 export const isMenuSearchActive = createReducer(false, {

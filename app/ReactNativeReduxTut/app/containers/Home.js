@@ -1,12 +1,12 @@
 import React, { PureComponent } from "react";
 import { TabNavigator } from "react-navigation";
-import Menu from './pages/Menu';
-import Favorites from './pages/Favorites';
-import Profile from './pages/Profile';
-import HomeHeader from './pages/HomeHeader';
+import HomeHeader from '../header';
 import * as Colors from '../Constants/Colors';
 import { basicStyles } from '../StyleSheets/styles';
 import * as IconName from '../Constants/IconName';
+import Favorites from "../favorites/containers/Favorites";
+import Profile from "../profile/containers/Profile";
+import Menu from "../menu/containers/Menu";
 
 const proflieHeader = (navigation) => <HomeHeader key={'profile'}  headerTitle='TasteE' leftLogo={IconName.HOTEL_LOGO} navigation={navigation} isNavigateBack={false}/>
 const menuHeader = (navigation) => <HomeHeader key={'menu'} isMenu={true} headerTitle='TasteE' leftLogo={IconName.HOTEL_LOGO} navigation={navigation} searchLogo={IconName.SEARCH_ICON_NAME} searchPlaceHoler={'Search'} backLogo={IconName.BACK_ICON_NAME} closeLogo={IconName.CLOSE_ICON_NAME}  isNavigateBack={false}/>
