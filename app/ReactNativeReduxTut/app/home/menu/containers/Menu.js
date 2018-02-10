@@ -3,10 +3,10 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from "redux";
 import Icon from 'react-native-vector-icons/Entypo';
 import MenuUI from "../components/MenuUI";
-import DraggableTopView from "../../components/DraggableTopView";
-import * as Sizes from '../../Constants/Sizes';
-import * as IconName from '../../Constants/IconName';
-import * as Labels from '../../Constants/Labels';
+import DraggableTopView from "../../../components/DraggableTopView";
+import * as Sizes from '../../../Constants/Sizes';
+import * as IconName from '../../../Constants/IconName';
+import * as Labels from '../../../Constants/Labels';
 import { dishDisplayDataActions } from "../actions/index";
 import FilterUI from "../../filter/components/FilterUI";
 

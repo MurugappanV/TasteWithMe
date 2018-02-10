@@ -1,10 +1,10 @@
 import React, {PureComponent} from "react";
 import { Image, View, Text, TouchableHighlight} from "react-native";
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { basicStyles , basicCompStyles, sizes } from '../StyleSheets/styles';
-import * as IconName from '../Constants/IconName';
-import * as Colors from '../Constants/Colors';
-import * as Sizes from '../Constants/Sizes';
+import { basicStyles , basicCompStyles, sizes } from '../../StyleSheets/styles';
+import * as IconName from '../../Constants/IconName';
+import * as Colors from '../../Constants/Colors';
+import * as Sizes from '../../Constants/Sizes';
 
 
 DishList = (item, navigation) => {

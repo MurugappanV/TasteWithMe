@@ -12,7 +12,6 @@ let cardViewWidth = (contentFullWidth - (Sizes.DEFAULT_PADDING * 3) - (Sizes.DEF
 let cardImageViewWidth = cardViewWidth - (Sizes.DEFAULT_PADDING * 2) - (Sizes.DEFAULT_BORDER_WIDTH *2);
 let cardImageWidth = cardImageViewWidth - (Sizes.DEFAULT_PADDING * 2);
 let cardImageHeight = cardImageWidth * 2 / 3;
-console.log(`${cardImageWidth}<->${cardImageViewWidth}<->${cardViewWidth}<->${contentFullWidth}<->${fullWidth}`);
 let halfHeight = fullHeight/2;
 let halfWidth = fullWidth/2;
 

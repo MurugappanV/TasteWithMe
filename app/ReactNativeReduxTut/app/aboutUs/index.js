@@ -2,6 +2,7 @@ import React, {PureComponent} from "react";
 import AboutUs from "./containers/AboutUs";
 import HomeHeader from '../header';
 import * as IconName from '../Constants/IconName';
+import * as hotelDetReducer from './reducers/hotelDetails';
 
 export default class AboutUsIndex extends PureComponent {
     static navigationOptions = {
@@ -12,3 +13,7 @@ export default class AboutUsIndex extends PureComponent {
         return <AboutUs/>
     }
 }
+
+export const hotelDetDataReducer = Object.assign({},
+    hotelDetReducer,
+);

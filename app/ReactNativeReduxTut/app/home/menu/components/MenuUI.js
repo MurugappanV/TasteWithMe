@@ -1,13 +1,13 @@
 import React, { PureComponent } from "react";
 import { TouchableHighlight, View} from "react-native";
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
-import Accordion from '../../components/accordion';
+import Accordion from '../../../components/accordion';
 import CollapseHeader from '../../components/CollapseHeader';
 import CollapseContent from '../../components/CollapseContent';
-import * as Sizes from '../../Constants/Sizes';
-import * as Colors from '../../Constants/Colors';
-import * as IconName from '../../Constants/IconName';
-import { basicStyles } from '../../StyleSheets/styles';
+import * as Sizes from '../../../Constants/Sizes';
+import * as Colors from '../../../Constants/Colors';
+import * as IconName from '../../../Constants/IconName';
+import { basicStyles } from '../../../StyleSheets/styles';
 
 class MenuUI extends PureComponent {
 

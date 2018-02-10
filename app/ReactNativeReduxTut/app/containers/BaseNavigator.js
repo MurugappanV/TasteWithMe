@@ -1,6 +1,6 @@
 import React, {PureComponent} from "react";
 import { StackNavigator } from "react-navigation";
-import Home from './Home';
+import Home from '../home';
 import AboutUs from '../aboutUs';
 import DishDetails from "../dishDetail";
 

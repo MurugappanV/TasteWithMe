@@ -1,5 +1,5 @@
-import createReducer from '../lib/createReducer';
-import *  as types from '../redux/types';
+import createReducer from '../../lib/createReducer';
+import *  as types from '../types';
 
 export const exception = createReducer(null, {
     [types.EXCEPTION](state, action) {

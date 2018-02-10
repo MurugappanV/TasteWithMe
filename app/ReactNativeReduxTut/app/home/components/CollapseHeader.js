@@ -1,10 +1,10 @@
 import React, {PureComponent} from "react";
 import { View, Text} from "react-native";
 import Icon from 'react-native-vector-icons/Ionicons';
-import * as IconName from '../Constants/IconName';
-import * as Sizes from '../Constants/Sizes';
+import * as IconName from '../../Constants/IconName';
+import * as Sizes from '../../Constants/Sizes';
 import * as Animatable from 'react-native-animatable';
-import { basicStyles , basicCompStyles , animate } from '../StyleSheets/styles';
+import { basicStyles , basicCompStyles , animate } from '../../StyleSheets/styles';
 
 const CollapseHeader  = ({headerText, isCollapsed}) => {
     return <View style={basicStyles.subHeader}>

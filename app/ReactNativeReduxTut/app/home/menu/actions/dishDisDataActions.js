@@ -1,5 +1,5 @@
-import * as types from '../../redux/types';
-import client from '../../redux/apollo/client';
+import * as types from '../../../redux/types';
+import client from '../../../redux/apollo/client';
 import {dishListByCourse} from '../graphql/quries';
 
 export function dishList() {

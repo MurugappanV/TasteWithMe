@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import { View, Text } from "react-native";
-import * as Colors from '../../Constants/Colors';
-import { basicStyles } from '../../StyleSheets/styles';
+import * as Colors from '../../../Constants/Colors';
+import { basicStyles } from '../../../StyleSheets/styles';
 
 class FilterUI extends PureComponent {
 

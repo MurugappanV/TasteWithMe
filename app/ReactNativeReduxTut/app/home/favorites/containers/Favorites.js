@@ -1,10 +1,10 @@
 import React, {PureComponent} from "react";
 import {connect} from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import * as Sizes from '../../Constants/Sizes';
-import * as IconName from '../../Constants/IconName';
-import * as Labels from '../../Constants/Labels';
-import UnderConstruction from '../../components/UnderConstruction';
+import * as Sizes from '../../../Constants/Sizes';
+import * as IconName from '../../../Constants/IconName';
+import * as Labels from '../../../Constants/Labels';
+import UnderConstruction from '../../../components/UnderConstruction';
 
 class Favorites extends PureComponent {
     static navigationOptions = {

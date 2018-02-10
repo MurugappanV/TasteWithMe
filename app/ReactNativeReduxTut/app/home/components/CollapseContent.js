@@ -1,6 +1,6 @@
 import React, {PureComponent} from "react";
 import {FlatList, View } from "react-native";
-import { basicStyles , basicCompStyles, sizes } from '../StyleSheets/styles';
+import { basicStyles , basicCompStyles, sizes } from '../../StyleSheets/styles';
 import DishCard from "./DishCard";
 import DishList from "./DishList";
 
@@ -12,16 +12,19 @@ class CollapseContent extends PureComponent  {
 
     renderItem = () => {
         if(this.props.isCardView) {
-            return <View style={basicStyles.subContentCardView}><FlatList 
+            return <FlatList 
+                key={'cardView'}
                 data={this.props.data.dish}
                 extraData={this.props.isCardView}
                 keyExtractor={(item, index) => item.name}
                 renderItem={({item}) => DishCard(item, this.props.navigation)}
                 numColumns={2}
                 horizontal={false}
-            /></View>
+                style={basicStyles.subContentCardView}
+            />
         } else {
             return <FlatList 
+                key={'listView'}
                 data={this.props.data.dish}
                 extraData={this.props.isCardView}
                 keyExtractor={(item, index) => item.name}
