@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import { FlatList, PanResponder, Animated, View } from "react-native";
-import { basicStyles, fullWidth , contentFullHeight } from '../StyleSheets/styles';
+import { basicStyles, sizes, fullWidth, contentFullHeight, basicCompStyles } from '../StyleSheets/styles';
 
 const GESTURE_DELAY = 10;
 const GESTURE_DELAY_NEGATE = -10;
@@ -62,12 +62,12 @@ class DraggableTopView extends PureComponent {
     }
 
     render() {
-        return <View style={[{ marginTop: this.state.dragViewHideHeightNagate , width: fullWidth, height: contentFullHeight}]}>
-            <Animated.View style={[this.state.position.getLayout(), {flexDirection: 'column'}]}  >
+        return <View style={[{ marginTop: this.state.dragViewHideHeightNagate }, sizes.contentFullHeightPad0]}>
+            <Animated.View style={[this.state.position.getLayout()]}  >
                 <View style={[{marginTop: this.state.dragHeight, width: fullWidth, height: contentFullHeight-this.state.dragViewInitialVisibleSize}]}>
                     {this.props.mainView}
                 </View>
-                <View {...this.panResponder.panHandlers} style={{ width: fullWidth, height: this.state.dragHeight, position: 'absolute', top: 0, right: 0, left: 0, flexDirection: 'column',  }}>
+                <View {...this.panResponder.panHandlers} style={[{ width: fullWidth, height: this.state.dragHeight  }, basicCompStyles.absoluteTopLeftRight0]}>
                     {this.props.dragView}
                 </View>
             </Animated.View>

@@ -1,12 +1,12 @@
 import React, { PureComponent } from "react";
 import { View, Text } from "react-native";
 import * as Colors from '../../../Constants/Colors';
-import { basicStyles } from '../../../StyleSheets/styles';
+import { basicStyles, basicCompStyles } from '../../../StyleSheets/styles';
 
 class FilterUI extends PureComponent {
 
     render() {
-        return <View  style={{ flex: 1,justifyContent: 'flex-end',alignItems: 'center', backgroundColor: Colors.LIGHT_BACKGROUND_COLOR }}>
+        return <View  style={[basicCompStyles.fullSize, basicCompStyles.contentBackGround]}>
             <Text >FILTER</Text>
         </View>
     }

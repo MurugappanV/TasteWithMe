@@ -10,7 +10,7 @@ const CollapseHeader  = ({headerText, isCollapsed}) => {
     return <View style={basicStyles.subHeader}>
         <Text style={basicStyles.darkHeaderText}>{headerText}</Text>
         <Animatable.View transition="rotate" duration={500} style={animate(isCollapsed).rotation}>
-            <Icon name={IconName.DROP_DOWN_ARROW_ICON_NAME} size={Sizes.DEFAULT_ICON_SIZE} style={[basicCompStyles.darkTextColor, {fontWeight: 'bold'}]}/>
+            <Icon name={IconName.DROP_DOWN_ARROW_ICON_NAME} size={Sizes.DEFAULT_ICON_SIZE} style={[basicCompStyles.darkTextColor]}/>
         </Animatable.View>
     </View>
 }

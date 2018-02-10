@@ -6,7 +6,10 @@ import * as Sizes from '../Constants/Sizes';
 export let fullHeight = Dimensions.get('window').height;
 export let fullWidth = Dimensions.get('window').width;
 export let contentFullHeight = fullHeight - (Sizes.HEADER_HEIGHT * 2);
-let contentExtraFullHeight = contentFullHeight + 400;
+export let fullFilterHeight = fullHeight * 0.6;
+export let fullFilterHeightNegate = fullFilterHeight * -1;
+export let halfFilterHeightNegate = fullFilterHeightNegate / 2;
+export let fullFilterWidth = fullFilterHeight * 2;
 let contentFullWidth = fullWidth - (Sizes.DEFAULT_PADDING * 2);
 let cardViewWidth = (contentFullWidth - (Sizes.DEFAULT_PADDING * 3) - (Sizes.DEFAULT_BORDER_WIDTH *2)) / 2;
 let cardImageViewWidth = cardViewWidth - (Sizes.DEFAULT_PADDING * 2) - (Sizes.DEFAULT_BORDER_WIDTH *2);
@@ -33,10 +36,9 @@ export const sizes = StyleSheet.create({
         height: contentFullHeight,
         padding: Sizes.DEFAULT_PADDING
     },
-    contentExtraFullHeight: {
+    contentFullHeightPad0: {
         width: fullWidth,
         height: contentFullHeight,
-        padding: Sizes.DEFAULT_PADDING
     },
     mediumCircle: {
         height: 40,
@@ -119,6 +121,12 @@ export const basicCompStyles = StyleSheet.create({
         top: 5, 
         right: 0
     },
+    absoluteTopLeftRight0: {
+        position: 'absolute', 
+        top: 0, 
+        right: 0, 
+        left: 0
+    },
 
 
     
@@ -153,7 +161,10 @@ export const basicCompStyles = StyleSheet.create({
         backgroundColor: Colors.CONTENT_BACKGROUND_COLOR,
     },
     darkBackGround: {
-        backgroundColor: Colors.MEDIUM_TEXT_COLOR
+        backgroundColor: Colors.MEDIUM_TEXT_COLOR,
+    },
+    lightBackGround: {
+        backgroundColor: Colors.LIGHT_BACKGROUND_COLOR,
     },
     transparentBackGround: {
         backgroundColor: Colors.TRANSPARENT
@@ -271,12 +282,6 @@ export const basicStyles = {
     ],
     fullContent: [
         sizes.contentFullHeight,
-        basicCompStyles.contentBackGround,
-        basicCompStyles.flexColumnCC,
-        basicCompStyles.fullSize
-    ],
-    fullExtraContent: [
-        sizes.contentExtraFullHeight,
         basicCompStyles.contentBackGround,
         basicCompStyles.flexColumnCC,
         basicCompStyles.fullSize
