@@ -20,12 +20,7 @@ class Menu extends PureComponent {
     };
 
     render() {
-        return <DraggableTopView 
-            mainView={<MenuUI navigation={this.props.navigation} dishListData={this.props.dishListData} dishList={this.props.dishList}/>} 
-            dragView={<FilterUI/>}
-            dragViewHeight={500}
-            dragViewInitialVisibleSize={25}
-        />        
+        return <MenuUI navigation={this.props.navigation} dishListData={this.props.dishListData} dishList={this.props.dishList}/>     
     }
 }
 
@@ -42,6 +37,15 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Menu);
+
+
+
+{/* <DraggableTopView 
+            mainView={<MenuUI navigation={this.props.navigation} dishListData={this.props.dishListData} dishList={this.props.dishList}/>} 
+            dragView={<FilterUI/>}
+            dragViewHeight={500}
+            dragViewInitialVisibleSize={25}
+        />  */}
 
 
         // <ExpanableList style={{paddingLeft: 5, paddingTop: 5, paddingRight: 5, paddingBottom: 5, backgroundColor: 'white'}}
