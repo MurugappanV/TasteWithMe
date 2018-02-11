@@ -29,29 +29,35 @@ class FilterUI extends PureComponent {
                     if(gestureState.dx < 0) {
                         degreeChange = degreeChange * -1;
                     }
-                    console.log(`position-${degreeChange}`)
-                    position.setValue(degreeChange);
+                    // console.log(`position-${degreeChange}`)
+                    if((this.state.rotatedDegree + degreeChange) > 0) {
+                        position.setValue(0);
+                    } else if((this.state.rotatedDegree + degreeChange) < this.totalRotateDegrees) {
+                        position.setValue(this.totalRotateDegrees);
+                    } else {
+                        position.setValue(this.state.rotatedDegree + degreeChange);
+                    }
                 }
             },
             onPanResponderRelease: (evt, gestureState) => {
-                if (gestureState.dx > GESTURE_DELAY || gestureState.dx < GESTURE_DELAY_NEGATE) {
-                    let dxChange = Math.abs(gestureState.dx);
-                    let noOf90Deg = (dxChange / (fullFilterHeight-50)) 
-                    let noOf90DegWholeNum = noOf90Deg - (noOf90Deg % 1)
-                    dxChange -= (noOf90DegWholeNum * (fullFilterHeight-50))
-                    degreeChange = Math.asin(dxChange / (fullFilterHeight-50)) * 180 / Math.PI
-                    degreeChange += (noOf90DegWholeNum * 90)
-                    if(gestureState.dx < 0) {
-                        degreeChange = degreeChange * -1;
-                    }
-                    this.setState({ rotatedDegree: ((this.state.rotatedDegree + this.state.animatedValue) % 360) })
-                    position.setValue(0);
-                }
+                // if (gestureState.dx > GESTURE_DELAY || gestureState.dx < GESTURE_DELAY_NEGATE) {
+                //     let dxChange = Math.abs(gestureState.dx);
+                //     let noOf90Deg = (dxChange / (fullFilterHeight-50)) 
+                //     let noOf90DegWholeNum = noOf90Deg - (noOf90Deg % 1)
+                //     dxChange -= (noOf90DegWholeNum * (fullFilterHeight-50))
+                //     degreeChange = Math.asin(dxChange / (fullFilterHeight-50)) * 180 / Math.PI
+                //     degreeChange += (noOf90DegWholeNum * 90)
+                //     if(gestureState.dx < 0) {
+                //         degreeChange = degreeChange * -1;
+                //     }
+                    this.setState({ rotatedDegree: ((this.state.animatedValue)) })
+                    //position.setValue(this.state.rotatedDegree);
+                // }
                 
             },
         });
         this.panResponder = panResponder;
-        this.state = { position , animatedValue : 0, rotatedDegree : 0}
+        this.state = { position , animatedValue : 0, rotatedDegree : 0, displayArray : [], firstItemIndex: 0, lastItemIndex : 0, firstContentIndex: 0, lastContentIndex : 0, lastDegreeSettle : 0, toggler: false, reverseToggler: false}
         
     }
 
@@ -65,15 +71,18 @@ class FilterUI extends PureComponent {
     angleForEachItem = 360 * (100 / this.perimeter)
     noOfItemsCouldBeDisplayed = Math.ceil((this.SmallCircleDegree * 2) / this.angleForEachItem)
     noOfItems = arr.length;
-    noOfItemsToCreate = (this.noOfItems > (this.noOfItemsCouldBeDisplayed+2)) ? this.noOfItemsCouldBeDisplayed+2 : this.noOfItems;
+    noOfItemsToCreate = (this.noOfItems > (this.noOfItemsCouldBeDisplayed+1)) ? this.noOfItemsCouldBeDisplayed+1 : this.noOfItems;
+    itemDegree = (this.BigCircleDegree + (this.angleForEachItem / 2)) * -1 
+    totalRotateDegrees = ((this.noOfItems * this.angleForEachItem) - (this.SmallCircleDegree * 2) + this.angleForEachItem) * -1;
     degArr = arr.map((item, index, array) => {
-        let deg = 0
-        if (index % 2 == 1) {
-            deg = (Math.floor(index / 2) + 1) * this.angleForEachItem;
-        } else {
-            deg = (index / 2) * this.angleForEachItem * -1;
-        }
-        return deg+'deg'
+        // let deg = 0
+        // if (index % 2 == 1) {
+        //     deg = (Math.floor(index / 2) + 1) * this.angleForEachItem;
+        // } else {
+        //     deg = (index / 2) * this.angleForEachItem * -1;
+        // }
+        this.itemDegree += this.angleForEachItem; 
+        return this.itemDegree+'deg'
     })
     displayDeg = this.degArr.slice(0, this.noOfItemsToCreate);
 
@@ -83,23 +92,86 @@ class FilterUI extends PureComponent {
         </View>
     }
 
-    render() {
-        
-
+    componentWillMount() {
+        for(i = 0; i < this.noOfItemsToCreate; i++) {
+            let displayItem = {
+                degree : this.degArr[i],
+                color : arr[i],
+                index : i
+            }
+            this.state.displayArray.push(displayItem)
+        }
+        this.setState({firstItemIndex: 0, lastItemIndex : this.noOfItemsToCreate-1,firstContentIndex: 0, lastContentIndex : this.noOfItemsToCreate-1})
+        console.log('display array---')
+        console.log(this.state.displayArray)
         this.state.position.addListener(({value}) => this.setState({animatedValue: value}));
-        let animatedValueDeg = `${(this.state.animatedValue + this.state.rotatedDegree)}deg`;
+    }
+
+    componentWillUpdate() {
+        
+    }
+
+    render() {
+        if((this.state.lastDegreeSettle - this.state.animatedValue) > (this.angleForEachItem*2) || ((this.state.lastDegreeSettle - this.state.animatedValue) > 0 && this.state.reverseToggler)) {
+            console.log(`${this.state.lastDegreeSettle}<->${this.state.animatedValue}<com>${this.angleForEachItem}`)
+        console.log(`${this.state.lastDegreeSettle - this.state.animatedValue}<diff>${this.angleForEachItem}`)
+            let nextContentIndex = (this.state.lastContentIndex+1 ) % this.noOfItems
+            this.state.displayArray[this.state.firstItemIndex] = {
+                degree: this.degArr[nextContentIndex],
+                color: arr[nextContentIndex],
+                index: nextContentIndex
+            }
+            let temp = this.state.firstItemIndex;
+            this.state.firstItemIndex = (this.state.firstItemIndex + 1) % this.noOfItemsToCreate;
+            this.state.lastItemIndex = temp
+            this.state.firstContentIndex = (this.state.firstContentIndex + 1) % this.noOfItems;
+            this.state.lastContentIndex = (this.state.lastContentIndex + 1) % this.noOfItems;
+            if(!this.state.reverseToggler) {
+                this.state.lastDegreeSettle = this.state.lastDegreeSettle - this.angleForEachItem
+            }
+            this.state.toggler = true
+            this.state.reverseToggler = false
+            console.log(this.state.displayArray[temp])
+            console.log(`if->${this.state.firstItemIndex }<->${ this.state.lastItemIndex}<degSettle>${this.state.lastDegreeSettle}`)
+        
+        } else if(((this.state.lastDegreeSettle - this.state.animatedValue) < (this.angleForEachItem * -1)) || ((this.state.lastDegreeSettle - this.state.animatedValue) < 0 && this.state.toggler)) {
+            console.log(`${this.state.lastDegreeSettle}<->${this.state.animatedValue}<com>${this.angleForEachItem}`)
+        console.log(`${this.state.lastDegreeSettle - this.state.animatedValue}<diff>${this.angleForEachItem}`)
+            let prevContentIndex = (this.state.firstContentIndex-1 ) < 0 ? this.noOfItems - 1 : this.state.firstContentIndex-1
+            this.state.displayArray[this.state.lastItemIndex] = {
+                degree: this.degArr[prevContentIndex],
+                color: arr[prevContentIndex],
+                index: prevContentIndex
+            }
+            let temp = this.state.lastItemIndex;
+            this.state.firstItemIndex = temp
+            this.state.lastItemIndex = (this.state.lastItemIndex - 1) < 0 ? this.noOfItemsToCreate-1: this.state.lastItemIndex - 1;
+            
+            this.state.firstContentIndex = (this.state.firstContentIndex - 1) < 0 ? this.noOfItems-1: this.state.firstContentIndex - 1;
+            this.state.lastContentIndex = (this.state.lastContentIndex - 1) < 0 ? this.noOfItems-1: this.state.lastContentIndex - 1;
+            if(!this.state.toggler) {
+                this.state.lastDegreeSettle = this.state.lastDegreeSettle + this.angleForEachItem
+            }
+            
+            this.state.toggler = false
+            this.state.reverseToggler = true
+            console.log(this.state.displayArray[temp])
+            console.log(`elseif->${this.state.firstItemIndex }<->${ this.state.lastItemIndex}<degSettle>${this.state.lastDegreeSettle}`)
+        }
+         
+        // let animatedValueDeg = ;
         return <View style={sizes.contentFullHeightPad0}>
             <Text>{`degrees->${this.BigCircleDegree}`}</Text>
             <Text>{`smallCirdegrees->${this.SmallCircleDegree}`}</Text>
-            <Text>{animatedValueDeg}</Text>
-            <Animated.View {...this.panResponder.panHandlers} style={{position: 'absolute', height: fullFilterWidth, width: fullFilterWidth, borderRadius: fullFilterHeight, backgroundColor: 'green', bottom: fullFilterHeightNegate, left: halfFilterHeightNegate, transform: [{rotate : animatedValueDeg}, {perspective: 1000},]}}>
+            <Text>{`${this.state.animatedValue}deg`}</Text>
+            <Animated.View {...this.panResponder.panHandlers} style={{position: 'absolute', height: fullFilterWidth, width: fullFilterWidth, borderRadius: fullFilterHeight, backgroundColor: 'green', bottom: fullFilterHeightNegate, left: halfFilterHeightNegate, transform: [{rotate : `${this.state.animatedValue}deg`}, {perspective: 1000},]}}>
                 {
                     // for(i = 0; i < this.noOfItemsToCreate; i++) {
 
                     // }
-                    this.displayDeg.map(( item, index ) =>
+                    this.state.displayArray.map(( item, index ) =>
                     (
-                        this.renderItems(item, arr[index], index)
+                        this.renderItems(item.degree, item.color, item.index)
                     ))
                 }
             </Animated.View>
