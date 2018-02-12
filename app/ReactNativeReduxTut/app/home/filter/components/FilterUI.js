@@ -170,9 +170,36 @@ class FilterUI extends PureComponent {
         // }
     }
 
+    renderItems = (degree, item, index) => {
+        return <View key={index} style={{transform: [{ rotate: degree}],position: 'absolute', height: fullFilterWidth, width: 100, paddingTop: 20,  backgroundColor: 'transparent', bottom: 0, left: fullFilterHeight-50, alignItems: 'center'}}>
+            <Icon name={IconName.PROFILE_TAB_ICON_NAME} size={50} color={item} />
+        </View>
+    }
+
+    renderItems1 = (degree, item, index) => {
+        return <View key={index} style={{transform: [{ rotate: degree}],position: 'absolute', height: fullFilterWidth - 200, width: 100, paddingTop: 20,  backgroundColor: 'transparent', bottom: 0, left: fullFilterHeight-150, alignItems: 'center'}}>
+            <Icon name={IconName.PROFILE_TAB_ICON_NAME} size={50} color={item} />
+        </View>
+    }
+
+    renderItems2 = (degree, item, index) => {
+        return <View key={index} style={{transform: [{ rotate: degree}],position: 'absolute', height: fullFilterWidth - 400, width: 100, paddingTop: 20,  backgroundColor: 'transparent', bottom: 0, left: fullFilterHeight-250, alignItems: 'center'}}>
+            <Icon name={IconName.PROFILE_TAB_ICON_NAME} size={50} color={item} />
+        </View>
+    }
+
+    renderItems3 = (degree, item, index) => {
+        return <View key={index} style={{transform: [{ rotate: degree}],position: 'absolute', height: fullFilterWidth - 600, width: 100, paddingTop: 20,  backgroundColor: 'transparent', bottom: 0, left: fullFilterHeight-350, alignItems: 'center'}}>
+            <Icon name={IconName.PROFILE_TAB_ICON_NAME} size={50} color={item} />
+        </View>
+    }
+
     render() {
         return <View style={sizes.contentFullHeightPad0}>   
-            <CurvedList data={arr}/>
+            <CurvedList data={arr} radius={fullFilterHeight} renderItem={this.renderItems} deviceWidth={fullWidth}      itemWidth={50} itemHeight={70} />
+            <CurvedList data={arr} radius={fullFilterHeight-70} renderItem={this.renderItems1} deviceWidth={fullWidth} itemWidth={50} itemHeight={70}/>
+            <CurvedList data={arr} radius={fullFilterHeight-140} renderItem={this.renderItems2} deviceWidth={fullWidth} itemWidth={50} itemHeight={70}/>
+            <CurvedList data={arr} radius={fullFilterHeight-210} renderItem={this.renderItems3} deviceWidth={fullWidth} itemWidth={50} itemHeight={70}/>
         </View>   
     }
 }
