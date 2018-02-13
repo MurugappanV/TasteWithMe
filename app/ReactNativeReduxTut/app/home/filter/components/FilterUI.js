@@ -177,19 +177,19 @@ class FilterUI extends PureComponent {
     }
 
     renderItems1 = (degree, item, index) => {
-        return <View key={index} style={{transform: [{ rotate: degree}],position: 'absolute', height: fullFilterWidth - 200, width: 100, paddingTop: 20,  backgroundColor: 'transparent', bottom: 0, left: fullFilterHeight-150, alignItems: 'center'}}>
+        return <View key={index} style={{transform: [{ rotate: degree}],position: 'absolute', height: fullFilterWidth - 140, width: 100, paddingTop: 20,  backgroundColor: 'transparent', bottom: 0, left: fullFilterHeight-120, alignItems: 'center'}}>
             <Icon name={IconName.PROFILE_TAB_ICON_NAME} size={50} color={item} />
         </View>
     }
 
     renderItems2 = (degree, item, index) => {
-        return <View key={index} style={{transform: [{ rotate: degree}],position: 'absolute', height: fullFilterWidth - 400, width: 100, paddingTop: 20,  backgroundColor: 'transparent', bottom: 0, left: fullFilterHeight-250, alignItems: 'center'}}>
+        return <View key={index} style={{transform: [{ rotate: degree}],position: 'absolute', height: fullFilterWidth - 280, width: 100, paddingTop: 20,  backgroundColor: 'transparent', bottom: 0, left: fullFilterHeight-190, alignItems: 'center'}}>
             <Icon name={IconName.PROFILE_TAB_ICON_NAME} size={50} color={item} />
         </View>
     }
 
     renderItems3 = (degree, item, index) => {
-        return <View key={index} style={{transform: [{ rotate: degree}],position: 'absolute', height: fullFilterWidth - 600, width: 100, paddingTop: 20,  backgroundColor: 'transparent', bottom: 0, left: fullFilterHeight-350, alignItems: 'center'}}>
+        return <View key={index} style={{transform: [{ rotate: degree}],position: 'absolute', height: fullFilterWidth - 420, width: 100, paddingTop: 20,  backgroundColor: 'transparent', bottom: 0, left: fullFilterHeight-260, alignItems: 'center'}}>
             <Icon name={IconName.PROFILE_TAB_ICON_NAME} size={50} color={item} />
         </View>
     }
