@@ -2,18 +2,53 @@ import React, { PureComponent } from "react";
 import * as Colors from '../../../Constants/Colors';
 import * as IconName from '../../../Constants/IconName';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import { View , Animated, PanResponder, Text} from "react-native";
-import { fullFilterHeight, fullWidth, fullFilterWidth, basicCompStyles, sizes , fullFilterHeightNegate, halfFilterHeightNegate} from "../../../StyleSheets/styles";
+import { View , Animated, PanResponder, Text, TouchableOpacity, TouchableHighlight, Image} from "react-native";
+import { fullFilterHeight, fullWidth, fullFilterWidth, basicCompStyles, sizes , fullFilterHeightNegate, halfFilterHeightNegate, basicStyles} from "../../../StyleSheets/styles";
 import CurvedList from "../../components/CurvedList";
 
-
-// const GESTURE_DELAY = 10;
+const typeArr = ['https://firebasestorage.googleapis.com/v0/b/tastewithme-1.appspot.com/o/time%2F002-sunny-landscape.png?alt=media&token=a8053857-aa2d-4387-9c85-a8b1c0b76f6c',
+                    'https://firebasestorage.googleapis.com/v0/b/tastewithme-1.appspot.com/o/time%2F001-mountain.png?alt=media&token=b1f80353-e18f-4677-8750-aab89e6a356d',
+                    'https://firebasestorage.googleapis.com/v0/b/tastewithme-1.appspot.com/o/time%2F003-mountain-view-with-sun.png?alt=media&token=7cff15d0-3e58-4ce9-bad4-9c0e852badd1']
+const courseArr = ['https://firebasestorage.googleapis.com/v0/b/tastewithme-1.appspot.com/o/course%20icons%2F006-soup.png?alt=media&token=99498c14-22da-4ef8-94d9-b4d9d20d4db3',
+                    'https://firebasestorage.googleapis.com/v0/b/tastewithme-1.appspot.com/o/course%20icons%2F007-canape.png?alt=media&token=1c703e95-bcc3-4e26-9618-58c63d914a55',
+                    'https://firebasestorage.googleapis.com/v0/b/tastewithme-1.appspot.com/o/course%20icons%2F003-pasta-serving.png?alt=media&token=3a062d99-bade-4d61-b4e8-216412ae0c45',
+                    'https://firebasestorage.googleapis.com/v0/b/tastewithme-1.appspot.com/o/course%20icons%2F002-hamburger.png?alt=media&token=27a6d426-5850-4aec-98f4-d98b238de6f4',
+                    'https://firebasestorage.googleapis.com/v0/b/tastewithme-1.appspot.com/o/course%20icons%2F005-noodles.png?alt=media&token=57bbd762-7d62-4601-b787-469f3a67042a',
+                    'https://firebasestorage.googleapis.com/v0/b/tastewithme-1.appspot.com/o/course%20icons%2F004-bologneze.png?alt=media&token=fff2dc9f-de93-4c1e-8ed3-760c209868a3',
+                    'https://firebasestorage.googleapis.com/v0/b/tastewithme-1.appspot.com/o/course%20icons%2F001-long-glass-cocktail.png?alt=media&token=5f6cbbae-526b-4258-8462-19c59bb448ee',
+                    'https://firebasestorage.googleapis.com/v0/b/tastewithme-1.appspot.com/o/course%20icons%2F008-ice-cream.png?alt=media&token=0b95bbfa-1c60-4b18-8699-b2e7c013216f']
+const cuisineArr = ['https://firebasestorage.googleapis.com/v0/b/tastewithme-1.appspot.com/o/cuisine%20icons%2F001-worldwide.png?alt=media&token=6b5dae1d-ac9c-4d68-b581-bdc87ad5a6bc',
+                    'https://firebasestorage.googleapis.com/v0/b/tastewithme-1.appspot.com/o/cuisine%20icons%2F008-taj-mahal.png?alt=media&token=f4d9f3aa-8176-425c-a7bf-061d9de28f59',
+                    'https://firebasestorage.googleapis.com/v0/b/tastewithme-1.appspot.com/o/cuisine%20icons%2F004-temple.png?alt=media&token=5056b45d-e993-4d43-9f44-8addd9b1908a',
+                    'https://firebasestorage.googleapis.com/v0/b/tastewithme-1.appspot.com/o/cuisine%20icons%2F005-chinese-temple.png?alt=media&token=636b1bce-7feb-49ea-89a7-85c9792415de',
+                    'https://firebasestorage.googleapis.com/v0/b/tastewithme-1.appspot.com/o/cuisine%20icons%2F003-leaning-tower-of-pisa.png?alt=media&token=e72f88c7-073e-40de-910a-4df956f6211c',
+                    'https://firebasestorage.googleapis.com/v0/b/tastewithme-1.appspot.com/o/cuisine%20icons%2F006-eiffel-tower.png?alt=media&token=e3bda551-a84c-4f50-9bf6-cfafeb043535',
+                    'https://firebasestorage.googleapis.com/v0/b/tastewithme-1.appspot.com/o/cuisine%20icons%2F007-statue-of-liberty.png?alt=media&token=87a99002-056b-4b2d-b5b6-7af5663f9f72',
+                    'https://firebasestorage.googleapis.com/v0/b/tastewithme-1.appspot.com/o/cuisine%20icons%2F002-cathedral-of-saint-basil.png?alt=media&token=bde8b091-e541-4577-a511-09c76f6ddf69']
+const ingredientArr = [ 'https://firebasestorage.googleapis.com/v0/b/tastewithme-1.appspot.com/o/ingredient%20icons%2F005-wheat.png?alt=media&token=fe0e3275-64a2-4d7f-9bf8-50b23faaf157',
+                    'https://firebasestorage.googleapis.com/v0/b/tastewithme-1.appspot.com/o/ingredient%20icons%2F006-broccoli.png?alt=media&token=09c2d612-9c31-44f9-b658-d540a618dc84',
+                    'https://firebasestorage.googleapis.com/v0/b/tastewithme-1.appspot.com/o/ingredient%20icons%2F001-corn-cob-hand-drawn-vegetable.png?alt=media&token=fe3ad8ae-ff2f-4723-8aa4-bb0001997817',
+                    'https://firebasestorage.googleapis.com/v0/b/tastewithme-1.appspot.com/o/ingredient%20icons%2F013-chicken.png?alt=media&token=ec5dfcc6-a8c4-445d-a351-5316d6b9e320',
+                    'https://firebasestorage.googleapis.com/v0/b/tastewithme-1.appspot.com/o/ingredient%20icons%2F014-sheep.png?alt=media&token=31f232e9-1170-4d9c-b191-3ecdf1479c43',
+                    'https://firebasestorage.googleapis.com/v0/b/tastewithme-1.appspot.com/o/ingredient%20icons%2F012-fish-hand-drawn-animal.png?alt=media&token=d5bdf94e-b501-4e08-b8d9-305066d6e703',
+                    'https://firebasestorage.googleapis.com/v0/b/tastewithme-1.appspot.com/o/ingredient%20icons%2F011-prawn.png?alt=media&token=5990aeb4-78ae-4555-93a1-af7a1d08ac11',
+                    'https://firebasestorage.googleapis.com/v0/b/tastewithme-1.appspot.com/o/ingredient%20icons%2F010-crab.png?alt=media&token=045cf674-dc59-4cd2-8472-71bd851d928d',
+                    'https://firebasestorage.googleapis.com/v0/b/tastewithme-1.appspot.com/o/ingredient%20icons%2F008-egg.png?alt=media&token=7fc2ad35-b381-458f-81fe-e708097eaf7d',
+                    'https://firebasestorage.googleapis.com/v0/b/tastewithme-1.appspot.com/o/ingredient%20icons%2F009-champignon.png?alt=media&token=681da0ee-8064-47fc-9957-f7356e8f8495',
+                    'https://firebasestorage.googleapis.com/v0/b/tastewithme-1.appspot.com/o/ingredient%20icons%2F002-potatoes.png?alt=media&token=0a88d3e1-9187-4fa8-8e96-311803957929',
+                    'https://firebasestorage.googleapis.com/v0/b/tastewithme-1.appspot.com/o/ingredient%20icons%2F007-pea.png?alt=media&token=5ccac7bb-8573-4eb8-befc-1ba961e188d2',
+                    'https://firebasestorage.googleapis.com/v0/b/tastewithme-1.appspot.com/o/ingredient%20icons%2F004-garlic.png?alt=media&token=309235f8-1608-4d4b-98e5-631fcd184d45',
+                    'https://firebasestorage.googleapis.com/v0/b/tastewithme-1.appspot.com/o/ingredient%20icons%2F003-pepper.png?alt=media&token=d9066a0f-78f4-499b-903e-391dc09a3300']
+                    // const GESTURE_DELAY = 10;
 // const GESTURE_DELAY_NEGATE = -10;
 const arr = ['red', 'pink', 'yellow', 'white', 'orange', 'blue','black', 'purple', 'grey', 'brown', 'orange', 'blue','pink']
 class FilterUI extends PureComponent {
 
-    // constructor() {
-    //     super()
+    constructor() {
+        super()
+        const scale = new Animated.Value(0.3);
+        this.state = {scale}
+    }
     //     const position = new Animated.Value(0);
     //     const panResponder = PanResponder.create({
     //         onStartShouldSetPanResponder: (evt, gestureState) => false,
@@ -94,6 +129,12 @@ class FilterUI extends PureComponent {
     // }
 
     componentWillMount() {
+        Animated.timing(this.state.scale, {
+            toValue: 1 ,
+            duration: 600,
+        }).start(() => {
+            
+        })
         // for(i = 0; i < this.noOfItemsToCreate; i++) {
         //     let displayItem = {
         //         degree : this.degArr[i],
@@ -170,9 +211,58 @@ class FilterUI extends PureComponent {
         // }
     }
 
+    renderItems = (degree, item, index) => {
+        return <View key={index} style={{transform: [{ rotate: degree}],position: 'absolute', height: fullFilterWidth, width: 100, paddingTop: 30,  backgroundColor: 'transparent', bottom: 0, left: fullFilterHeight-50, alignItems: 'center'}}>
+            <TouchableOpacity>
+            <Image style={{width: 35, height: 35, tintColor: Colors.DARK_TEXT_COLOR}} resizeMode='contain' source={{uri: item, cache: 'force-cache',}} />
+            </TouchableOpacity>
+        </View>
+    }
+
+    renderItems1 = (degree, item, index) => {
+        return <View key={index} style={{transform: [{ rotate: degree}],position: 'absolute', height: fullFilterWidth - 200, width: 100, paddingTop: 30,  backgroundColor: 'transparent', bottom: 0, left: fullFilterHeight-150, alignItems: 'center'}}>
+            <TouchableOpacity>
+            <Image style={{width: 40, height: 40, tintColor: Colors.DARK_TEXT_COLOR}} resizeMode='contain' source={{uri: item, cache: 'force-cache',}} />
+            </TouchableOpacity>
+        </View>
+    }
+
+    renderItems2 = (degree, item, index) => {
+        return <View key={index} style={{transform: [{ rotate: degree}],position: 'absolute', height: fullFilterWidth - 400, width: 100, paddingTop: 30,  backgroundColor: 'transparent', bottom: 0, left: fullFilterHeight-250, alignItems: 'center'}}>
+            <TouchableOpacity>
+            <Image style={{width: 40, height: 40, tintColor: Colors.DARK_TEXT_COLOR}} resizeMode='contain' source={{uri: item, cache: 'force-cache',}} />
+            </TouchableOpacity>
+        </View>
+    }
+
+    renderItems3 = (degree, item, index) => {
+        return <View key={index} style={{transform: [{ rotate: degree}],position: 'absolute', height: fullFilterWidth - 600, width: 100, paddingTop: 20,  backgroundColor: 'transparent', bottom: 0, left: fullFilterHeight-350, alignItems: 'center'}}>
+            <TouchableOpacity>
+                <Image style={{width: 40, height: 40, tintColor: Colors.DARK_TEXT_COLOR}} resizeMode='contain' source={{uri: item, cache: 'force-cache',}} />
+            </TouchableOpacity>
+        </View>
+    }
+
+    isColse = () => {
+        Animated.timing(this.state.scale, {
+            toValue: 0.3 ,
+            duration: 300,
+            useNativeDriver: true
+        }).start(() => {
+            this.props.closeFilter()
+        })
+    }
+
     render() {
-        return <View style={sizes.contentFullHeightPad0}>   
-            <CurvedList data={arr}/>
+        //console.log(`s-----------------------------${this,state.scale}`);
+        return <View style={[basicStyles.fullContentSizeAbsolute]}>   
+            <CurvedList data={ingredientArr} radius={fullFilterHeight} renderItem={this.renderItems} deviceWidth={fullWidth}      itemWidth={70} itemHeight={100} scale={this.state.scale}/>
+            <CurvedList data={courseArr} radius={fullFilterHeight-100} renderItem={this.renderItems1} deviceWidth={fullWidth} itemWidth={70} itemHeight={100} scale={this.state.scale}/>
+            <CurvedList data={cuisineArr} radius={fullFilterHeight-200} renderItem={this.renderItems2} deviceWidth={fullWidth} itemWidth={70} itemHeight={100} scale={this.state.scale}/>
+            <CurvedList data={typeArr} radius={fullFilterHeight-300} renderItem={this.renderItems3} deviceWidth={fullWidth} itemWidth={60} itemHeight={100} scale={this.state.scale}/>
+            <TouchableOpacity onPress={this.isColse} style={{height:80, width:80, borderRadius: 40, position: 'absolute', bottom: -40, left: fullWidth/2-40, backgroundColor: Colors.HEADER_BACKGROUND_COLOR, alignItems: 'center', padding: 10, transform: [{scale : this.state.scale}]}}>
+                <Text style={{color: 'white'}}>OK</Text>
+            </TouchableOpacity>
         </View>   
     }
 }
