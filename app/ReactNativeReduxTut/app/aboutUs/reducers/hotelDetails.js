@@ -14,10 +14,22 @@ export const fetchHotelDetails = createReducer(0, {
                 hotelDetail: {
                     ...action.data.hotel.hotelDetail,
                     openingTime: "",
-                    closingTime: ""
+                    closingTime: "",
                 }
             }
         };
+    },
+    [types.FETCH_HOTEL_ERROR](state, action) {
+        return GeneralConstants.ERROR;
+    }
+});
+
+export const fetchHotelDetailStatus = createReducer(0, {
+    [types.FETCH_HOTEL_DETAIL_LOADING](state, action) {
+        return GeneralConstants.LOADING
+    },
+    [types.FETCH_HOTEL_DETAIL](state, action) {
+        return GeneralConstants.LOADED
     },
     [types.FETCH_HOTEL_ERROR](state, action) {
         return GeneralConstants.ERROR;

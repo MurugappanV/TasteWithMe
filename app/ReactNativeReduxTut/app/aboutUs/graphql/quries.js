@@ -1,8 +1,11 @@
 import gql from 'graphql-tag';
+import { hotelDetailById } from '../actions/aboutUsActions';
 
-export const hotelDetailByID = gql`
+export const hotelDetailByID = (hotelId) => {
+    console.log(hotelId)
+    return gql`
     query {
-        Hotel(id: "cjde7ni3645px0134n7bkomcw"){
+        Hotel(id: "${hotelId}"){
             id
             name,
   	        logoImageUrl,
@@ -12,8 +15,9 @@ export const hotelDetailByID = gql`
             hotelDetail {
                 description,
                 openingTime,
-                closingTime
+                closingTime,
+                storePhoneNumber
             }
           }
       }
-`;
+`};
