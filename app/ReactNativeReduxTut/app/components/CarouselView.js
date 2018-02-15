@@ -5,25 +5,24 @@ const deviceWidth = Dimensions.get('window').width
 const FIXED_BAR_WIDTH = 280
 const BAR_SPACE = 50
 
-const images = [
-    'https://s-media-cache-ak0.pinimg.com/originals/ee/51/39/ee5139157407967591081ee04723259a.png',
-    'https://s-media-cache-ak0.pinimg.com/originals/40/4f/83/404f83e93175630e77bc29b3fe727cbe.jpg',
-    'https://s-media-cache-ak0.pinimg.com/originals/8d/1a/da/8d1adab145a2d606c85e339873b9bb0e.jpg',
-    'https://s-media-cache-ak0.pinimg.com/originals/ee/51/39/ee5139157407967591081ee04723259a.png',
-    'https://s-media-cache-ak0.pinimg.com/originals/40/4f/83/404f83e93175630e77bc29b3fe727cbe.jpg',
-    'https://s-media-cache-ak0.pinimg.com/originals/8d/1a/da/8d1adab145a2d606c85e339873b9bb0e.jpg',
-]
+// const images = [
+//     'https://s-media-cache-ak0.pinimg.com/originals/ee/51/39/ee5139157407967591081ee04723259a.png',
+//     'https://s-media-cache-ak0.pinimg.com/originals/40/4f/83/404f83e93175630e77bc29b3fe727cbe.jpg',
+//     'https://s-media-cache-ak0.pinimg.com/originals/8d/1a/da/8d1adab145a2d606c85e339873b9bb0e.jpg',
+//     'https://s-media-cache-ak0.pinimg.com/originals/ee/51/39/ee5139157407967591081ee04723259a.png',
+//     'https://s-media-cache-ak0.pinimg.com/originals/40/4f/83/404f83e93175630e77bc29b3fe727cbe.jpg',
+//     'https://s-media-cache-ak0.pinimg.com/originals/8d/1a/da/8d1adab145a2d606c85e339873b9bb0e.jpg',
+// ]
 
 export default class CarouselView extends PureComponent {
-
-    numItems = images.length
-    itemWidth = (FIXED_BAR_WIDTH / this.numItems) - ((BAR_SPACE / this.numItems))
     animVal = new Animated.Value(0)
 
     render() {
+        numItems = this.props.images.length
+        itemWidth = (FIXED_BAR_WIDTH / numItems) - ((BAR_SPACE / numItems))
         let imageArray = []
         let barArray = []
-        images.forEach((image, i) => {
+        this.props.images.forEach((image, i) => {
             console.log(image, i)
             const thisImage = (
                 <Image
@@ -36,7 +35,7 @@ export default class CarouselView extends PureComponent {
 
             const scrollBarVal = this.animVal.interpolate({
                 inputRange: [deviceWidth * (i - 1), deviceWidth * (i + 1)],
-                outputRange: [-this.itemWidth, this.itemWidth],
+                outputRange: [-itemWidth, itemWidth],
                 extrapolate: 'clamp',
             })
 
@@ -46,8 +45,8 @@ export default class CarouselView extends PureComponent {
                     style={[
                         styles.track,
                         {
-                            width: this.itemWidth,
-                            marginLeft: i === 0 ? 0 : BAR_SPACE / this.numItems,
+                            width: itemWidth,
+                            marginLeft: i === 0 ? 0 : BAR_SPACE / numItems,
                         },
                     ]}
                 >
@@ -56,7 +55,7 @@ export default class CarouselView extends PureComponent {
                         style={[
                             styles.bar,
                             {
-                                width: this.itemWidth,
+                                width: itemWidth,
                                 transform: [
                                     { translateX: scrollBarVal },
                                 ],
@@ -94,7 +93,7 @@ export default class CarouselView extends PureComponent {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 0.35,
+        flex: 0.40,
         alignItems: 'center',
         justifyContent: 'center',
     },

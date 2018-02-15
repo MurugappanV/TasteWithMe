@@ -111,6 +111,11 @@ export const basicCompStyles = StyleSheet.create({
         bottom: 20,
         right: 20
     },
+    absoluteBottomMiddle: {
+        position: 'absolute',
+        bottom: 20,
+        left: halfWidth-20
+    },
     absoluteBottomLeft0: {
         position: 'absolute',
         bottom: 0,
@@ -264,6 +269,10 @@ export const basicStyles = {
         sizes.fullViewSize, 
         basicCompStyles.absoluteAndBlack
     ],
+    fullContentSizeAbsolute: [
+        sizes.contentFullHeightPad0, 
+        basicCompStyles.absoluteBottomLeft0
+    ],
 
 
     pageHeader: [
@@ -296,6 +305,12 @@ export const basicStyles = {
         basicCompStyles.flexColumnCC,
         basicCompStyles.darkBackGround,
         basicCompStyles.absoluteBottomRight20
+    ],
+    absoluteBottomMiddleCircle: [
+        sizes.mediumCircle,
+        basicCompStyles.flexColumnCC,
+        basicCompStyles.darkBackGround,
+        basicCompStyles.absoluteBottomMiddle
     ],
     vegImageView: [
         basicCompStyles.absoluteBottomLeft0,

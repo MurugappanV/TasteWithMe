@@ -49,6 +49,10 @@ type HotelDetails @model {
   description: String
   openingTime: DateTime!
   closingTime: DateTime!
+  storePhoneNumber: String
+  otherContactNumber: [String!]
+  email: String
+  address: String
   hotel : Hotel! @relation(name : "HotelDetailRelation")
 }
 

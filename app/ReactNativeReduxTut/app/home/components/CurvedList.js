@@ -19,7 +19,7 @@ class CurvedList extends PureComponent {
             onPanResponderMove: (evt, gestureState) => {
                 if (gestureState.dx > GESTURE_DELAY || gestureState.dx < GESTURE_DELAY_NEGATE) {
                     let degreeChange = getDegree(gestureState.dx, (this.props.radius-this.halfItemHeight))// half height
-                    position.setValue(limitNumberBetweenRange((this.state.rotatedDegree + degreeChange), 0, this.totalRotateDegrees))
+                    position.setValue(limitNumberBetweenRange((this.state.rotatedDegree + degreeChange), this.initialRotateDegree, this.totalRotateDegrees))
                 }
             },
             onPanResponderRelease: (evt, gestureState) => {
@@ -27,8 +27,7 @@ class CurvedList extends PureComponent {
             },
         });
         this.panResponder = panResponder;
-        this.state = { position , animatedValue : 0, rotatedDegree : 0, displayArray : [], firstItemIndex: 0, lastItemIndex : 0, firstContentIndex: 0, lastContentIndex : 0, lastDegreeSettle : 0, toggler: 0}
-        
+        this.initialRotateDegree = 0
         this.deviceWidth = this.props.deviceWidth;
         this.halfDeviceWidth = this.deviceWidth / 2;
         this.itemWidth = this.props.itemWidth;
@@ -39,20 +38,41 @@ class CurvedList extends PureComponent {
         this.radiusNegate = this.props.radius * -1;
         this.haldRadiusNegate = this.halfDeviceWidth - this.props.radius;
         this.innerItemleft = this.props.radius - this.halfItemWidth;
-        this.smallCircleRadius = this.props.radius - this.itemHeight; //todo - height
+        this.smallCircleRadius = this.props.radius - this.itemHeight; 
+        this.middleCircleRadius = this.props.radius - this.halfItemHeight;
         this.BigCircleDegree = limitNumberBetweenRange(getDegree(this.halfDeviceWidth, this.props.radius), 90, 0)
         this.SmallCircleDegree = limitNumberBetweenRange(getDegree(this.halfDeviceWidth, this.smallCircleRadius), 90, 0)
-        this.perimeter = perimeter(this.smallCircleRadius)// 100 for width of item
+        this.middleCircleDegree = limitNumberBetweenRange(getDegree(this.halfDeviceWidth, this.middleCircleRadius), 90, 0)
+        this.perimeter = perimeter(this.middleCircleRadius)// 100 for width of item
         this.angleForEachItem = getAngle(this.itemWidth, this.perimeter)//360 * (100 / this.perimeter)
-        this.noOfItemsCouldBeDisplayed = Math.ceil((this.SmallCircleDegree * 2) / this.angleForEachItem)
+        this.noOfItemsCouldBeDisplayed = Math.ceil((this.middleCircleDegree * 2) / this.angleForEachItem)
         this.noOfItems = this.props.data.length;
         this.noOfItemsToCreate = (this.noOfItems > (this.noOfItemsCouldBeDisplayed+1)) ? this.noOfItemsCouldBeDisplayed+1 : this.noOfItems;
         this.lastItemDegree = (this.BigCircleDegree + (this.angleForEachItem / 2)) * -1 
-        this.totalRotateDegrees = ((this.noOfItems * this.angleForEachItem) - (this.SmallCircleDegree * 2) + this.angleForEachItem) * -1;
+        this.totalRotateDegrees = ((this.noOfItems * this.angleForEachItem) - (this.middleCircleDegree * 2) + this.angleForEachItem) * -1;
         this.degArr = this.props.data.map((item, index, array) => {
-            this.lastItemDegree += this.angleForEachItem; 
-            return this.lastItemDegree+'deg'
+            if(this.middleCircleDegree * 2 > (this.angleForEachItem * this.noOfItems)) {
+                let deg = 0
+                if (index % 2 == 1) {
+                    deg = (Math.floor(index / 2) + 1) * this.angleForEachItem;
+                } else {
+                    deg = (index / 2) * this.angleForEachItem * -1;
+                }
+                return deg+'deg'
+            } else {
+                this.lastItemDegree += this.angleForEachItem; 
+                return this.lastItemDegree+'deg'
+            }
         })
+        if(this.middleCircleDegree * 2 > (this.angleForEachItem * this.noOfItems)) {
+            if(this.noOfItems % 2 == 0) {
+                this.initialRotateDegree = this.angleForEachItem / 2 * -1
+            }
+            this.totalRotateDegrees = this.initialRotateDegree
+        }
+        this.state = { position , animatedValue : 0 , rotatedDegree : 0, displayArray : [], firstItemIndex: 0, lastItemIndex : 0, firstContentIndex: 0, lastContentIndex : 0, lastDegreeSettle : 0, toggler: 0}
+        
+        console.log(`angle and total angle --visible->${this.middleCircleDegree*2}<total->${this.angleForEachItem * this.noOfItems}<angle->${this.angleForEachItem}<item->${this.noOfItems}` )
     }
 
     componentWillMount() {
@@ -64,7 +84,7 @@ class CurvedList extends PureComponent {
             }
             this.state.displayArray.push(displayItem)
         }
-        this.setState({firstItemIndex: 0, lastItemIndex : this.noOfItemsToCreate-1,firstContentIndex: 0, lastContentIndex : this.noOfItemsToCreate-1})
+        this.setState({firstItemIndex: 0, lastItemIndex : this.noOfItemsToCreate-1,firstContentIndex: 0, lastContentIndex : this.noOfItemsToCreate-1, animatedValue: this.initialRotateDegree})
         this.state.position.addListener(({value}) => this.setState({animatedValue: value}));
     }
 
@@ -111,11 +131,13 @@ class CurvedList extends PureComponent {
     }
 
     render() {
-        return <View style={{position: 'absolute', height: this.bigDiameter, width: this.bigDiameter, borderRadius: this.props.radius, backgroundColor:  Colors.DARK_HIGHLIGHT_COLOR, bottom: this.radiusNegate, left: this.haldRadiusNegate}}>
+        
+        console.log(`animaved value ---${this.state.animatedValue}`)
+        return <Animated.View style={{position: 'absolute', height: this.bigDiameter, width: this.bigDiameter, borderRadius: this.props.radius, backgroundColor:  Colors.HEADER_BACKGROUND_COLOR, bottom: this.radiusNegate, left: this.haldRadiusNegate, opacity: this.props.scale, transform: [{scale : this.props.scale}]}}>
             <Animated.View {...this.panResponder.panHandlers} style={{position: 'absolute', height: this.bigDiameter-4, width: this.bigDiameter-4, borderRadius: this.props.radius-2, backgroundColor: Colors.CONTENT_BACKGROUND_COLOR, bottom: 2, left: 2, transform: [{rotate : `${this.state.animatedValue}deg`}, {perspective: 1000},]}}>
                 { this.state.displayArray.map(item => this.props.renderItem(item.degree, item.itemData, item.index)) }
             </Animated.View>
-        </View>
+        </Animated.View>
     }
 }
 
@@ -215,7 +237,7 @@ export default CurvedList;
 
 
 // degree
-                            // let deg = 0
+            //                 let deg = 0
             // if (index % 2 == 1) {
             //     deg = (Math.floor(index / 2) + 1) * this.angleForEachItem;
             // } else {
@@ -259,12 +281,12 @@ export default CurvedList;
                 //     }).start(() => {
                 //     });
                 // } else {
-                //     Animated.timing(this.state.position, {
-                //         toValue: { x: 0, y: this.state.isFilterOpen ? 0 :  this.state.dragViewHideHeight },
-                //         duration: 300,
-                //     }).start(() => {
-                //         this.setState({ isFilterOpen: !this.state.isFilterOpen })
-                //     });
+                    // Animated.timing(this.state.position, {
+                    //     toValue: { x: 0, y: this.state.isFilterOpen ? 0 :  this.state.dragViewHideHeight },
+                    //     duration: 300,
+                    // }).start(() => {
+                    //     this.setState({ isFilterOpen: !this.state.isFilterOpen })
+                    // });
                 // }
 
 // console.log(`deg chang----${degreeChange}`)

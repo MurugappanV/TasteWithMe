@@ -4,8 +4,9 @@ import { hotelDetailByID } from '../graphql/quries';
 
 export function hotelDetailById(hotelID) {
     return (dispatch, getState) => {
+        dispatch({type: types.FETCH_HOTEL_DETAIL_LOADING});
         client.query({
-            query: hotelDetailByID
+            query: hotelDetailByID("cjde7ni3645px0134n7bkomcw")
         }).then((resp) => {
             if (resp.data) {
                 dispatch({type: types.FETCH_HOTEL_DETAIL, data: mapHotelDetails(resp.data)});

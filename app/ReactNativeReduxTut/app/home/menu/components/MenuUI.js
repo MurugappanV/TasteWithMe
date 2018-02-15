@@ -8,12 +8,13 @@ import * as Sizes from '../../../Constants/Sizes';
 import * as Colors from '../../../Constants/Colors';
 import * as IconName from '../../../Constants/IconName';
 import { basicStyles } from '../../../StyleSheets/styles';
+import FilterUI from "../../filter";
 
 class MenuUI extends PureComponent {
 
     constructor() {
         super()
-        this.state = { isCardView: false }
+        this.state = { isCardView: false, isFilterView: false }
     }
 
     componentDidMount() {
@@ -23,6 +24,16 @@ class MenuUI extends PureComponent {
     onViewChangePress = () => {
         this.setState({ isCardView: !this.state.isCardView })
     }
+
+    onViewFilterPress = () => {
+        this.setState({ isFilterView: true })
+    }
+
+    onCloseFilter = () => {
+        this.setState({ isFilterView: false })
+    }
+
+    renderFilter = ((isFileterNeeded) => { if(isFileterNeeded) { return <FilterUI closeFilter={this.onCloseFilter}/> } }).bind(this)
 
     renderHeader = (data, isCollapsed) => <View><CollapseHeader headerText={data.name} isCollapsed={isCollapsed} /></View>
 
@@ -34,6 +45,10 @@ class MenuUI extends PureComponent {
             <TouchableHighlight style={basicStyles.absoluteBottomCircle} onPress={this.onViewChangePress}>
                 <MaterialIcon name={this.state.isCardView ? IconName.CARD_VIEW_ICON_NAME : IconName.LIST_VIEW_ICON_NAME} size={Sizes.DEFAULT_HEADER_ICON_SIZE} color={Colors.ACTIVE_ICON_COLOR} />
             </TouchableHighlight>
+            <TouchableHighlight style={basicStyles.absoluteBottomMiddleCircle} onPress={this.onViewFilterPress}>
+                <MaterialIcon name={IconName.FILTER_ICON_NAME} size={Sizes.DEFAULT_HEADER_ICON_SIZE} color={Colors.ACTIVE_ICON_COLOR} />
+            </TouchableHighlight>
+            {this.renderFilter(this.state.isFilterView)}
         </View>
     }
 }

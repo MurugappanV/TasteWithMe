@@ -20,7 +20,9 @@ class Profile extends PureComponent {
     
 
     render() {
-        return <FilterUI/>
+        return <View style={sizes.contentFullHeightPad0}>  
+            {/* <FilterUI/> */}
+         </View>
         // return <UnderConstruction label='Under Construction' iconName={IconName.UNDER_CONSTRUCTION_ICON_NAME}/>        
     }
 }
