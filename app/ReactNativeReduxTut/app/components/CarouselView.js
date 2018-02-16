@@ -1,9 +1,74 @@
 import React, { PureComponent } from "react";
-import { Animated, View, StyleSheet, Image, Dimensions, ScrollView } from 'react-native'
+import { Animated, View, StyleSheet, Image, Dimensions, ScrollView, FlatList } from 'react-native'
+import { basicStyles } from "../StyleSheets/styles";
 
-const deviceWidth = Dimensions.get('window').width
-const FIXED_BAR_WIDTH = 280
-const BAR_SPACE = 50
+export default class CarouselView extends PureComponent {
+    
+    constructor(props) {
+        super(props)
+        this.animVal = new Animated.Value(0)
+        this.barArray = []
+        this.renderImage = this.renderImage.bind(this)
+    }
+
+    componentWillMount() {
+        const width = this.props.contentWidth
+        const barWidth = width * 0.7
+        const barSpace = width * 0.12
+        let numItems = this.props.images.length
+        let itemWidth = (barWidth / numItems) - ((barSpace / numItems))
+        this.barArray = this.props.images.map((image, i) => {
+            const scrollBarVal = this.animVal.interpolate({
+                inputRange: [width * (i - 1), width * (i + 1)],
+                outputRange: [-itemWidth, itemWidth],
+                extrapolate: 'clamp',
+            })
+            return <View key={`bar${i}`} style={[ basicStyles.barTrack, { width: itemWidth, marginLeft: i === 0 ? 0 : barSpace / numItems, }, ]} >
+                <Animated.View style={[ basicStyles.bar, { width: itemWidth, transform: [ { translateX: scrollBarVal }, ], }, ]} />
+            </View>
+        })
+    }
+
+    renderImage = ({item}) => {
+        return <Image source={{ uri: item }} style={{ width: this.props.contentWidth }} resizeMode={'cover'} />
+    }
+
+    render() {
+        return (
+            <View style={basicStyles.container30pc}>
+                <FlatList
+                    data={this.props.images}
+                    renderItem={this.renderImage}
+                    keyExtractor={(item, index) => index}
+                    style={{flex: 1, backgroundColor: 'black'}}
+                    horizontal
+                    showsHorizontalScrollIndicator={false}
+                    scrollEventThrottle={10}
+                    pagingEnabled
+                    onScroll={Animated.event( [{ nativeEvent: { contentOffset: { x: this.animVal } } }] )}
+                />
+                <View style={basicStyles.barContainer}  >
+                    {this.barArray}
+                </View>
+            </View>
+        )
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // const images = [
 //     'https://s-media-cache-ak0.pinimg.com/originals/ee/51/39/ee5139157407967591081ee04723259a.png',
@@ -13,106 +78,3 @@ const BAR_SPACE = 50
 //     'https://s-media-cache-ak0.pinimg.com/originals/40/4f/83/404f83e93175630e77bc29b3fe727cbe.jpg',
 //     'https://s-media-cache-ak0.pinimg.com/originals/8d/1a/da/8d1adab145a2d606c85e339873b9bb0e.jpg',
 // ]
-
-export default class CarouselView extends PureComponent {
-    animVal = new Animated.Value(0)
-
-    render() {
-        numItems = this.props.images.length
-        itemWidth = (FIXED_BAR_WIDTH / numItems) - ((BAR_SPACE / numItems))
-        let imageArray = []
-        let barArray = []
-        this.props.images.forEach((image, i) => {
-            console.log(image, i)
-            const thisImage = (
-                <Image
-                    key={`image${i}`}
-                    source={{ uri: image }}
-                    style={{ width: deviceWidth }}
-                />
-            )
-            imageArray.push(thisImage)
-
-            const scrollBarVal = this.animVal.interpolate({
-                inputRange: [deviceWidth * (i - 1), deviceWidth * (i + 1)],
-                outputRange: [-itemWidth, itemWidth],
-                extrapolate: 'clamp',
-            })
-
-            const thisBar = (
-                <View
-                    key={`bar${i}`}
-                    style={[
-                        styles.track,
-                        {
-                            width: itemWidth,
-                            marginLeft: i === 0 ? 0 : BAR_SPACE / numItems,
-                        },
-                    ]}
-                >
-                    <Animated.View
-
-                        style={[
-                            styles.bar,
-                            {
-                                width: itemWidth,
-                                transform: [
-                                    { translateX: scrollBarVal },
-                                ],
-                            },
-                        ]}
-                    />
-                </View>
-            )
-            barArray.push(thisBar)
-        })
-
-        return (
-            <View style={styles.container}>
-                <ScrollView
-                    horizontal
-                    showsHorizontalScrollIndicator={false}
-                    scrollEventThrottle={10}
-                    pagingEnabled
-                    onScroll={
-                        Animated.event(
-                            [{ nativeEvent: { contentOffset: { x: this.animVal } } }]
-                        )
-                    }
-                >
-                    {imageArray}
-                </ScrollView>
-                <View style={styles.barContainer}  >
-                    {barArray}
-                </View>
-            </View>
-        )
-    }
-}
-
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 0.40,
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    barContainer: {
-        position: 'absolute',
-        zIndex: 2,
-        bottom: 20,
-        flexDirection: 'row',
-    },
-    track: {
-        backgroundColor: '#ccc',
-        // overflow: 'hidden',
-        height: 2,
-    },
-    bar: {
-        backgroundColor: '#5294d6',
-        height: 2,
-        position: 'absolute',
-        left: 0,
-        top: 0,
-    },
-})

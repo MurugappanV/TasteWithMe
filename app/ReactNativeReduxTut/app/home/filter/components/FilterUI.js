@@ -131,7 +131,7 @@ class FilterUI extends PureComponent {
     componentWillMount() {
         Animated.timing(this.state.scale, {
             toValue: 1 ,
-            duration: 600,
+            duration: 1000,
         }).start(() => {
             
         })
@@ -245,8 +245,8 @@ class FilterUI extends PureComponent {
 
     isColse = () => {
         Animated.timing(this.state.scale, {
-            toValue: 0.3 ,
-            duration: 300,
+            toValue: 0.1 ,
+            duration: 600,
             useNativeDriver: true
         }).start(() => {
             this.props.closeFilter()

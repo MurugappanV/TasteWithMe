@@ -24,12 +24,10 @@ function mapHotelDetails(inData) {
     let data = {
         hotel: {
             ...inData.Hotel,
-            hotelImages: {
-                ...inData.Hotel.hotelImages,
-                hotelImageUrls: inData.Hotel.hotelImages.hotelImageUrls.map((imageUrl) => {
-                    return imageUrl
-                })
-            },
+            ...inData.Hotel.hotelImages,
+            hotelImageUrls: inData.Hotel.hotelImages.hotelImageUrls.map((imageUrl) => {
+                return imageUrl
+            }),
             hotelDetail: {
                 ...inData.Hotel.hotelDetail,
                 openingTime: "",

@@ -22,6 +22,7 @@ export const DARK_TEXT_COLOR = DEEP_ORANGE_900;
 export const LIGHT_TEXT_COLOR = ORANGE_100;
 export const VEG_COLOR = GREEN_800;
 export const NON_VEG_COLOR = DEEP_ORANGE_800;
+export const MEDIUM_INDICATOR_COLOR = ORANGE_900;
 export const TRANSPARENT = 'transparent';
 export const ICON_WHITE = "white";
 export const BLACK = "black";

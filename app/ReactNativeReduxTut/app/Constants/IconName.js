@@ -11,3 +11,7 @@ export const CARD_VIEW_ICON_NAME = "view-quilt"               //MaterialIcons
 export const LIST_VIEW_ICON_NAME = "view-list"                //MaterialIcons
 export const VEG_INDICATE_ICON_NAME = "dot-circle-o"          //FontAwesome
 export const HOTEL_LOGO = "emoji-happy"                       //Entypo
+export const CALL_ICON_NAME = "call";                //MaterialIcons 
+export const NAVIGATE_ICON_NAME = "near-me";                //MaterialIcons 
+export const SHARE_ICON_NAME = "share";                //MaterialIcons 
+export const LOCATION_ICON_NAME = "location-on";                //MaterialIcons 

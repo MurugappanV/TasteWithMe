@@ -7,18 +7,15 @@ import CollapseContent from '../../components/CollapseContent';
 import * as Sizes from '../../../Constants/Sizes';
 import * as Colors from '../../../Constants/Colors';
 import * as IconName from '../../../Constants/IconName';
-import { basicStyles } from '../../../StyleSheets/styles';
+import { basicStyles, basicCompStyles } from '../../../StyleSheets/styles';
 import FilterUI from "../../filter";
+import LoadingIndicator from "../../../components/LoadingIndicator";
 
 class MenuUI extends PureComponent {
 
     constructor() {
         super()
         this.state = { isCardView: false, isFilterView: false }
-    }
-
-    componentDidMount() {
-        this.props.dishList();
     }
 
     onViewChangePress = () => {
@@ -40,16 +37,18 @@ class MenuUI extends PureComponent {
     renderContent = (data, isCollapsed) => <CollapseContent navigation={this.props.navigation} data={data} isCollapsed={isCollapsed} isCardView={this.state.isCardView} />
 
     render() {
-        return <View style={[{flex: 1, alignItems: 'center', backgroundColor: Colors.CONTENT_BACKGROUND_COLOR}]}>
-            <Accordion style={basicStyles.fullContent} data={this.props.dishListData} extraData={this.state.isCardView} itemHeader={this.renderHeader.bind(this)} itemContent={this.renderContent.bind(this)} />
-            <TouchableHighlight style={basicStyles.absoluteBottomCircle} onPress={this.onViewChangePress}>
-                <MaterialIcon name={this.state.isCardView ? IconName.CARD_VIEW_ICON_NAME : IconName.LIST_VIEW_ICON_NAME} size={Sizes.DEFAULT_HEADER_ICON_SIZE} color={Colors.ACTIVE_ICON_COLOR} />
-            </TouchableHighlight>
-            <TouchableHighlight style={basicStyles.absoluteBottomMiddleCircle} onPress={this.onViewFilterPress}>
-                <MaterialIcon name={IconName.FILTER_ICON_NAME} size={Sizes.DEFAULT_HEADER_ICON_SIZE} color={Colors.ACTIVE_ICON_COLOR} />
-            </TouchableHighlight>
-            {this.renderFilter(this.state.isFilterView)}
-        </View>
+        return <LoadingIndicator containerStyle={basicStyles.fullContentPad0} spinnerColor={Colors.MEDIUM_INDICATOR_COLOR} loadingStatus={this.props.loadingStatus}>
+            <View style={basicStyles.fullContentPadLR}>
+                <Accordion style={basicStyles.fullContent} data={this.props.dishListData} extraData={this.state.isCardView} itemHeader={this.renderHeader.bind(this)} itemContent={this.renderContent.bind(this)} />
+                <TouchableHighlight style={basicStyles.absoluteBottomCircle} onPress={this.onViewChangePress}>
+                    <MaterialIcon name={this.state.isCardView ? IconName.CARD_VIEW_ICON_NAME : IconName.LIST_VIEW_ICON_NAME} size={Sizes.DEFAULT_HEADER_ICON_SIZE} color={Colors.ACTIVE_ICON_COLOR} />
+                </TouchableHighlight>
+                <TouchableHighlight style={basicStyles.absoluteBottomMiddleCircle} onPress={this.onViewFilterPress}>
+                    <MaterialIcon name={IconName.FILTER_ICON_NAME} size={Sizes.DEFAULT_HEADER_ICON_SIZE} color={Colors.ACTIVE_ICON_COLOR} />
+                </TouchableHighlight>
+                {this.renderFilter(this.state.isFilterView)}
+            </View>
+        </LoadingIndicator>
     }
 }
 
