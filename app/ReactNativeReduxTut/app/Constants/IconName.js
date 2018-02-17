@@ -4,6 +4,7 @@ export const PROFILE_TAB_ICON_NAME = "person";                //MaterialIcons
 export const FILTER_ICON_NAME = "filter-list";                //MaterialIcons 
 export const DROP_DOWN_ARROW_ICON_NAME = "ios-arrow-dropdown" //IconName 
 export const BACK_ICON_NAME = "ios-arrow-back"                //Ionicons 
+export const FORWARD_ICON_NAME = "ios-arrow-forward"                //Ionicons 
 export const CLOSE_ICON_NAME = "ios-close-circle-outline"                //Ionicons 
 export const SEARCH_ICON_NAME = "md-search"                  //Ionicons 
 export const UNDER_CONSTRUCTION_ICON_NAME = "ios-construct-outline"      //Ionicons

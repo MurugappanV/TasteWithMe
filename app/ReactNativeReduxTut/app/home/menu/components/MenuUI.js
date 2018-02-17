@@ -15,7 +15,7 @@ class MenuUI extends PureComponent {
 
     constructor() {
         super()
-        this.state = { isCardView: false, isFilterView: false }
+        this.state = { isCardView: true, isFilterView: false }
     }
 
     onViewChangePress = () => {
