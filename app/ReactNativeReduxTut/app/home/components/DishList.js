@@ -1,15 +1,16 @@
 import React, {PureComponent} from "react";
 import { Image, View, Text, TouchableHighlight} from "react-native";
 import Icon from 'react-native-vector-icons/FontAwesome';
+import IonIcon from 'react-native-vector-icons/Ionicons';
 import { basicStyles , basicCompStyles, sizes } from '../../StyleSheets/styles';
 import * as IconName from '../../Constants/IconName';
 import * as Colors from '../../Constants/Colors';
 import * as Sizes from '../../Constants/Sizes';
+import CustomTouchable from "../../components/CustomTouchable";
 
 
 DishList = (item, navigation) => {
-    return <TouchableHighlight onPress={() => navigation.navigate('DishDetails')} underlayColor={Colors.DARK_HIGHLIGHT_COLOR}>
-        <View style={basicStyles.dishListView}>
+    return <View style={basicStyles.dishListView}>
             <View style={basicStyles.dishListImageView}>
                 <Image style={sizes.listImage} resizeMode='contain' source={{uri: item.photoUrl, cache: 'force-cache',}} />
             </View>
@@ -24,9 +25,11 @@ DishList = (item, navigation) => {
                 <View>
                     <Text style={basicStyles.darkTitleText}>{item.rate}</Text>
                 </View>
+                <CustomTouchable onPress={() => navigation.navigate('DishDetails')} >
+                    <IonIcon style={[basicStyles.darkMediumIcon, basicCompStyles.paddingLR10]} name={IconName.FORWARD_ICON_NAME}/>
+                </CustomTouchable>
             </View>
         </View>
-    </TouchableHighlight>
 }
 
 export default DishList;

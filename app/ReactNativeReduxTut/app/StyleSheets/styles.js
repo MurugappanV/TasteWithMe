@@ -3,29 +3,34 @@ import { StyleSheet , Platform} from 'react-native';
 import * as Colors from '../Constants/Colors';
 import * as Sizes from '../Constants/Sizes';
 
-export let fullHeight = Dimensions.get('window').height;
-export let fullWidth = Dimensions.get('window').width;
-export let contentFullHeight = fullHeight - (Sizes.HEADER_HEIGHT * 2);
-export let fullFilterHeight = fullHeight * 0.6;
-export let fullFilterHeightNegate = fullFilterHeight * -1;
-export let halfFilterHeightNegate = fullFilterHeightNegate / 2;
-export let fullFilterWidth = fullFilterHeight * 2;
-let contentFullWidth = fullWidth - (Sizes.DEFAULT_PADDING * 2);
-let cardViewWidth = (contentFullWidth - (Sizes.DEFAULT_PADDING * 3) - (Sizes.DEFAULT_BORDER_WIDTH *2)) / 2;
-let cardImageViewWidth = cardViewWidth - (Sizes.DEFAULT_PADDING * 2) - (Sizes.DEFAULT_BORDER_WIDTH *2);
-let cardImageWidth = cardImageViewWidth - (Sizes.DEFAULT_PADDING * 2);
-let cardImageHeight = cardImageWidth * 2 / 3;
-let halfHeight = fullHeight/2;
-let halfWidth = fullWidth/2;
+export const fullHeight = Dimensions.get('window').height;
+export const fullWidth = Dimensions.get('window').width;
+export const contentFullHeight = fullHeight - (Sizes.HEADER_HEIGHT * 2);
+export const pageContentFullHeight = fullHeight - Sizes.HEADER_HEIGHT;
+export const fullFilterHeight = fullHeight * 0.6;
+export const fullFilterHeightNegate = fullFilterHeight * -1;
+export const halfFilterHeightNegate = fullFilterHeightNegate / 2;
+export const fullFilterWidth = fullFilterHeight * 2;
+export const height30pc = fullHeight * 0.3;
+const contentFullWidth = fullWidth - (Sizes.DEFAULT_PADDING * 2);
+const cardViewWidth = (contentFullWidth - (Sizes.DEFAULT_PADDING * 3) - (Sizes.DEFAULT_BORDER_WIDTH *2)) / 2;
+const cardImageViewWidth = cardViewWidth - (Sizes.DEFAULT_PADDING * 2) - (Sizes.DEFAULT_BORDER_WIDTH *2);
+const cardImageWidth = cardImageViewWidth - (Sizes.DEFAULT_PADDING * 2);
+const cardImageHeight = cardImageWidth * 2 / 3;
+const halfHeight = fullHeight/2;
+const halfWidth = fullWidth/2;
 
 export const sizes = StyleSheet.create({
     fullViewSize: {
-      width: fullWidth,
-      height: fullHeight,
+        width: fullWidth,
+        height: fullHeight,
     },
     halfViewSize: {
-      width: fullWidth,
-      height: halfHeight,
+        width: fullWidth,
+        height: halfHeight,
+    },
+    fullWidth: {
+        width: fullWidth,
     },
     pageHeader: {
         width: fullWidth,
@@ -36,9 +41,22 @@ export const sizes = StyleSheet.create({
         height: contentFullHeight,
         padding: Sizes.DEFAULT_PADDING
     },
+    contentFullHeightPadLR: {
+        width: fullWidth,
+        height: contentFullHeight,
+        paddingLeft: Sizes.DEFAULT_PADDING,
+        paddingRight: Sizes.DEFAULT_PADDING,
+    },
     contentFullHeightPad0: {
         width: fullWidth,
         height: contentFullHeight,
+    },
+    pageContentFullHeightPad0: {
+        width: fullWidth,
+        height: pageContentFullHeight,
+    },
+    height30pc: {
+        height: height30pc
     },
     mediumCircle: {
         height: 40,
@@ -65,6 +83,9 @@ export const sizes = StyleSheet.create({
     listImage: {
         width: 40, 
         height: 40
+    },
+    barHeight: {
+        height: Sizes.BAR_SIZE
     },
 });
 
@@ -100,6 +121,9 @@ export const basicCompStyles = StyleSheet.create({
         flexDirection: "row", 
         alignItems:"center"
     },
+    flexRow: {
+        flexDirection: "row", 
+    },
 
 
     absoluteAndBlack: {
@@ -111,6 +135,10 @@ export const basicCompStyles = StyleSheet.create({
         bottom: 20,
         right: 20
     },
+    absoluteBottom20: {
+        position: 'absolute',
+        bottom: 20,
+    },
     absoluteBottomMiddle: {
         position: 'absolute',
         bottom: 20,
@@ -119,6 +147,11 @@ export const basicCompStyles = StyleSheet.create({
     absoluteBottomLeft0: {
         position: 'absolute',
         bottom: 0,
+        left: 0
+    },
+    absoluteTopLeft0: {
+        position: 'absolute',
+        top: 0,
         left: 0
     },
     absoluteTop5Right0: {
@@ -139,8 +172,26 @@ export const basicCompStyles = StyleSheet.create({
         borderWidth: Sizes.DEFAULT_BORDER_WIDTH,
         borderColor: Colors.LIGHT_BACKGROUND_COLOR,
     },
+    defaultDarkBorderRight: {
+        borderRightWidth: Sizes.DEFAULT_BORDER_WIDTH,
+        borderColor: Colors.DARK_HIGHLIGHT_COLOR,
+    },
+    defaultDarkBorder: {
+        borderWidth: Sizes.DEFAULT_BORDER_WIDTH,
+        borderColor: Colors.DARK_HIGHLIGHT_COLOR,
+    },
+    defaultDarkBorderBottem: {
+        borderBottomWidth: Sizes.DEFAULT_BORDER_WIDTH,
+        borderColor: Colors.DARK_HIGHLIGHT_COLOR,
+    },
     defaultPadding: {
         padding: Sizes.DEFAULT_PADDING,
+    },
+    Padding10: {
+        padding: 10,
+    },
+    Padding20: {
+        padding: 20,
     },
     halfPadding: {
         padding: Sizes.HALF_DEF_PADDING,
@@ -208,6 +259,10 @@ export const basicCompStyles = StyleSheet.create({
     subContent: { 
         backgroundColor: Colors.ACTIVE_ICON_COLOR,
     },
+    subContentPad: { 
+        backgroundColor: Colors.ACTIVE_ICON_COLOR,
+        padding: Sizes.DEFAULT_PADDING,
+    },
 
     bigHeaderText: {
         fontSize: 40, 
@@ -218,13 +273,26 @@ export const basicCompStyles = StyleSheet.create({
         fontSize: 16, 
         fontWeight: 'bold', 
     },
+    mediumBoldText: {
+        fontSize: 25, 
+        fontWeight: 'bold', 
+    },
     titleText: {
         fontSize: 16, 
         paddingRight: 10
     },
+    smallText: {
+        fontSize: 12, 
+    },
     mediumText: {
         fontSize: 25, 
         color: 'white'
+    },
+    defaultIcon: {
+        fontSize: Sizes.DEFAULT_ICON_SIZE, 
+    },
+    mediumIcon: {
+        fontSize: Sizes.MEDIUM_ICON_SIZE, 
     },
 });
 
@@ -253,9 +321,29 @@ export const basicStyles = {
         basicCompStyles.headerText,
         basicCompStyles.darkTextColor
     ],
+    darkMediumHeaderText: [
+        fonts.default , 
+        basicCompStyles.mediumBoldText,
+        basicCompStyles.darkTextColor
+    ],
     darkTitleText: [
         fonts.default , 
         basicCompStyles.titleText,
+        basicCompStyles.darkerTextColor
+    ],
+    darkSmallText: [
+        fonts.default , 
+        basicCompStyles.smallText,
+        basicCompStyles.darkerTextColor
+    ],
+    darkDefaultIcon: [
+        fonts.default , 
+        basicCompStyles.defaultIcon,
+        basicCompStyles.darkerTextColor
+    ],
+    darkMediumIcon: [
+        fonts.default , 
+        basicCompStyles.mediumIcon,
         basicCompStyles.darkerTextColor
     ],
 
@@ -289,11 +377,35 @@ export const basicStyles = {
     activeBackGround: [
         basicCompStyles.activeBackGround
     ],
+    fullFlexColumnCCPad10: [
+        basicCompStyles.fullSize,
+        basicCompStyles.activeBackGround,
+        basicCompStyles.flexColumnCC,
+        basicCompStyles.Padding10
+    ],
+    fullWidthFlexRow: [
+        basicCompStyles.flexRow,
+        sizes.fullWidth,
+    ],
     fullContent: [
         sizes.contentFullHeight,
         basicCompStyles.contentBackGround,
         basicCompStyles.flexColumnCC,
-        basicCompStyles.fullSize
+    ],
+    fullContentPadLR: [
+        sizes.contentFullHeightPadLR,
+        basicCompStyles.contentBackGround,
+        basicCompStyles.flexColumnCC,
+    ],
+    fullContentPad0: [
+        sizes.contentFullHeightPad0,
+        basicCompStyles.contentBackGround,
+        basicCompStyles.flexColumnCC,
+    ],
+    fullPageContentPad0: [
+        sizes.pageContentFullHeightPad0,
+        basicCompStyles.contentBackGround,
+        basicCompStyles.flexColumnCC,
     ],
     halfContent: [
         sizes.halfViewSize,
@@ -327,7 +439,36 @@ export const basicStyles = {
         basicCompStyles.defaultBorder,
         basicCompStyles.halfPadding
     ],
+    container30pc: [
+        sizes.height30pc,
+        basicCompStyles.flexColumnCC
+    ],
+    
 
+
+    aboutUsHeader: [
+        basicCompStyles.subHeader
+    ],
+    aboutUsContent: [
+        basicCompStyles.fullSize,
+        basicCompStyles.subContentPad
+    ],
+
+
+
+    bar: [
+        basicCompStyles.absoluteTopLeft0,
+        basicCompStyles.darkBackGround,
+        sizes.barHeight
+    ],
+    barTrack: [
+        sizes.barHeight,
+        basicCompStyles.lightBackGround,
+    ],
+    barContainer: [
+        basicCompStyles.absoluteBottom20,
+        basicCompStyles.flexRow
+    ],
 
 
     dishListView: [

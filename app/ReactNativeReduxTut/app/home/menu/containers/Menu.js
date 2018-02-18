@@ -7,6 +7,7 @@ import DraggableTopView from "../../../components/DraggableTopView";
 import * as Sizes from '../../../Constants/Sizes';
 import * as IconName from '../../../Constants/IconName';
 import * as Labels from '../../../Constants/Labels';
+import * as GeneralConstants from '../../../Constants/GeneralConstants';
 import { dishDisplayDataActions } from "../actions/index";
 import FilterUI from "../../filter/components/FilterUI";
 
@@ -19,8 +20,14 @@ class Menu extends PureComponent {
         ),
     };
 
+    componentDidMount() {
+        if(this.props.dishListFetchingStatus != GeneralConstants.LOADED) {
+            this.props.dishList();
+        }
+    }
+
     render() {
-        return <MenuUI navigation={this.props.navigation} dishListData={this.props.dishListData} dishList={this.props.dishList}/>     
+        return <MenuUI navigation={this.props.navigation} dishListData={this.props.dishListData} loadingStatus={this.props.dishListFetchingStatus}/>     
     }
 }
 

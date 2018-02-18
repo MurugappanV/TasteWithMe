@@ -7,10 +7,8 @@ export const fetchHotelDetails = createReducer(0, {
         return {
             hotel: {
                 ...action.data.hotel,
-                hotelImages: {
-                    ...action.data.hotel.hotelImages,
-                    hotelImageUrls: action.data.hotel.hotelImages.hotelImageUrls.map(imageUrl => {return imageUrl})
-                },
+                ...action.data.hotel.hotelImages,
+                hotelImageUrls: action.data.hotel.hotelImages.hotelImageUrls.map(imageUrl => {return imageUrl}),
                 hotelDetail: {
                     ...action.data.hotel.hotelDetail,
                     openingTime: "",
