@@ -8,6 +8,7 @@ import UnderConstruction from '../../../components/UnderConstruction';
 import { View , Animated, PanResponder, Text} from "react-native";
 import { fullFilterHeight, fullWidth, fullFilterWidth, basicCompStyles, sizes , fullFilterHeightNegate, halfFilterHeightNegate} from "../../../StyleSheets/styles";
 import FilterUI from "../../filter";
+import PhoneAuthTest from './PhoneAuthTest';
 
 class Profile extends PureComponent {
     static navigationOptions = {
@@ -20,7 +21,8 @@ class Profile extends PureComponent {
     
 
     render() {
-        return <UnderConstruction label='Under Construction' iconName={IconName.UNDER_CONSTRUCTION_ICON_NAME}/>        
+        return <PhoneAuthTest />
+        // return <UnderConstruction label='Under Construction' iconName={IconName.UNDER_CONSTRUCTION_ICON_NAME}/>        
     }
 }
 
