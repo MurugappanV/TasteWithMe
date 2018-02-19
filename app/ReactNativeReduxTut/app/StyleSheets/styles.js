@@ -12,6 +12,8 @@ export const fullFilterHeightNegate = fullFilterHeight * -1;
 export const halfFilterHeightNegate = fullFilterHeightNegate / 2;
 export const fullFilterWidth = fullFilterHeight * 2;
 export const height30pc = fullHeight * 0.3;
+export const width20pc = fullWidth * 0.2;
+export const width10pc = fullWidth * 0.1;
 const contentFullWidth = fullWidth - (Sizes.DEFAULT_PADDING * 2);
 const cardViewWidth = (contentFullWidth - (Sizes.DEFAULT_PADDING * 3) - (Sizes.DEFAULT_BORDER_WIDTH *2)) / 2;
 const cardImageViewWidth = cardViewWidth - (Sizes.DEFAULT_PADDING * 2) - (Sizes.DEFAULT_BORDER_WIDTH *2);
@@ -108,6 +110,15 @@ export const basicCompStyles = StyleSheet.create({
         justifyContent: 'center', 
         alignItems: 'center'
     },
+    flexColumnCS: { 
+        flexDirection: 'column', 
+        justifyContent: 'center', 
+        alignItems: 'stretch'
+    },
+    flexColumnNC: { 
+        flexDirection: 'column', 
+        alignItems: 'center'
+    },
     flexColumnNFs: {
         flexDirection: 'column', 
         alignItems: 'flex-start'
@@ -123,6 +134,12 @@ export const basicCompStyles = StyleSheet.create({
     },
     flexRow: {
         flexDirection: "row", 
+    },
+    alignSelfS: {
+        alignSelf: 'stretch',
+    },
+    alignSelfFe: {
+        alignSelf: 'flex-end',
     },
 
 
@@ -196,9 +213,21 @@ export const basicCompStyles = StyleSheet.create({
     halfPadding: {
         padding: Sizes.HALF_DEF_PADDING,
     },
+    padding20pc: {
+        padding: width20pc,
+    },
+    padding10pc: {
+        padding: width10pc,
+    },
     paddingLR10: {
         paddingLeft: 10, 
         paddingRight: 10
+    },
+    marginBottom15: {
+        marginBottom: 15,
+    },
+    marginTop15: {
+        marginTop: 15,
     },
     fullSize: {
         flex: 1
@@ -294,6 +323,12 @@ export const basicCompStyles = StyleSheet.create({
     mediumIcon: {
         fontSize: Sizes.MEDIUM_ICON_SIZE, 
     },
+
+    darkTextInput: {
+        height: 40,
+        color: Colors.DARK_TEXT_COLOR, 
+        alignSelf: 'stretch'
+    }
 });
 
 export const basicStyles = {
@@ -391,6 +426,16 @@ export const basicStyles = {
         sizes.contentFullHeight,
         basicCompStyles.contentBackGround,
         basicCompStyles.flexColumnCC,
+    ],
+    fullContentNC: [
+        sizes.contentFullHeight,
+        basicCompStyles.contentBackGround,
+        basicCompStyles.flexColumnNC,
+    ],
+    fullContentStretched: [
+        sizes.contentFullHeight,
+        basicCompStyles.contentBackGround,
+        basicCompStyles.flexColumnCS,
     ],
     fullContentPadLR: [
         sizes.contentFullHeightPadLR,
