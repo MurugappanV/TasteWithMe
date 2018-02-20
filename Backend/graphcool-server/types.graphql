@@ -10,8 +10,10 @@ type User @model {
   name: String
   dateOfBirth: DateTime
 
-  email: String! @isUnique
-  password: String!
+  # email: String! @isUnique
+  # password: String!
+
+  firebaseUserId: String @isUnique
 }
 
 
