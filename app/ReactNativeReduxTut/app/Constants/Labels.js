@@ -10,4 +10,5 @@ export const LOGIN_TITLE = "Login to your profile";
 export const VERIFY_PHONE_TITLE = "Phone number verification";
 export const RESEND_CODE = "Resend code";
 export const CONFIRM_CODE = "Confirm code";
-export const VERIFY_PHONE_NUMBER = "Verify Phone number";
+export const SEND_VERIFICATION_CODE = "Send verification code";
+export const CHANGE_PHONE_NUMBER = "Change phone number";

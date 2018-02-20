@@ -3,11 +3,12 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from "redux";
 import { aboutUsDataActions } from "../actions";
 import AboutUsUI from "../components/AboutUsUI";
+import * as GeneralConstants from '../../Constants/GeneralConstants';
 
 class AboutUs extends PureComponent {
 
     componentDidMount() {
-        this.props.hotelDetailById();
+        this.props.hotelDetailById(GeneralConstants.HOTEL_ID);
     }
 
     render() {

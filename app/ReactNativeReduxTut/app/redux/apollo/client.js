@@ -22,6 +22,7 @@
 // export default client;
 
 import ApolloClient, { createNetworkInterface } from 'react-apollo';
+import { AsyncStorage } from 'react-native'
 //import config from '../config.json';
 
 const networkInterface = createNetworkInterface({
@@ -35,10 +36,13 @@ networkInterface.use([{
     }
 
    // get the authentication token from local storage if it exists
-    // const token = localStorage.getItem('token');
-    // if (token) {
-    //   req.options.headers.authorization = `Bearer ${token}`;
-    // }
+    const token = AsyncStorage.getItem('token').then((value) => {return value}).catch((error) => {return null})
+    console.log(`token -- ${token}`)
+    console.log(token)
+    if (!!token) {
+      console.log(`token -+- in`)
+      req.options.headers.authorization = `Bearer ${token}`;
+    }
     next();
   },
 }]);

@@ -205,7 +205,7 @@ export const basicCompStyles = StyleSheet.create({
         padding: Sizes.DEFAULT_PADDING,
     },
     Padding10: {
-        padding: 10,
+        padding: Sizes.PADDING_10,
     },
     Padding20: {
         padding: 20,
@@ -264,6 +264,10 @@ export const basicCompStyles = StyleSheet.create({
     },
     lightTextColor: {
         color: Colors.LIGHT_TEXT_COLOR
+    },
+
+    defaultBorderRadius: {
+        borderRadius: Sizes.DEFAULT_BORDER_RADIUS
     },
 
 
@@ -371,6 +375,14 @@ export const basicStyles = {
         basicCompStyles.smallText,
         basicCompStyles.darkerTextColor
     ],
+
+
+    darkButton: [
+        basicCompStyles.darkBackGround,
+        basicCompStyles.Padding10,
+        basicCompStyles.defaultBorderRadius,
+    ],
+
     darkDefaultIcon: [
         fonts.default , 
         basicCompStyles.defaultIcon,

@@ -6,7 +6,8 @@ export function hotelDetailById(hotelID) {
     return (dispatch, getState) => {
         dispatch({type: types.FETCH_HOTEL_DETAIL_LOADING});
         client.query({
-            query: hotelDetailByID("cjde7ni3645px0134n7bkomcw")
+            query: hotelDetailByID,
+            variables: {Id: hotelID}
         }).then((resp) => {
             if (resp.data) {
                 dispatch({type: types.FETCH_HOTEL_DETAIL, data: mapHotelDetails(resp.data)});

@@ -30,8 +30,8 @@ export default class PhoneNumberInput extends PureComponent {
                     placeholderTextColor={Colors.IN_ACTIVE_ICON_COLOR} 
                     value={this.state.phoneNumber}
                 />
-                <CustomTouchable onPress={() => this.props.signIn(this.state.phoneNumber)} >
-                    <Text style={basicStyles.darkHeaderText}>{Labels.VERIFY_PHONE_NUMBER}</Text>
+                <CustomTouchable style={basicStyles.darkButton} onPress={() => this.props.signIn(this.state.phoneNumber)} >
+                    <Text style={basicStyles.headerText}>{Labels.SEND_VERIFICATION_CODE}</Text>
                 </CustomTouchable>
             </View>
         );

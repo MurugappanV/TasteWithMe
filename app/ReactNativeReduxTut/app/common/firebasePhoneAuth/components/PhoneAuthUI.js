@@ -19,11 +19,22 @@ export default class PhoneAuthUI extends Component {
     this.signIn = this.signIn.bind(this)
     this.signOut = this.signOut.bind(this)
     this.confirmCode = this.confirmCode.bind(this)
+    this.changeNumber = this.changeNumber.bind(this)
+    this.resendCode = this.resendCode.bind(this)
   }
 
   componentDidMount() {
     this.unsubscribe = firebase.auth().onAuthStateChanged((user) => {
       if (user) {
+        user.getIdToken(false)
+        .then(token => {
+          console.log('set token')
+          console.log(token)
+          this.props.setTokenId(token);
+        }).catch(error => {
+          console.log(`error ${error}`); 
+          return null 
+        })
         this.setState({ user: user.toJSON() });
       } else {
         this.setState({
@@ -55,6 +66,11 @@ export default class PhoneAuthUI extends Component {
   };
 
   resendCode = () => {
+    this.signIn(this.props.userPhoneNumber)
+    
+  }
+
+  changeNumber = () => {
     this.setState({
       confirmResult: null,
       message: ''
@@ -91,7 +107,7 @@ export default class PhoneAuthUI extends Component {
     return (
       <View style={basicCompStyles.fullSize}>
         {!user && !confirmResult && <PhoneNumberInput signIn={this.signIn} phoneNumber={this.props.userPhoneNumber}/>}
-        {!user && confirmResult && <VerificationCodeInput confirmCode={this.confirmCode} resendCode={this.resendCode}/>}
+        {!user && confirmResult && <VerificationCodeInput confirmCode={this.confirmCode} resendCode={this.resendCode} changeNumber={this.changeNumber}/>}
         {user && React.Children.map(children, child => React.cloneElement(child, { signOut: this.signOut }))}
       </View>
     );

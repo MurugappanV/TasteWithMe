@@ -5,7 +5,7 @@ import { phoneAuthDataActions } from "../actions/index";
 // import { View, Button, Text, TextInput, Image } from 'react-native';
 // import firebase from 'react-native-firebase';
 // import PhoneNumberInput from '../components/PhoneNumberInput';
-// import PhoneAuthUI from '../components/PhoneAuthUI';
+import PhoneAuthUI from '../components/PhoneAuthUI';
 // import Toast from 'react-native-simple-toast';
 // import { basicCompStyles } from '../../../StyleSheets/styles';
 
@@ -15,8 +15,12 @@ class PhoneAuth extends Component {
     this.props.setPhoneNumber(phoneNumber);
   }
 
+  setTokenId = (token) => {
+    this.props.setTokenId(token);
+  }
+
   render() {
-    return <PhoneAuthUI userPhoneNumber={this.props.userRegisteredPhoneNumber} setPhoneNumber={this.setUserPhoneNumber}>
+    return <PhoneAuthUI userPhoneNumber={this.props.userRegisteredPhoneNumber} setPhoneNumber={this.setUserPhoneNumber} setTokenId={this.setTokenId}>
       {this.props.children}
     </PhoneAuthUI>
   }

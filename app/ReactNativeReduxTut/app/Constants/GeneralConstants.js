@@ -12,3 +12,5 @@ export const ERROR = -1;
 
 export const SPLASH_SCREEN_MIN_TIME = 2000;
 export const SPLASH_SCREEN_TEXT = 'TasteE';
+
+export const HOTEL_ID="cjde7ni3645px0134n7bkomcw";

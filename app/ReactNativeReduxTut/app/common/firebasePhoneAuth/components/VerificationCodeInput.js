@@ -33,8 +33,11 @@ export default class VerificationCodeInput extends PureComponent {
                 <CustomTouchable style={basicCompStyles.alignSelfFe} onPress={this.props.resendCode} >
                     <Text style={basicStyles.darkSmallText}>{Labels.RESEND_CODE}</Text>
                 </CustomTouchable>
-                <CustomTouchable style={basicCompStyles.marginTop15} onPress={() => this.props.confirmCode(this.state.codeInput)} >
-                    <Text style={basicStyles.darkHeaderText}>{Labels.CONFIRM_CODE}</Text>
+                <CustomTouchable style={[basicCompStyles.marginTop15, basicStyles.darkButton]} onPress={() => this.props.confirmCode(this.state.codeInput)} >
+                    <Text style={basicStyles.headerText}>{Labels.CONFIRM_CODE}</Text>
+                </CustomTouchable>
+                <CustomTouchable onPress={this.props.changeNumber} >
+                    <Text style={basicStyles.darkSmallText}>{Labels.CHANGE_PHONE_NUMBER}</Text>
                 </CustomTouchable>
             </View>
         );
