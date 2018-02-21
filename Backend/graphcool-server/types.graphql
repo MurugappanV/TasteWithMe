@@ -9,8 +9,12 @@ type User @model {
 
   name: String
   dateOfBirth: DateTime
-
-  # email: String! @isUnique
+  email: String
+  address: String
+  addressLat: String
+  addressLong: String
+  phoneNo: String
+  imageUrl: String
   # password: String!
 
   firebaseUserId: String @isUnique
