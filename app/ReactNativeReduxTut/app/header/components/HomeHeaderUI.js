@@ -53,7 +53,7 @@ const title = (title, searchPlaceHoler, onFinish, onSearchTextChange, searchValu
     }
 }
 
-const search = (searchLogo, closeLogo, onSearchPress, onSearchClear, isSearchActive, searchValue) => {
+const search = (searchLogo, closeLogo, onSearchPress, onSearchClear, onSearchClose, isSearchActive, searchValue) => {
     let logoName = '';
     let color = '';
     let onPress = '';
@@ -66,7 +66,7 @@ const search = (searchLogo, closeLogo, onSearchPress, onSearchClear, isSearchAct
         } else {
             logoName = closeLogo
             color = Colors.MEDIUM_TEXT_COLOR
-            onPress = onSearchClear
+            onPress = onSearchClose
         }
     } else {
         logoName = searchLogo
@@ -88,7 +88,7 @@ class HomeHeader extends PureComponent {
             {backButton(backLogo, navigation, onSearchClosed, isSearchActive, isNavigateBack)}
             {logo(leftLogo, navigation, isSearchActive)}
             {title(headerTitle, searchPlaceHoler, onSearchClosed, onSearchTextChanged, searchValue, isSearchActive)}
-            {search(searchLogo,closeLogo,onSearchPressed, onSearchClearPressed, isSearchActive, searchValue)}
+            {search(searchLogo,closeLogo,onSearchPressed, onSearchClearPressed, onSearchClosed, isSearchActive, searchValue)}
         </View>  
     } 
 }
