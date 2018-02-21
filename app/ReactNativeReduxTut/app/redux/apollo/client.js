@@ -30,17 +30,14 @@ const networkInterface = createNetworkInterface({
 });
 
 networkInterface.use([{
-  applyMiddleware(req, next) {
+  async applyMiddleware(req, next) {
     if (!req.options.headers) {
       req.options.headers = {};  // Create the header object if needed.
     }
 
    // get the authentication token from local storage if it exists
-    const token = AsyncStorage.getItem('token').then((value) => {return value}).catch((error) => {return null})
-    console.log(`token -- ${token}`)
-    console.log(token)
+    const token = await AsyncStorage.getItem('token')
     if (!!token) {
-      console.log(`token -+- in`)
       req.options.headers.authorization = `Bearer ${token}`;
     }
     next();
@@ -48,3 +45,5 @@ networkInterface.use([{
 }]);
 
 export default new ApolloClient({ networkInterface });
+
+// .then((value) => {return value}).catch((error) => {return null})

@@ -6,6 +6,7 @@ export const dishListByCourse = gql`
             name 
             dishDetailRelations {
                 dishes {
+                    id
                     name
                     dishType
                     photoUrls

@@ -1,6 +1,7 @@
 import createReducer from '../../../lib/createReducer';
 import *  as types from '../../../redux/types';
 import *  as GeneralConstants from '../../../Constants/GeneralConstants';
+import { mapDishListData } from '../../../redux/manipulations/dishDetailDataConvertor';
 
 let dishList = {
     originalDishlist: {},
@@ -11,50 +12,14 @@ export const generalDishList = createReducer(dishList, {
     [types.SET_DISH_LIST](state, action) {
         return {
             ...state,
-            originalDishlist: {
-                ...action.data,
-                dishList: action.data.dishList.map((courseObj) => {
-                    return {
-                        ...courseObj,
-                        dish: courseObj.dish.map((dishObj) => {
-                            return {
-                                ...dishObj,
-                            }
-                        })
-                    }
-                })
-            },
-            presentDishList: {
-                ...action.data,
-                dishList: action.data.dishList.map((courseObj) => {
-                    return {
-                        ...courseObj,
-                        dish: courseObj.dish.map((dishObj) => {
-                            return {
-                                ...dishObj,
-                            }
-                        })
-                    }
-                })
-            }
+            originalDishlist: mapDishListData(action.data),
+            presentDishList: mapDishListData(action.data)
         };
     },
     [types.SET_MODIFIED_DISH_LIST](state, action) {
         return {
             ...state,
-            presentDishList: {
-                ...action.data,
-                dishList: action.data.dishList.map((courseObj) => {
-                    return {
-                        ...courseObj,
-                        dish: courseObj.dish.map((dishObj) => {
-                            return {
-                                ...dishObj,
-                            }
-                        })
-                    }
-                })
-            }
+            presentDishList: mapDishListData(action.data)
         };
     },
     [types.DISH_LIST_LOADING](state, action) {

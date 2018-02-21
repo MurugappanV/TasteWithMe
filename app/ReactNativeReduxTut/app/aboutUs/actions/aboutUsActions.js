@@ -10,7 +10,7 @@ export function hotelDetailById(hotelID) {
             variables: {Id: hotelID}
         }).then((resp) => {
             if (resp.data) {
-                dispatch({type: types.FETCH_HOTEL_DETAIL, data: mapHotelDetails(resp.data)});
+                dispatch({type: types.FETCH_HOTEL_DETAIL, data: resp.data});
             }
             if(resp.errors) {
                  dispatch({ type: types.FETCH_HOTEL_DETAIL_ERROR, errors: resp.errors});
@@ -21,20 +21,3 @@ export function hotelDetailById(hotelID) {
     }
 }
 
-function mapHotelDetails(inData) {
-    let data = {
-        hotel: {
-            ...inData.Hotel,
-            ...inData.Hotel.hotelImages,
-            hotelImageUrls: inData.Hotel.hotelImages.hotelImageUrls.map((imageUrl) => {
-                return imageUrl
-            }),
-            hotelDetail: {
-                ...inData.Hotel.hotelDetail,
-                openingTime: "",
-                closingTime: ""
-            }
-        }
-    };
-    return data;
-}

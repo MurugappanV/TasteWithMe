@@ -1,21 +1,11 @@
 import createReducer from '../../lib/createReducer';
 import *  as types from '../../redux/types';
 import *  as GeneralConstants from '../../Constants/GeneralConstants';
+import { mapHotelDetails } from '../../redux/manipulations/hotelDetailDataConverter';
 
 export const fetchHotelDetails = createReducer(0, {
     [types.FETCH_HOTEL_DETAIL](state, action) {
-        return {
-            hotel: {
-                ...action.data.hotel,
-                ...action.data.hotel.hotelImages,
-                hotelImageUrls: action.data.hotel.hotelImages.hotelImageUrls.map(imageUrl => {return imageUrl}),
-                hotelDetail: {
-                    ...action.data.hotel.hotelDetail,
-                    openingTime: "",
-                    closingTime: "",
-                }
-            }
-        };
+        return mapHotelDetails(action.data)
     },
     [types.FETCH_HOTEL_ERROR](state, action) {
         return GeneralConstants.ERROR;

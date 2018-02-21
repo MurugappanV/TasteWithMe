@@ -1,6 +1,7 @@
 import * as types from '../../../redux/types';
 import client from '../../../redux/apollo/client';
 import {dishListByCourse} from '../graphql/quries';
+import { mapDishListRawData } from '../../../redux/manipulations/dishDetailDataConvertor';
 
 export function dishList() {
     return (dispatch, getState) => {
@@ -20,23 +21,3 @@ export function dishList() {
     }
 }
 
-
-function mapDishListRawData(inData) {
-    let data = {};
-    if(inData.allCourses) {
-        data.dishList = inData.allCourses.map(courseObj => {
-            let course = {};
-            course.name = courseObj.name;
-            course.dish = courseObj.dishDetailRelations.dishes.map(dishObj => {
-                let dish = {};
-                dish.name = dishObj.name;
-                dish.type = dishObj.dishType;
-                dish.photoUrl = dishObj.photoUrls;
-                dish.rate = `₹${dishObj.rateDetalil.price}`;
-                return dish;
-            });
-            return course;
-        });
-    }
-    return data;
-}
