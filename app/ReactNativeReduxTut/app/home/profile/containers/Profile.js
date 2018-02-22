@@ -8,7 +8,7 @@ import UnderConstruction from '../../../components/UnderConstruction';
 import { View , Animated, PanResponder, Text, Button} from "react-native";
 import { fullFilterHeight, fullWidth, fullFilterWidth, basicCompStyles, sizes , fullFilterHeightNegate, halfFilterHeightNegate} from "../../../StyleSheets/styles";
 import FilterUI from "../../filter";
-import PhoneAuthTest from '../../../common/firebasePhoneAuth';
+import PhoneAuthTest from '../../../common/login/firebasePhoneAuth';
 
 class Profile extends PureComponent {
     static navigationOptions = {

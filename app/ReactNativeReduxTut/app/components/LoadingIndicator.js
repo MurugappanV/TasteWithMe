@@ -1,8 +1,6 @@
 import React, {PureComponent} from "react";
 import {View, Text} from "react-native";
 import IonIcon from 'react-native-vector-icons/Ionicons';
-import { basicStyles } from '../StyleSheets/styles';
-import * as Colors from '../Constants/Colors';
 import * as GeneralConstants from '../Constants/GeneralConstants';
 import { Spinner } from 'native-base';
 

@@ -17,7 +17,7 @@ type User @model {
   imageUrl: String
   # password: String!
 
-  firebaseUserId: String @isUnique
+  firebaseUserId: String! @isUnique
 }
 
 

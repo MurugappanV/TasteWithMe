@@ -1,11 +1,11 @@
 import React, { PureComponent } from 'react';
 import { View, Button, Text, TextInput, Image } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import { basicStyles, basicCompStyles } from '../../../StyleSheets/styles';
-import * as Labels from '../../../Constants/Labels';
-import * as Colors from '../../../Constants/Colors';
-import * as IconName from '../../../Constants/IconName';
-import CustomTouchable from '../../../components/CustomTouchable';
+import { basicStyles, basicCompStyles } from '../../../../StyleSheets/styles';
+import * as Labels from '../../../../Constants/Labels';
+import * as Colors from '../../../../Constants/Colors';
+import * as IconName from '../../../../Constants/IconName';
+import CustomTouchable from '../../../../components/CustomTouchable';
 
 export default class VerificationCodeInput extends PureComponent {
 

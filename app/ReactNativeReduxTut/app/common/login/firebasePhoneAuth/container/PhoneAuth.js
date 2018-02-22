@@ -20,7 +20,7 @@ class PhoneAuth extends Component {
   }
 
   render() {
-    return <PhoneAuthUI userPhoneNumber={this.props.userRegisteredPhoneNumber} setPhoneNumber={this.setUserPhoneNumber} setTokenId={this.setTokenId}>
+    return <PhoneAuthUI userPhoneNumber={this.props.userRegisteredPhoneNumber} graphcoolTokenStatus={this.props.graphcoolTokenStatus} setPhoneNumber={this.setUserPhoneNumber} setTokenId={this.setTokenId}>
       {this.props.children}
     </PhoneAuthUI>
   }
@@ -29,7 +29,8 @@ class PhoneAuth extends Component {
 
 function mapStateToProps(state) {
   return {
-      userRegisteredPhoneNumber: state.userRegisteredPhoneNumber
+      userRegisteredPhoneNumber: state.userRegisteredPhoneNumber,
+      graphcoolTokenStatus: state.isGraphcoolTokenObtained
   }
 }
 

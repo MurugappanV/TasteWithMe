@@ -12,3 +12,4 @@ export const RESEND_CODE = "Resend code";
 export const CONFIRM_CODE = "Confirm code";
 export const SEND_VERIFICATION_CODE = "Send verification code";
 export const CHANGE_PHONE_NUMBER = "Change phone number";
+export const CONTINUE = "Continue";

@@ -4,14 +4,14 @@ import firebase from 'react-native-firebase';
 import Toast from 'react-native-simple-toast';
 import PhoneNumberInput from './PhoneNumberInput';
 import VerificationCodeInput from './VerificationCodeInput';
-import { basicCompStyles } from '../../../StyleSheets/styles';
+import { basicCompStyles } from '../../../../StyleSheets/styles';
+import LoginDetail from '../../loginDetail';
 
 export default class PhoneAuthUI extends Component {
   constructor(props) {
     super(props);
     this.unsubscribe = null;
     this.state = {
-      user: null,
       message: '',
       confirmResult: null,
     };
@@ -33,12 +33,13 @@ export default class PhoneAuthUI extends Component {
           this.props.setTokenId(token);
         }).catch(error => {
           console.log(`error ${error}`); 
-          return null 
+          this.setState({
+            message: 'Unable to get user details',
+            confirmResult: null,
+          });
         })
-        this.setState({ user: user.toJSON() });
       } else {
         this.setState({
-          user: null,
           message: '',
           confirmResult: null,
         });
@@ -49,6 +50,8 @@ export default class PhoneAuthUI extends Component {
   componentWillUnmount() {
      if (this.unsubscribe) this.unsubscribe();
   }
+
+
 
   signIn = (phoneNumber) => {
     this.props.setPhoneNumber(phoneNumber)
@@ -100,15 +103,24 @@ export default class PhoneAuthUI extends Component {
     if (!!message.length) Toast.show(message, Toast.LONG)
   }
 
+  componentWillReceiveProps() {
+    if(this.props.graphcoolTokenStatus == -1) {
+      this.setState({
+        message: 'Unable to get user details',
+        confirmResult: null,
+      });
+    }
+  }
+
   render() {
-    const { user, confirmResult, message } = this.state;
-    const { children } = this.props;
+    const { confirmResult, message } = this.state;
+    const { children, userPhoneNumber, graphcoolTokenStatus } = this.props;
     this.renderMessage(message)
     return (
       <View style={basicCompStyles.fullSize}>
-        {!user && !confirmResult && <PhoneNumberInput signIn={this.signIn} phoneNumber={this.props.userPhoneNumber}/>}
-        {!user && confirmResult && <VerificationCodeInput confirmCode={this.confirmCode} resendCode={this.resendCode} changeNumber={this.changeNumber}/>}
-        {user && React.Children.map(children, child => React.cloneElement(child, { signOut: this.signOut }))}
+        {graphcoolTokenStatus != 2 && !confirmResult && <PhoneNumberInput signIn={this.signIn} phoneNumber={userPhoneNumber}/>}
+        {graphcoolTokenStatus != 2 && confirmResult && <VerificationCodeInput confirmCode={this.confirmCode} resendCode={this.resendCode} changeNumber={this.changeNumber}/>}
+        {graphcoolTokenStatus == 2 && React.Children.map(children, child => React.cloneElement(child, { signOut: this.signOut }))}
       </View>
     );
   }
