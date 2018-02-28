@@ -9,16 +9,20 @@ export function setPhoneNumber(phoneNumber) {
     }
 }
 
+export function clearTokenId() {
+    return (dispatch, getState) => {
+        AsyncStorage.removeItem('token');
+        dispatch({type: types.GRAPHCOOL_AUTH_TOKEN_CLEAR});
+    }
+}
+
 export function setTokenId(token) {
     return (dispatch, getState) => {
         client.mutate({
             mutation: authenticateUser,
             variables: {firebaseToken: token}
         }).then((resp) => {
-            console.log(`token -- resp`)
-            console.log(resp)
             if (resp.data) {
-                console.log(`token data -- ${resp.data.authenticateFirebaseUser.token}`)
                 AsyncStorage.setItem('token', resp.data.authenticateFirebaseUser.token);
                 dispatch({ type: types.SET_USER_ID, data: resp.data.authenticateFirebaseUser.id});
                 dispatch({ type: types.GRAPHCOOL_AUTH_TOKEN_OBTAINED});

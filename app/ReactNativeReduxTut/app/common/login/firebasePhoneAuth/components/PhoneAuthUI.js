@@ -12,7 +12,7 @@ export default class PhoneAuthUI extends Component {
     super(props);
     this.unsubscribe = null;
     this.state = {
-      message: '',
+      message: null,
       confirmResult: null,
     };
     this.renderMessage = this.renderMessage.bind(this)
@@ -28,11 +28,8 @@ export default class PhoneAuthUI extends Component {
       if (user) {
         user.getIdToken(false)
         .then(token => {
-          console.log('set token')
-          console.log(token)
           this.props.setTokenId(token);
         }).catch(error => {
-          console.log(`error ${error}`); 
           this.setState({
             message: 'Unable to get user details',
             confirmResult: null,
@@ -40,7 +37,7 @@ export default class PhoneAuthUI extends Component {
         })
       } else {
         this.setState({
-          message: '',
+          message: null,
           confirmResult: null,
         });
       }
@@ -76,7 +73,7 @@ export default class PhoneAuthUI extends Component {
   changeNumber = () => {
     this.setState({
       confirmResult: null,
-      message: ''
+      message: null
     });
   }
 
@@ -96,11 +93,16 @@ export default class PhoneAuthUI extends Component {
 
   signOut = () => {
     this.props.setPhoneNumber('')
+    this.props.clearTokenId()
     firebase.auth().signOut();
+    this.setState({
+      message: null,
+      confirmResult: null,
+    });
   }
 
   renderMessage = (message) => {
-    if (!!message.length) Toast.show(message, Toast.LONG)
+    if (!!message) Toast.show(message, Toast.LONG)
   }
 
   componentWillReceiveProps() {

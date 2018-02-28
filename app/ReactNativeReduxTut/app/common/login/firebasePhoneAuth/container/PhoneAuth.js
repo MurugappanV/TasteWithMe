@@ -20,7 +20,7 @@ class PhoneAuth extends Component {
   }
 
   render() {
-    return <PhoneAuthUI userPhoneNumber={this.props.userRegisteredPhoneNumber} graphcoolTokenStatus={this.props.graphcoolTokenStatus} setPhoneNumber={this.setUserPhoneNumber} setTokenId={this.setTokenId}>
+    return <PhoneAuthUI userPhoneNumber={this.props.userRegisteredPhoneNumber} graphcoolTokenStatus={this.props.graphcoolTokenStatus} setPhoneNumber={this.setUserPhoneNumber} setTokenId={this.setTokenId} clearTokenId={this.props.clearTokenId}>
       {this.props.children}
     </PhoneAuthUI>
   }

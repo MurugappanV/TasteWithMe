@@ -20,5 +20,8 @@ export const isGraphcoolTokenObtained = createReducer(0, {
     },
     [types.GRAPHCOOL_AUTH_TOKEN_ERROR](state, action) {
         return GeneralConstants.ERROR;
-   },
+    },
+    [types.GRAPHCOOL_AUTH_TOKEN_CLEAR](state, action) {
+        return 0;
+    },
 });
