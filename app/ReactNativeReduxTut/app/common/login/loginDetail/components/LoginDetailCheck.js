@@ -10,17 +10,18 @@ import LoadingIndicator from '../../../../components/LoadingIndicator';
 import LoginDetailUI from './LoginDetailUI';
 
 export default class LoginDetailCheck extends PureComponent {
-    renderLoginCheck() {
-        if(this.props.userDetails.phoneNo == null) {
-            return this.props.children
+    renderLoginCheck(children, signOut, userDetails) {
+        if(userDetails.phoneNo != null) {
+            return React.Children.map(children, child => React.cloneElement(child, { signOut: signOut }))
         } else {
-            <LoginDetailUI />
+            return <LoginDetailUI signOut={signOut}/>
         }
     }
 
     render() {
-        return <LoadingIndicator loadingStatus={this.props.loadingStatus} spinnerColor={Colors.MEDIUM_INDICATOR_COLOR} containerStyle={basicStyles.fullContentPad0}>
-            {this.renderLoginCheck()}
+        const { children, signOut, userDetails, loadingStatus } = this.props;
+        return <LoadingIndicator loadingStatus={loadingStatus} spinnerColor={Colors.MEDIUM_INDICATOR_COLOR} containerStyle={basicStyles.fullContentPad0}>
+            {this.renderLoginCheck(children, signOut, userDetails)}
         </LoadingIndicator>
     }
 }

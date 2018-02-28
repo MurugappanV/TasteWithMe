@@ -4,20 +4,9 @@ import { bindActionCreators } from "redux";
 import { loginDetailDataActions } from "../actions/index";
 import LoginDetailCheck from '../components/LoginDetailCheck';
 import LoadingIndicator from '../../../../components/LoadingIndicator';
+import { View } from 'react-native';
 
 class LoginDetail extends PureComponent {
-
-//   setUserPhoneNumber = (phoneNumber) => {
-//     this.props.setPhoneNumber(phoneNumber);
-//   }
-
-//   setTokenId = (token) => {
-//     this.props.setTokenId(token);
-//   }
-
-//   renderItem = () => {
-//       if()
-//   }
 
     constructor(props) {
         super(props)
@@ -28,9 +17,10 @@ class LoginDetail extends PureComponent {
     }
 
     render() {
-        return <View>
-            {this.props.children}
-        </View>
+        const { children, signOut, userDetails, userDetailLoadingStatus } = this.props;
+        return <LoginDetailCheck signOut={signOut} userDetails={userDetails} loadingStatus={userDetailLoadingStatus}>
+            {children}
+        </LoginDetailCheck>
     }
 
 }

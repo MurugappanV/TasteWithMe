@@ -122,8 +122,10 @@ export default class PhoneAuthUI extends Component {
       <View style={basicCompStyles.fullSize}>
         {graphcoolTokenStatus != 2 && !confirmResult && <PhoneNumberInput signIn={this.signIn} phoneNumber={userPhoneNumber}/>}
         {graphcoolTokenStatus != 2 && confirmResult && <VerificationCodeInput confirmCode={this.confirmCode} resendCode={this.resendCode} changeNumber={this.changeNumber}/>}
-        {graphcoolTokenStatus == 2 && React.Children.map(children, child => React.cloneElement(child, { signOut: this.signOut }))}
+        {graphcoolTokenStatus == 2 && <LoginDetail signOut={this.signOut}>{children}</LoginDetail>}
       </View>
     );
   }
 }
+
+//React.Children.map(children, child => React.cloneElement(child, { signOut: this.signOut }))
