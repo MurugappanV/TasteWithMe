@@ -10,15 +10,20 @@ class LoginDetail extends PureComponent {
 
     constructor(props) {
         super(props)
+        this.saveUserDetails = this.saveUserDetails.bind(this)
     }
 
     componentWillMount() {
         this.props.getUserById(this.props.userId)
     }
 
+    saveUserDetails(name, email, photoUrl) {
+        this.props.saveUserDetails(this.props.userId, name, email, photoUrl, this.props.userRegisteredPhoneNumber);
+    }
+
     render() {
         const { children, signOut, userDetails, userDetailLoadingStatus } = this.props;
-        return <LoginDetailCheck signOut={signOut} userDetails={userDetails} loadingStatus={userDetailLoadingStatus}>
+        return <LoginDetailCheck signOut={signOut} userDetails={userDetails} loadingStatus={userDetailLoadingStatus} saveUserDetails={this.saveUserDetails}>
             {children}
         </LoginDetailCheck>
     }

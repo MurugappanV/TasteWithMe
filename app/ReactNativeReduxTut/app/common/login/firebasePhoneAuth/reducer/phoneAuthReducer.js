@@ -12,6 +12,9 @@ export const userId = createReducer(null, {
     [types.SET_USER_ID](state, action) {
          return action.data;
     },
+    [types.CLEAR_USER_ID](state, action) {
+        return null;
+   },
 });
 
 export const isGraphcoolTokenObtained = createReducer(0, {

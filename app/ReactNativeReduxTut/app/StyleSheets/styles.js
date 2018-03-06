@@ -141,6 +141,9 @@ export const basicCompStyles = StyleSheet.create({
     alignSelfFe: {
         alignSelf: 'flex-end',
     },
+    alignSelfC: {
+        alignSelf: 'center',
+    },
 
 
     absoluteAndBlack: {
@@ -165,6 +168,12 @@ export const basicCompStyles = StyleSheet.create({
         position: 'absolute',
         bottom: 0,
         left: 0
+    },
+    absoluteBottomLeftRight0: {
+        position: 'absolute',
+        bottom: 0,
+        left: 0,
+        right: 0
     },
     absoluteTopLeft0: {
         position: 'absolute',
@@ -381,6 +390,10 @@ export const basicStyles = {
         basicCompStyles.darkBackGround,
         basicCompStyles.Padding10,
         basicCompStyles.defaultBorderRadius,
+    ],
+    darkButtonRad0: [
+        basicCompStyles.darkBackGround,
+        basicCompStyles.Padding10,
     ],
 
     darkDefaultIcon: [

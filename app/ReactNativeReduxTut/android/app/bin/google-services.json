@@ -1,0 +1,62 @@
+{
+  "project_info": {
+    "project_number": "820188359969",
+    "firebase_url": "https://tastewithme-1.firebaseio.com",
+    "project_id": "tastewithme-1",
+    "storage_bucket": "tastewithme-1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:820188359969:android:4e1c6e64ebdfef13",
+        "android_client_info": {
+          "package_name": "com.tastee"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "820188359969-au46idd48odlmi9l04678v6ljsnksdsv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.tastee",
+            "certificate_hash": "e7cbc270da82f380efab406a98ef0b62e4972cbc"
+          }
+        },
+        {
+          "client_id": "820188359969-brjkf6p6c551ubvvda47doeiicak3r6v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDe_9Rv4Ni5_SJ-9OOMF1jOcSU40GFhHj4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "820188359969-uuhq9s070hocjo7up3pe87106e18t8ba.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.reactjs.native.example.TasteE"
+              }
+            },
+            {
+              "client_id": "820188359969-brjkf6p6c551ubvvda47doeiicak3r6v.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

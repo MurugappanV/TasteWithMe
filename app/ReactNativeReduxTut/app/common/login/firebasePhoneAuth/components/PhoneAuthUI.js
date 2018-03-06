@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { View, Button, Text, TextInput, Image } from 'react-native';
 import firebase from 'react-native-firebase';
 import Toast from 'react-native-simple-toast';
+import { LoginManager } from 'react-native-fbsdk';
+import { GoogleSignin } from 'react-native-google-signin';
 import PhoneNumberInput from './PhoneNumberInput';
 import VerificationCodeInput from './VerificationCodeInput';
 import { basicCompStyles } from '../../../../StyleSheets/styles';
@@ -95,6 +97,12 @@ export default class PhoneAuthUI extends Component {
     this.props.setPhoneNumber('')
     this.props.clearTokenId()
     firebase.auth().signOut();
+    // try {
+    //   LoginManager.logOut()
+    // } catch(e) {}
+    // try {
+    //   GoogleSignin.signOut()
+    // } catch(e) {}
     this.setState({
       message: null,
       confirmResult: null,

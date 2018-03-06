@@ -24,6 +24,7 @@ export default class PhoneNumberInput extends PureComponent {
                     onSubmitEditing={() => this.props.signIn(this.state.phoneNumber)}
                     underlineColorAndroid={Colors.DARK_TEXT_COLOR} 
                     selectionColor={Colors.DARK_TEXT_COLOR}
+                    returnKeyType={"send"}
                     style={[basicCompStyles.darkTextInput, basicCompStyles.marginBottom15]}
                     onChangeText={value => this.setState({ phoneNumber: value })}
                     placeholder={Labels.PHONE_NUMBER_PLACEHOLDER}

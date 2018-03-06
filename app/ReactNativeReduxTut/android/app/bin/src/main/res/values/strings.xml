@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">TasteE</string>
+    <string name="facebook_app_id">430771930688867</string>
+    <string name="fb_login_protocol_scheme">fb430771930688867</string>
+</resources>

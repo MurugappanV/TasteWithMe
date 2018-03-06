@@ -18,8 +18,8 @@ export const userProfileDetail = createReducer(initialUserDetail, {
     [types.USER_DETAILS_LOADED](state, action) {
         return {
             ...state,
+            userDetails: mapUserDetails(action.data),
             userDetailLoadingStatus: GeneralConstants.LOADED,
-            userDetails: mapUserDetails(action.data)
         };
     },
     [types.USER_DETAILS_ERROR](state, action) {
@@ -27,5 +27,8 @@ export const userProfileDetail = createReducer(initialUserDetail, {
             ...state,
             userDetailLoadingStatus: GeneralConstants.ERROR,
         };
+    },
+    [types.CLEAR_USER_DETAILS](state, action) {
+        return initialUserDetail;
     },
 });
