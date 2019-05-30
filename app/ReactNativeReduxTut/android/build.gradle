@@ -13,7 +13,6 @@ buildscript {
 }
 
 allprojects {
-    buildDir = "C:/tmp/tasteE/"
     repositories {
         mavenLocal()
         jcenter()
