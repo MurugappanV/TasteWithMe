@@ -6,7 +6,7 @@
     "@types/bcryptjs": "^2.4.1",
     "@types/validator": "^6.3.0",
     "bcryptjs": "^2.4.3",
-    "firebase-admin": "^5.9.0",
+    "firebase-admin": "^11.4.1",
     "graphcool-lib": "^0.1.0",
     "graphql-request": "^1.4.0",
     "isomorphic-fetch": "^2.2.1",
